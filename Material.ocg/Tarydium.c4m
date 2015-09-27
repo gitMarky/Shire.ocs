@@ -1,0 +1,13 @@
+[Material]
+Name=Tarydium
+Color=253,43,243,250,143,0,250,143,0
+ColorAnimation=1
+Shape=3
+Density=50
+Friction=100
+BlastFree=1
+Blast2Object=TY93
+Blast2ObjectRatio=75
+MaxAirSpeed=100
+MaxSlide=250
+ 

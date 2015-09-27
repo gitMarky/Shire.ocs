@@ -1,0 +1,17 @@
+[Head]
+Title=Shire
+Version=6,0
+Icon=15
+
+[Game]
+Goals=MELE=1
+
+[Definitions]
+Definition1=Objects.ocd
+
+[Landscape]
+TopOpen=0
+BottomOpen=0
+
+[Weather]
+Climate=0
