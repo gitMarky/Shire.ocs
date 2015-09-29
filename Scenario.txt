@@ -8,6 +8,7 @@ Goals=MELE=1
 
 [Definitions]
 Definition1=Objects.ocd
+Definition2=LibraryAdventures.ocd
 
 [Landscape]
 TopOpen=0

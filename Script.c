@@ -18,4 +18,5 @@ func CreateTuti()
 {
 	npc_tuti = CreateObject(Clonk, 695, 1020, NO_OWNER);
 	npc_tuti->SetName("$NPC_Tuti$");
+	npc_tuti->SetDialogueEx("Tuti");
 }
