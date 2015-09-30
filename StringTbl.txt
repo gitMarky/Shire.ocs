@@ -9,3 +9,6 @@ NPC_IolosFather=Iolos Vater
 NPC_Mhoram=Mhoram
 NPC_NDo=N'Do, der Buschclonk
 NPC_Pea=Pea
+NPC_Quimby=Quimby
+NPC_Guardsman=Wächter
+NPC_Scientist=Wissenschaftler

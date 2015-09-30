@@ -21,7 +21,7 @@ public func Dlg_Quimby(object player)
 	DlgText("Danke.", player);
 }
 
-public func Dlg_Wachtmeister(object player)
+public func Dlg_Guardsman(object player)
 {
 	DlgText("Hallo.", player);
 	DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
@@ -52,7 +52,7 @@ public func Dlg_Wachtmeister(object player)
 	DlgText("Nein, ich besitze kein Brecheisen.");
 }
 
-public func Dlg_Wissenschaftler(object player)
+public func Dlg_Scientist(object player)
 {
 	DlgText("Hallo!|Bist Du auch aus der richtigen Welt?", player);
 	DlgText("Du meinst bestimmt Deine Welt.");

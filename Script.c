@@ -1,14 +1,13 @@
 
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
-static npc_ndo, npc_pea;
+static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 
 func Initialize()
 {
 //	CreateObjectMapZoom(_BGC,1160,1291,0);
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 
-//	CreateObjectMapZoom(_VEW,200,650,0);
 //	CreateObjectMapZoom(AB93,100,1335,0);
 //	CreateObjectMapZoom(TI93,300,300,0);
 
@@ -111,8 +110,6 @@ func Initialize()
 //	CreateConstruction(SAWM,1200,1290,0,100,1);
 //	CreateConstruction(WMIL,1260,1290,0,100,1);
 //	CreateConstruction(_LA2,1320,1290,0,100,1);
-//	CreateObjectMapZoom(_QUI,1365,1200,0);
-//	CreateObjectMapZoom(_WAM,1440,1200,0);
 //	CreateConstruction(_CS2,1440,1290,0,100,1);
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
@@ -209,6 +206,9 @@ func Initialize()
 	CreateMhoram();
 	CreateNDo();
 	CreatePea();
+	CreateQuimby();
+	CreateGuardsman();
+	CreateScientist();
 }
 
 func InitializePlayer(int player)
@@ -298,10 +298,31 @@ func CreateNDo()
 	npc_ndo->SetDialogueEx("NDo");
 }
 
-
 func CreatePea()
 {
 	npc_pea=CreateObject(Clonk, 1020, 1020, NO_OWNER);
 	npc_pea->SetName("$NPC_Pea$");
 	npc_pea->SetDialogueEx("Pea");
 }
+
+func CreateQuimby()
+{
+	npc_quimby=CreateObject(Clonk, 1095, 1020, NO_OWNER);
+	npc_quimby->SetName("$NPC_Quimby$");
+	npc_quimby->SetDialogueEx("Quimby");
+}
+
+func CreateGuardsman()
+{
+	npc_guardsman=CreateObject(Clonk, 1155, 1020, NO_OWNER);
+	npc_guardsman->SetName("$NPC_Guardsman$");
+	npc_guardsman->SetDialogueEx("Guardsman");
+}
+
+func CreateScientist()
+{
+	npc_scientist=CreateObject(Clonk, 160, 520, NO_OWNER);
+	npc_scientist->SetName("$NPC_Scientist$");
+	npc_scientist->SetDialogueEx("Scientist");
+}
+
