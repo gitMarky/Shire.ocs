@@ -1,22 +1,6 @@
 #include Library_Dialogue
 #appendto Library_Dialogue
 
-public func Dlg_IolosVater(object player)
-{
-	DlgText("Hallo!", player);
-	DlgText("Geh weg!|Siehst Du Gruenschnabel nicht,|dass ich beschaeftigt bin?");
-	DlgText("Wissen Sie wo Iolo ist?", player);
-	DlgText("Zu Iolo willst Du, hae?");
-	DlgText("Der sitzt nur zu Hause 'rum,|anstatt zu arbeiten.");
-	DlgText("Der ist genauso faul, wie Du aussiehst.");
-	DlgText("IOLO!!!|Komm her, Du Nichtsnutz!");
-	DlgText("Mach schnell, verfluchte Hacke!");
-	DlgText("Diese Jugend von heute...|tz,tz,tz!");
-	DlgText("Hallo.|Sie haben nicht zufaellig ein Brecheisen oder so,|mit dem ich in den Laden kann?", player);
-	DlgText("Nein, ich habe keins.");
-	DlgText("Du faengst an mich zu nerven, Kleiner.");
-}
-
 public func Dlg_Mhoram(object player)
 {
 	DlgText("Hallo!|Wissen Sie, wie ich wieder in meine Welt komme?", player);

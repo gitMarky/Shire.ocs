@@ -4,3 +4,5 @@ NPC_Carpenter=Bauarbeiter
 NPC_Beggar=Bettler
 NPC_Drin=Drin
 NPC_Merchant=Händler
+NPC_Iolo=Iolo
+NPC_IolosFather=Iolos Vater
