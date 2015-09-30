@@ -1,16 +1,6 @@
 #include Library_Dialogue
 #appendto Library_Dialogue
 
-public func Dlg_Bettler(object player)
-{
-	DlgText("Hallo.", player);
-	DlgText("Hallo, Du.");
-	DlgText("Hast Du nicht eine Goldmuenze fuer einen armen Kriegsveteranen?");
-	DlgText("Nein, leider nicht.", player);
-	DlgText("Hier eine Goldmuenze.", player);
-	DlgText("Gott segne Dich.");
-}
-
 public func Dlg_Drin(object player)
 {
 	DlgText("Hi, wie geht es dir?", player);

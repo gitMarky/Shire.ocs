@@ -1,5 +1,5 @@
 
-static npc_tuti, npc_pirate, npc_carpenter;
+static npc_tuti, npc_pirate, npc_carpenter, npc_beggar;
 
 func Initialize()
 {
@@ -112,7 +112,6 @@ func Initialize()
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
 //	CreateObjectMapZoom(_PEA,1200,1270,0);
 //	CreateConstruction(SAWM,1200,1290,0,100,1);
-//	CreateObjectMapZoom(_BTL,1070,1200,0);
 //	CreateConstruction(WMIL,1260,1290,0,100,1);
 //	CreateObjectMapZoom(_DRI,1290,1200,0);
 //	CreateConstruction(_LA2,1320,1290,0,100,1);
@@ -229,21 +228,28 @@ func CreateObjectMapZoom(id def, int x, int y, int owner)
 
 func CreateTuti()
 {
-	npc_tuti = CreateObject(Clonk, 695, 1020, NO_OWNER);
+	npc_tuti=CreateObject(Clonk, 695, 1020, NO_OWNER);
 	npc_tuti->SetName("$NPC_Tuti$");
 	npc_tuti->SetDialogueEx("Tuti");
 }
 
 func CreatePirate()
 {
-	npc_pirate =  CreateObject(Clonk, 2095, 365, NO_OWNER);
+	npc_pirate=CreateObject(Clonk, 2095, 365, NO_OWNER);
 	npc_pirate->SetName("$NPC_Pirate$");
 	npc_pirate->SetDialogueEx("Pirat");
 }
 
 func CreateCarpenter()
 {
-	npc_carpenter =  CreateObjectMapZoom(Clonk, 815, 1025, NO_OWNER);
+	npc_carpenter=CreateObject(Clonk, 815, 1025, NO_OWNER);
 	npc_carpenter->SetName("$NPC_Carpenter$");
 	npc_carpenter->SetDialogueEx("Carpenter");
+}
+
+func CreateBeggar()
+{
+	npc_beggar=CreateObject(Clonk, 855, 960, NO_OWNER);
+	npc_beggar->SetName("$NPC_Beggar$");
+	npc_beggar->SetDialogueEx("Beggar");
 }
