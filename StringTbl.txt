@@ -1,1 +1,2 @@
 NPC_Tuti=Tuti, der Tutor
+NPC_Pirate=Pirat

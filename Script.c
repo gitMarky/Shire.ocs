@@ -1,5 +1,5 @@
 
-static npc_tuti;
+static npc_tuti, npc_pirate;
 
 func Initialize()
 {
@@ -120,7 +120,6 @@ func Initialize()
 //	CreateObjectMapZoom(_WAM,1440,1200,0);
 //	CreateConstruction(_CS2,1440,1290,0,100,1);
 //	CreateConstruction(_PBG,2820,550,0,100,1);
-//	CreateObjectMapZoom(_PIR,2620,450,0);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
 
 //	CreateObjectMapZoom(_TR1,2990,1290,0);
@@ -231,4 +230,11 @@ func CreateTuti()
 	npc_tuti = CreateObject(Clonk, 695, 1020, NO_OWNER);
 	npc_tuti->SetName("$NPC_Tuti$");
 	npc_tuti->SetDialogueEx("Tuti");
+}
+
+func CreatePirate()
+{
+	npc_pirate =  CreateObjectMapZoom(Clonk, 2096, 365, NO_OWNER);
+	npc_pirate->SetName("$NPC_Pirate$");
+	npc_pirate->SetDialogueEx("Pirat");
 }
