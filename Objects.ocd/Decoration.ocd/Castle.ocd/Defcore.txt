@@ -1,0 +1,17 @@
+[DefCore]
+id=DecoCastle
+Category=C4D_StaticBack
+Width=68
+Height=40
+Offset=-34,-20
+Value=300
+Mass=8000
+Components=Rock=8;Wood=3;
+SolidMask=68,16,68,14
+TopFace=68,0,68,16
+Picture=0,0,68,40
+Vertices=4
+VertexX=-30,32,-31,28
+VertexY=-20,-20,19,19
+VertexFriction=50,50,50,50
+Entrance=-13,0,16,20

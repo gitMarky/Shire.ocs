@@ -6,6 +6,7 @@ static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 func Initialize()
 {
 	CreateObject(DecoCity, 795, 1031, NO_OWNER);
+	CreateObject(DecoCastle, 1074, 1012, NO_OWNER);
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 
 //	CreateObjectMapZoom(AB93,100,1335,0);
@@ -110,7 +111,6 @@ func Initialize()
 //	CreateConstruction(SAWM,1200,1290,0,100,1);
 //	CreateConstruction(WMIL,1260,1290,0,100,1);
 //	CreateConstruction(_LA2,1320,1290,0,100,1);
-//	CreateConstruction(_CS2,1440,1290,0,100,1);
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
 
