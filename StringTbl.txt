@@ -8,3 +8,4 @@ NPC_Iolo=Iolo
 NPC_IolosFather=Iolos Vater
 NPC_Mhoram=Mhoram
 NPC_NDo=N'Do, der Buschclonk
+NPC_Pea=Pea

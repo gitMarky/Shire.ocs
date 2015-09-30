@@ -1,7 +1,7 @@
 
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
-static npc_ndo;
+static npc_ndo, npc_pea;
 
 func Initialize()
 {
@@ -108,7 +108,6 @@ func Initialize()
 
 //	CreateConstruction(_BAS,1020,1290,0,100,1);
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
-//	CreateObjectMapZoom(_PEA,1200,1270,0);
 //	CreateConstruction(SAWM,1200,1290,0,100,1);
 //	CreateConstruction(WMIL,1260,1290,0,100,1);
 //	CreateConstruction(_LA2,1320,1290,0,100,1);
@@ -209,6 +208,7 @@ func Initialize()
 	CreateIolo();
 	CreateMhoram();
 	CreateNDo();
+	CreatePea();
 }
 
 func InitializePlayer(int player)
@@ -291,10 +291,17 @@ func CreateMhoram()
 	npc_mhoram->SetDialogueEx("Mhoram");
 }
 
-
 func CreateNDo()
 {
 	npc_ndo=CreateObject(Clonk, 2415, 1020, NO_OWNER);
 	npc_ndo->SetName("$NPC_NDo$");
 	npc_ndo->SetDialogueEx("NDo");
+}
+
+
+func CreatePea()
+{
+	npc_pea=CreateObject(Clonk, 1020, 1020, NO_OWNER);
+	npc_pea->SetName("$NPC_Pea$");
+	npc_pea->SetDialogueEx("Pea");
 }
