@@ -1,0 +1,15 @@
+[DefCore]
+id=GoldCoin
+Version=6,0
+Category=C4D_Object
+Width=4
+Height=4
+Offset=-2,-2
+Vertices=3
+VertexX=0,2,-2
+VertexY=1,-1,-1
+VertexFriction=40,40,40
+Value=5
+Mass=1
+Components=GoldCoin=1
+Rotate=1

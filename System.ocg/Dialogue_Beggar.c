@@ -3,7 +3,7 @@
 
 public func Dlg_Beggar(object player)
 {
-	var coin = player->FindContents(GC06);
+	var coin = player->FindContents(GoldCoin);
 	DlgText("Hallo.", player);
 	DlgText("Hallo, Du.");
 	DlgText("Hast Du nicht eine Goldmuenze fuer einen armen Kriegsveteranen?");

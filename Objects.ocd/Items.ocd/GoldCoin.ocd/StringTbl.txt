@@ -1,0 +1,2 @@
+Name=Goldmünze
+Description=Ein Überbleibsel aus vergangenen Tagen von hohem Wert und geringem Nutzen.
