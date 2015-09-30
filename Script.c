@@ -1,5 +1,6 @@
 
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
+static npc_merchant;
 
 func Initialize()
 {
@@ -26,7 +27,6 @@ func Initialize()
 //	CreateObjectMapZoom(_ST2,1375,2130,0); 
 //	CreateObjectMapZoom(_HUI,900,2230,-1);
 //	CreateObjectMapZoom(_TUH,875,2200,-1);
-//	CreateObjectMapZoom(_HAE,1450,2200,0);
 //	CreateObjectMapZoom(_TIS,1437,2200,0);
 //	CreateObjectMapZoom(_BED,945,2150,0);
 
@@ -207,6 +207,7 @@ func Initialize()
 	CreateCarpenter();
 	CreateBeggar();
 	CreateDrin();
+	CreateMerchant();
 }
 
 func InitializePlayer(int player)
@@ -260,4 +261,11 @@ func CreateDrin()
 	npc_drin=CreateObject(Clonk, 1030, 1020, NO_OWNER);
 	npc_drin->SetName("$NPC_Drin$");
 	npc_drin->SetDialogueEx("Drin");
+}
+
+func CreateMerchant()
+{
+	npc_merchant=CreateObject(Clonk, 1160, 1760, NO_OWNER);
+	npc_merchant->SetName("$NPC_Merchant$");
+	npc_merchant->SetDialogueEx("Merchant");
 }

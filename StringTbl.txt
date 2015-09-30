@@ -3,3 +3,4 @@ NPC_Pirate=Pirat
 NPC_Carpenter=Bauarbeiter
 NPC_Beggar=Bettler
 NPC_Drin=Drin
+NPC_Merchant=Händler
