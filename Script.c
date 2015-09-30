@@ -1,6 +1,6 @@
 
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
-static npc_merchant, npc_iolo, npc_iolos_father;
+static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 
 func Initialize()
 {
@@ -9,7 +9,6 @@ func Initialize()
 
 //	CreateObjectMapZoom(_VEW,200,650,0);
 //	CreateObjectMapZoom(AB93,100,1335,0);
-//	CreateObjectMapZoom(_MHO,1820,1280,0);
 //	CreateObjectMapZoom(TI93,300,300,0);
 
 //	CreateObjectMapZoom(_HNH,905,2260,0);
@@ -208,6 +207,7 @@ func Initialize()
 	CreateMerchant();
 	CreateIolosFather();
 	CreateIolo();
+	CreateMhoram();
 }
 
 func InitializePlayer(int player)
@@ -281,4 +281,11 @@ func CreateIolo()
 {
 	npc_iolo=CreateObject(Clonk, 735, 1720, NO_OWNER);
 	npc_iolo->SetName("$NPC_Iolo$");
+}
+
+func CreateMhoram()
+{
+	npc_mhoram=CreateObject(Clonk, 1455, 1025, NO_OWNER);
+	npc_mhoram->SetName("$NPC_Mhoram$");
+	npc_mhoram->SetDialogueEx("Mhoram");
 }
