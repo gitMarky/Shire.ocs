@@ -5,7 +5,7 @@ static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 
 func Initialize()
 {
-//	CreateObjectMapZoom(_BGC,1160,1291,0);
+	CreateObject(DecoCity, 795, 1031, NO_OWNER);
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 
 //	CreateObjectMapZoom(AB93,100,1335,0);
@@ -28,8 +28,8 @@ func Initialize()
 //	CreateObjectMapZoom(_BED,945,2150,0);
 
 //	var cupboard1 = CreateObjectMapZoom(_SRK,920,2150,0);
-//	cupboard1->CreateContents(GC06);
-//	cupboard1->CreateContents(GC06);
+//	cupboard1->CreateContents(GoldCoin);
+//	cupboard1->CreateContents(GoldCoin);
 
 //	CreateObjectMapZoom(_TIS,930,2200,0);
 //	CreateObjectMapZoom(_STU,945,2200,0);
@@ -77,8 +77,8 @@ func Initialize()
 
 //	CreateObjectMapZoom(_BED,2620,2157,0);
 //	var cupboard6 = CreateObjectMapZoom(_SRK,2780,2115,0);
-//	cupboard6->CreateContents(GC06);
-//	cupboard6->CreateContents(GC06);
+//	cupboard6->CreateContents(GoldCoin);
+//	cupboard6->CreateContents(GoldCoin);
 //	CreateObjectMapZoom(SLBT,2640,2200,0);
 
 //	var cupboard7 = CreateObjectMapZoom(_SRK,3585,2150,-1);
