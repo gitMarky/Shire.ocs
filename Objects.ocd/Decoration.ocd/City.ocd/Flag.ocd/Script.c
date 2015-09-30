@@ -14,7 +14,7 @@ private func Flying()
 	}
 }
 
-public func Construction()
+public func Initialize()
 {
 	SetAction("FlyBase");
 }
