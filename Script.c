@@ -1,5 +1,5 @@
 
-static npc_tuti, npc_pirate;
+static npc_tuti, npc_pirate, npc_carpenter;
 
 func Initialize()
 {
@@ -107,7 +107,7 @@ func Initialize()
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
 //	CreateConstruction(_HUT,960,1290,0,100,1);
-//	CreateObjectMapZoom(_BAB,1020,1280,0);
+
 //	CreateConstruction(_BAS,1020,1290,0,100,1);
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
 //	CreateObjectMapZoom(_PEA,1200,1270,0);
@@ -205,6 +205,8 @@ func Initialize()
 
 
 	CreateTuti();
+	CreatePirate();
+	CreateCarpenter();
 }
 
 func InitializePlayer(int player)
@@ -234,7 +236,14 @@ func CreateTuti()
 
 func CreatePirate()
 {
-	npc_pirate =  CreateObjectMapZoom(Clonk, 2096, 365, NO_OWNER);
+	npc_pirate =  CreateObject(Clonk, 2095, 365, NO_OWNER);
 	npc_pirate->SetName("$NPC_Pirate$");
 	npc_pirate->SetDialogueEx("Pirat");
+}
+
+func CreateCarpenter()
+{
+	npc_carpenter =  CreateObjectMapZoom(Clonk, 815, 1025, NO_OWNER);
+	npc_carpenter->SetName("$NPC_Carpenter$");
+	npc_carpenter->SetDialogueEx("Carpenter");
 }

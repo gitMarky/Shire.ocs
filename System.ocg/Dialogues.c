@@ -1,20 +1,6 @@
 #include Library_Dialogue
 #appendto Library_Dialogue
 
-public func Dlg_Bauarbeiter(object player)
-{
-	DlgText("Hi, wie geht es dir?", player);
-	DlgText("Lass mich in Ruhe ich muss arbeiten.");
-	DlgText("Woran arbeitest Du gerade?", player);
-	DlgText("An diesem Haus hier. Im Auftrag von Iolos Vater.");
-	DlgText("Wir sehen uns.", player);
-	DlgText("Hast Du zufaellig ein Brecheisen da?", player);
-	DlgText("Na, denk doch mal nach,|ein Bauarbeiter hat immer sein Handwerkszeug dabei.");
-	DlgText("Kannst Du es mir mal leihen?", player);
-	DlgText("Hier ist es.");
-	DlgText("Danke.", player);
-}
-
 public func Dlg_Bettler(object player)
 {
 	DlgText("Hallo.", player);

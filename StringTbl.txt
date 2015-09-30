@@ -1,2 +1,3 @@
 NPC_Tuti=Tuti, der Tutor
 NPC_Pirate=Pirat
+NPC_Carpenter=Bauarbeiter
