@@ -1,9 +1,9 @@
 
 protected func Initialize()
 {
-	CreateObject(DecoFlag,-253,-137);
-	CreateObject(DecoFlag,-13,-100);
-	CreateObject(DecoFlag,+263,-115);
+	CreateObject(DecoFlag,-256,-139);
+	CreateObject(DecoFlag,-16,-100);
+	CreateObject(DecoFlag,+261,-115);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
