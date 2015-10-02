@@ -103,7 +103,7 @@ func Initialize()
 //	DigFree(150,660,90);
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
-//	CreateConstruction(_HUT,960,1290,0,100,1);
+	CreateObject(DecoHut, 610, 1007, NO_OWNER);
 
 //	CreateConstruction(_BAS,1020,1290,0,100,1);
 //	CreateConstruction(_HU2,1080,1290,0,100,1);

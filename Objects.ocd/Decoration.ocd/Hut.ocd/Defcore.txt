@@ -1,5 +1,5 @@
 [DefCore]
-id=Hut
+id=DecoHut
 Category=C4D_StaticBack
 Width=60
 Height=50
