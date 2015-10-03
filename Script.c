@@ -104,8 +104,8 @@ func Initialize()
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
+	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
-//	CreateConstruction(_BAS,1020,1290,0,100,1);
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
 //	CreateConstruction(SAWM,1200,1290,0,100,1);
 //	CreateConstruction(WMIL,1260,1290,0,100,1);
