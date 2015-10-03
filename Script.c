@@ -294,6 +294,7 @@ func CreateIolo()
 	npc_iolo=CreateObject(Clonk, 735, 1720, NO_OWNER);
 	npc_iolo->SetName("$NPC_Iolo$");
 	npc_iolo->RemoveBackpack();
+	npc_iolo->SetMeshMaterial("Clonk_Iolo");
 }
 
 func CreateMhoram()
