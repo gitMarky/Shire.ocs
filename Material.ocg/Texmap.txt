@@ -1,6 +1,7 @@
 # Static Map Material/Texture Table 
 # Index +128 for underground materials
 
+OverloadMaterials
 OverloadTextures
 
 1=Vehicle-none
