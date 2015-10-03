@@ -230,7 +230,7 @@ func CreateObjectMapZoom(id def, int x, int y, int owner)
 
 func CreateTuti()
 {
-	npc_tuti=CreateObject(Clonk, 695, 1020, NO_OWNER);
+	npc_tuti=CreateObject(Clonk, 480, 1030, NO_OWNER);
 	npc_tuti->SetName("$NPC_Tuti$");
 	npc_tuti->SetDialogueEx("Tuti");
 }
@@ -244,7 +244,7 @@ func CreatePirate()
 
 func CreateCarpenter()
 {
-	npc_carpenter=CreateObject(Clonk, 815, 1020, NO_OWNER);
+	npc_carpenter=CreateObject(Clonk, 675, 1025, NO_OWNER);
 	npc_carpenter->SetName("$NPC_Carpenter$");
 	npc_carpenter->SetDialogueEx("Carpenter");
 }
@@ -313,7 +313,7 @@ func CreateQuimby()
 
 func CreateGuardsman()
 {
-	npc_guardsman=CreateObject(Clonk, 1155, 1020, NO_OWNER);
+	npc_guardsman=CreateObject(Clonk, 1080, 985, NO_OWNER);
 	npc_guardsman->SetName("$NPC_Guardsman$");
 	npc_guardsman->SetDialogueEx("Guardsman");
 }
