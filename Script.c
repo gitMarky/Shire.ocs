@@ -215,6 +215,7 @@ func InitializePlayer(int player)
 	var crew = GetHiRank(player);
 	crew->SetPosition(80, 1048);
 	crew->Fling(100, 1335);
+	crew->RemoveBackpack();
 }
 
 
@@ -235,6 +236,7 @@ func CreateTuti()
 	npc_tuti->SetDialogueEx("Tuti");
 	npc_tuti->SetMeshMaterial("Clonk_Tuti");
 	npc_tuti->SetDir(DIR_Left);
+	npc_tuti->RemoveBackpack();
 }
 
 func CreatePirate()
@@ -242,6 +244,7 @@ func CreatePirate()
 	npc_pirate=CreateObject(Clonk, 2095, 365, NO_OWNER);
 	npc_pirate->SetName("$NPC_Pirate$");
 	npc_pirate->SetDialogueEx("Pirat");
+	npc_pirate->RemoveBackpack();
 }
 
 func CreateCarpenter()
@@ -249,6 +252,7 @@ func CreateCarpenter()
 	npc_carpenter=CreateObject(Clonk, 675, 1025, NO_OWNER);
 	npc_carpenter->SetName("$NPC_Carpenter$");
 	npc_carpenter->SetDialogueEx("Carpenter");
+	npc_carpenter->RemoveBackpack();
 }
 
 func CreateBeggar()
@@ -256,6 +260,7 @@ func CreateBeggar()
 	npc_beggar=CreateObject(Clonk, 855, 1020, NO_OWNER);
 	npc_beggar->SetName("$NPC_Beggar$");
 	npc_beggar->SetDialogueEx("Beggar");
+	npc_beggar->RemoveBackpack();
 }
 
 func CreateDrin()
@@ -263,6 +268,7 @@ func CreateDrin()
 	npc_drin=CreateObject(Clonk, 1030, 1020, NO_OWNER);
 	npc_drin->SetName("$NPC_Drin$");
 	npc_drin->SetDialogueEx("Drin");
+	npc_drin->RemoveBackpack();
 }
 
 func CreateMerchant()
@@ -270,6 +276,7 @@ func CreateMerchant()
 	npc_merchant=CreateObject(Clonk, 1160, 1760, NO_OWNER);
 	npc_merchant->SetName("$NPC_Merchant$");
 	npc_merchant->SetDialogueEx("Merchant");
+	npc_merchant->RemoveBackpack();
 }
 
 func CreateIolosFather()
@@ -277,12 +284,14 @@ func CreateIolosFather()
 	npc_iolos_father=CreateObject(Clonk, 915, 1020, NO_OWNER);
 	npc_iolos_father->SetName("$NPC_IolosFather$");
 	npc_iolos_father->SetDialogueEx("IolosFather");
+	npc_iolos_father->RemoveBackpack();
 }
 
 func CreateIolo()
 {
 	npc_iolo=CreateObject(Clonk, 735, 1720, NO_OWNER);
 	npc_iolo->SetName("$NPC_Iolo$");
+	npc_iolo->RemoveBackpack();
 }
 
 func CreateMhoram()
@@ -290,6 +299,7 @@ func CreateMhoram()
 	npc_mhoram=CreateObject(Clonk, 1455, 1025, NO_OWNER);
 	npc_mhoram->SetName("$NPC_Mhoram$");
 	npc_mhoram->SetDialogueEx("Mhoram");
+	npc_mhoram->RemoveBackpack();
 }
 
 func CreateNDo()
@@ -297,6 +307,7 @@ func CreateNDo()
 	npc_ndo=CreateObject(Clonk, 2415, 1020, NO_OWNER);
 	npc_ndo->SetName("$NPC_NDo$");
 	npc_ndo->SetDialogueEx("NDo");
+	npc_ndo->RemoveBackpack();
 }
 
 func CreatePea()
@@ -304,6 +315,7 @@ func CreatePea()
 	npc_pea=CreateObject(Clonk, 1020, 1020, NO_OWNER);
 	npc_pea->SetName("$NPC_Pea$");
 	npc_pea->SetDialogueEx("Pea");
+	// pea may keep his backpack!
 }
 
 func CreateQuimby()
@@ -311,6 +323,7 @@ func CreateQuimby()
 	npc_quimby=CreateObject(Clonk, 1095, 1020, NO_OWNER);
 	npc_quimby->SetName("$NPC_Quimby$");
 	npc_quimby->SetDialogueEx("Quimby");
+	npc_quimby->RemoveBackpack();
 }
 
 func CreateGuardsman()
@@ -318,6 +331,7 @@ func CreateGuardsman()
 	npc_guardsman=CreateObject(Clonk, 1080, 985, NO_OWNER);
 	npc_guardsman->SetName("$NPC_Guardsman$");
 	npc_guardsman->SetDialogueEx("Guardsman");
+	npc_guardsman->RemoveBackpack();
 }
 
 func CreateScientist()
@@ -325,5 +339,6 @@ func CreateScientist()
 	npc_scientist=CreateObject(Clonk, 160, 520, NO_OWNER);
 	npc_scientist->SetName("$NPC_Scientist$");
 	npc_scientist->SetDialogueEx("Scientist");
+	npc_scientist->RemoveBackpack();
 }
 
