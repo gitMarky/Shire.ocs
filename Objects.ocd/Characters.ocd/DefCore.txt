@@ -1,5 +1,5 @@
 [DefCore]
-id=ClonkIncluder
+id=ClonkNPC
 Version=6,0
 Category=C4D_Living
 Width=8

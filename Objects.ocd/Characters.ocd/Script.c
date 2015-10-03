@@ -1,10 +1,6 @@
-/*
-	Clonk
-	Author: Randrian
-
-	The protoganist of the test. Includes the original Clonk skeleton, hopefully!
+/**
+	Custom clonks that portray the new characters
+	@author Marky
 */
 
-
-// this is a new Clonk
 #include Clonk

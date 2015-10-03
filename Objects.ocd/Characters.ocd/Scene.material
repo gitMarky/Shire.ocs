@@ -1,4 +1,4 @@
-material Clonk_Body
+material Clonk_Body2
 {
 	receive_shadows on
 	technique
