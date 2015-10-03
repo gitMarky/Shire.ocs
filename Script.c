@@ -286,6 +286,7 @@ func CreateIolosFather()
 	npc_iolos_father->SetName("$NPC_IolosFather$");
 	npc_iolos_father->SetDialogueEx("IolosFather");
 	npc_iolos_father->RemoveBackpack();
+	npc_iolos_father->SetMeshMaterial("Clonk_IolosFather");
 }
 
 func CreateIolo()
