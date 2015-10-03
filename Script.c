@@ -230,10 +230,11 @@ func CreateObjectMapZoom(id def, int x, int y, int owner)
 
 func CreateTuti()
 {
-	npc_tuti=CreateObject(ClonkNPC, 480, 1030, NO_OWNER);
+	npc_tuti=CreateObject(Clonk, 480, 1030, NO_OWNER);
 	npc_tuti->SetName("$NPC_Tuti$");
 	npc_tuti->SetDialogueEx("Tuti");
 	npc_tuti->SetMeshMaterial("Clonk_Tuti");
+	npc_tuti->SetDir(DIR_Left);
 }
 
 func CreatePirate()
