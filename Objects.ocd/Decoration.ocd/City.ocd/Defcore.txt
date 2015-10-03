@@ -8,7 +8,6 @@ Value=20
 Mass=50
 Components=Rock=30;
 SolidMask=0,0,590,136
-TopFace=0,136,590,136
 Picture=0,0,590,136
 Vertices=1
 VertexX=1
