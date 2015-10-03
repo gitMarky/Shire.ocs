@@ -216,6 +216,7 @@ func InitializePlayer(int player)
 	crew->SetPosition(80, 1048);
 	crew->Fling(100, 1335);
 	crew->RemoveBackpack();
+	crew->SetMeshMaterial("Clonk_PlayerPullover");
 }
 
 

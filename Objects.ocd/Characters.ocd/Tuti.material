@@ -12,7 +12,7 @@ material Clonk_Tuti
 
 			texture_unit Overlay
 			{
-				texture Overlay.png
+				texture OverlayEmpty.png
 				tex_address_mode wrap
 				filtering trilinear
 				colour_op_ex modulate src_texture src_player_colour
