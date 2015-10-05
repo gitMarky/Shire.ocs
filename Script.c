@@ -335,6 +335,7 @@ func CreateGuardsman()
 	npc_guardsman->SetName("$NPC_Guardsman$");
 	npc_guardsman->SetDialogueEx("Guardsman");
 	npc_guardsman->RemoveBackpack();
+	npc_guardsman->SetMeshMaterial("Clonk_Guardsman");
 }
 
 func CreateScientist()
