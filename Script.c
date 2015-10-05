@@ -329,6 +329,7 @@ func CreateQuimby()
 	npc_quimby->SetName("$NPC_Quimby$");
 	npc_quimby->SetDialogueEx("Quimby");
 	npc_quimby->RemoveBackpack();
+	npc_quimby->SetMeshMaterial("Clonk_Quimby");
 }
 
 func CreateGuardsman()
