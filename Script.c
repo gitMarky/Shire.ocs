@@ -303,6 +303,7 @@ func CreateMhoram()
 	npc_mhoram->SetName("$NPC_Mhoram$");
 	npc_mhoram->SetDialogueEx("Mhoram");
 	npc_mhoram->RemoveBackpack();
+	npc_mhoram->SetMeshMaterial("Clonk_Mhoram");
 }
 
 func CreateNDo()
