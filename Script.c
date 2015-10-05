@@ -311,6 +311,7 @@ func CreateNDo()
 	npc_ndo->SetName("$NPC_NDo$");
 	npc_ndo->SetDialogueEx("NDo");
 	npc_ndo->RemoveBackpack();
+	npc_ndo->SetMeshMaterial("Clonk_NDo");
 }
 
 func CreatePea()
