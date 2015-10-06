@@ -254,6 +254,7 @@ func CreateCarpenter()
 	npc_carpenter->SetName("$NPC_Carpenter$");
 	npc_carpenter->SetDialogueEx("Carpenter");
 	npc_carpenter->RemoveBackpack();
+	npc_carpenter->SetMeshMaterial("Clonk_Carpenter");
 }
 
 func CreateBeggar()
