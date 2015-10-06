@@ -270,6 +270,7 @@ func CreateDrin()
 	npc_drin->SetName("$NPC_Drin$");
 	npc_drin->SetDialogueEx("Drin");
 	npc_drin->RemoveBackpack();
+	npc_drin->SetMeshMaterial("Clonk_Drin");
 }
 
 func CreateMerchant()
