@@ -321,6 +321,7 @@ func CreatePea()
 	npc_pea->SetName("$NPC_Pea$");
 	npc_pea->SetDialogueEx("Pea");
 	// pea may keep his backpack!
+	npc_pea->SetMeshMaterial("Clonk_Pea");
 }
 
 func CreateQuimby()
