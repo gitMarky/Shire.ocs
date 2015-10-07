@@ -302,7 +302,7 @@ func CreateIolo()
 
 func CreateMhoram()
 {
-	npc_mhoram=CreateObject(Clonk, 1455, 1025, NO_OWNER);
+	npc_mhoram=CreateObject(Clonk, 1455, 1020, NO_OWNER);
 	npc_mhoram->SetName("$NPC_Mhoram$");
 	npc_mhoram->SetDialogueEx("Mhoram");
 	npc_mhoram->RemoveBackpack();
@@ -311,7 +311,7 @@ func CreateMhoram()
 
 func CreateNDo()
 {
-	npc_ndo=CreateObject(Clonk, 2415, 1020, NO_OWNER);
+	npc_ndo=CreateObject(Clonk, 2415, 1015, NO_OWNER);
 	npc_ndo->SetName("$NPC_NDo$");
 	npc_ndo->SetDialogueEx("NDo");
 	npc_ndo->RemoveBackpack();
