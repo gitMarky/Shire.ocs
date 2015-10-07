@@ -246,6 +246,9 @@ func CreatePirate()
 	npc_pirate->SetName("$NPC_Pirate$");
 	npc_pirate->SetDialogueEx("Pirat");
 	npc_pirate->RemoveBackpack();
+	npc_pirate->SetGraphics("Alchemist");
+	npc_pirate->SetMeshMaterial("Clonk_Pirate");
+	npc_pirate->SetMeshMaterial("Clonk_PirateTunic", 1);
 }
 
 func CreateCarpenter()
