@@ -16,6 +16,11 @@ public func Dlg_Pea(object player)
 		DlgText("Wieso fragst Du?", player);
 		DlgText("Seit langer Zeit, weiss niemand mehr, was im Osten liegt.|Vielleicht solltest Du mal nach Osten gehen.");
 		DlgText("Ja, das werde ich tun.", player);
+		if (DlgEvent())
+		{
+			player.dialogue_pea_east = true; // gives new dialogue in guardsman
+			// TODO: create kolibri
+		}
 	}
 	else if (true) //TODO: talked to guardsman about t-flint
 	{

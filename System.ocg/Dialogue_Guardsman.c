@@ -3,7 +3,7 @@
 
 public func Dlg_Guardsman(object player)
 {
-	if (true)
+	if (!player.dialogue_pea_east)
 	{
 		DlgText("Hallo.", player);
 		DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
@@ -24,6 +24,10 @@ public func Dlg_Guardsman(object player)
 		DlgText("Dann muss man ihn freisprengen.", player);
 		DlgText("Mmmm... Das ist natuerlich richtig.|Mit einem Sprengpfeil, zum Beispiel.");
 		DlgText("Es gibt im Dorf nur einen einzigen Bogenschuetzen,|Iolo ist sein Name.");
+		if (DlgEvent())
+		{
+			player.dialogue_guardsman_elevator = true; // gives new dialogue in iolo's father
+		}
 	}
 	else if (true)
 	{
