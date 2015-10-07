@@ -354,5 +354,8 @@ func CreateScientist()
 	npc_scientist->SetName("$NPC_Scientist$");
 	npc_scientist->SetDialogueEx("Scientist");
 	npc_scientist->RemoveBackpack();
+	npc_scientist->SetGraphics("Alchemist");
+	npc_scientist->SetMeshMaterial("Clonk_Scientist");
+	npc_scientist->SetMeshMaterial("Clonk_Scientist", 1);
 }
 
