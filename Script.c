@@ -263,6 +263,7 @@ func CreateBeggar()
 	npc_beggar->SetName("$NPC_Beggar$");
 	npc_beggar->SetDialogueEx("Beggar");
 	npc_beggar->RemoveBackpack();
+	npc_beggar->SetMeshMaterial("Clonk_Beggar");
 }
 
 func CreateDrin()
