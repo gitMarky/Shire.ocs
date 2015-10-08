@@ -3,7 +3,12 @@
 
 public func Dlg_Pea(object player)
 {
-	if (true) // TODO: not talked to guardsman yet
+	var has_dialogue_east = !player.dialogue_pea_east;
+	var has_dialogue_tflint = player.dialogue_guardsman_asked_tflint; // talked to guardsman about t-flint
+	var has_dialogue_bread = player.dialogue_pea_asked_bread; //TODO: talked about bread
+	var has_dialogue_crowbar = false;
+
+	if (has_dialogue_east)
 	{
 		DlgText("Hi, wie geht es dir?", player);
 		DlgText("Gut! Danke!|Ich bin Pea, der Foerster.");
@@ -22,7 +27,7 @@ public func Dlg_Pea(object player)
 			// TODO: create kolibri
 		}
 	}
-	else if (true) //TODO: talked to guardsman about t-flint
+	else if (has_dialogue_tflint)
 	{
 		DlgText("Hi, Pea!|Weisst Du, wo es hier T-Flints gibt?", player);
 		DlgText("Na hoehr mal, ich bin doch Foerster.|Da sind Flints aller Art mein Spezialgebiet.");
@@ -31,21 +36,41 @@ public func Dlg_Pea(object player)
 		DlgText("Kann ich ihn haben?", player);
 		DlgText("Du musst mir nur einen Gefallen tun.|Bringe mir etwas Brot.");
 		DlgText("OK.", player);
+		if (DlgEvent())
+		{
+			player.dialogue_pea_asked_bread = true;
+		}
 	}
-	else if (true) //TODO: talked about break
+	else if (has_dialogue_bread)
 	{
-		DlgText("Hier ist das Brot.", player);
-		DlgText("Hier ist der T-Flint.");
+		var bread = player->FindContents(Bread);
+		
+		if (bread)
+		{
+			DlgText("Hier ist das Brot.", player);
+			DlgText("Hier ist der T-Flint.");
+			if (DlgEvent())
+			{
+				player.dialogue_pea_gave_bread = true;
+				bread->RemoveObject();
+				player->CreateContents(Firestone); // this should always fit into the players inventory, because after all he was holding bread before
+			}
+		}
+		else
+		{
+			DlgText("Was sollte ich dir gleich nochmal bringen?", player);
+			DlgText("Bring mir etwas Brot, bitte.");
+		}
 	}
-	else if (true) //TODO: some idly stuff
-	{
-		DlgText("Hi, Pea!", player);
-		DlgText("Hi, Du!");
-	}
-	else // TODO: asking for crowbar
+	else if (has_dialogue_crowbar)
 	{
 		DlgText("Hi, Pea!|Hast Du ein Brecheisen,|mit dem ich in den Laden komme?", player);
 		DlgText("Ich bin Foerster, kein Einbrecher.");
+	}
+	else
+	{
+		DlgText("Hi, Pea!", player);
+		DlgText("Hi, Du!");
 	}
 	DlgReset();
 }

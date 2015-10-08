@@ -3,14 +3,15 @@
 
 public func Dlg_Guardsman(object player)
 {
-	if (!player.dialogue_pea_east)
-	{
-		DlgText("Hallo.", player);
-		DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
-		DlgText("Tja, ich weiss nicht genau, was ich suche, aber ich...", player);
-		DlgText("Wenn Du nicht weisst, was Du suchst solltest|Du wiederkommen, wenn Du es weisst. ");
-	}
-	else if (true)
+	var has_dialogue_elevator = player.dialogue_pea_east // pea told player to go east
+	                        && !player.dialogue_guardsman_elevator; // did not tell the player about the elevator yet
+	var has_dialogue_need_arrow = player.dialogue_iolo_arrow // iolo needs an arrow
+	                          && !player.dialogue_guardsman_asked_tflint; // did not ask about the t-flint yet.
+	var has_dialogue_give_flint = player.dialogue_guardsman_asked_tflint // guardsman asked to give him the flint
+	                          && !player.dialogue_guardsman_gave_tflint; // did not give the t-flint to the guardsman yet.
+	var has_dialogue_go_east = player.dialogue_guardsman_gave_tflint;
+
+	if (has_dialogue_elevator)
 	{
 		DlgText("Hallo.", player);
 		DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
@@ -29,7 +30,7 @@ public func Dlg_Guardsman(object player)
 			player.dialogue_guardsman_elevator = true; // gives new dialogue in iolo's father
 		}
 	}
-	else if (true)
+	else if (has_dialogue_need_arrow)
 	{
 		DlgText("Hallo, nochmal.|Ich wuerde gerne einen Sprengpfeil|aus der Burg holen.", player);
 		DlgText("Aber sie ist abgeschlossen.", player);
@@ -37,17 +38,45 @@ public func Dlg_Guardsman(object player)
 		DlgText("Was waere denn, wenn wir angegriffen werden?");
 		DlgText("Wir waeren schutzlos ausgeliefert| und die Gegner koennten einfach in die Burg hineinspazieren.");
 		DlgText("Du solltest mir also erstmal einen T-Flint bringen.");
+		if (DlgEvent())
+		{
+			player.dialogue_guardsman_asked_tflint = true;
+		}
 	}
-	else if (true)
+	else if (has_dialogue_give_flint)
 	{
-		DlgText("Hi, Waechter!|Hier ist Dein T-Flint.", player);
-		DlgText("Sehr gut! Jetzt kannst Du in die Burg.");
-		DlgText("Und wenn wir angegriffen werden,|werden unsere Gegner T-Flints zu spueren bekommen.");
+		var tflint = player->FindContents(Firestone);
+		if (tflint)
+		{
+			DlgText("Hi, Waechter!|Hier ist Dein T-Flint.", player);
+			DlgText("Sehr gut! Jetzt kannst Du in die Burg.");
+			DlgText("Und wenn wir angegriffen werden,|werden unsere Gegner T-Flints zu spueren bekommen.");
+			if (DlgEvent())
+			{
+				tflint->RemoveObject();
+				player.dialogue_guardsman_gave_tflint = true;
+			}
+		}
+		else
+		{
+			DlgText("Hi, leider habe ich noch keinen T-Flint für Dich.", player);
+			DlgText("Du weißt ja...|Kein T-Flint, kein Zugang zur Burg.");
+		}
 	}
-	else
+	else if (false)
 	{
 		DlgText("Haben Sie zufaellig ein Brecheisen,|mit dem ich in den Laden komme?", player);
 		DlgText("Nein, ich besitze kein Brecheisen.");
 	}
+	else // default dialogue
+	{
+		DlgText("Hallo.", player);
+		if (has_dialogue_go_east) DlgText("Hallo. Was willst Du?|Ich dachte, du willst nach Osten.");
+		                     else DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
+		DlgText("Tja, ich weiss nicht genau, was ich suche, aber ich...", player);
+		DlgText("Wenn Du nicht weisst, was Du suchst solltest|Du wiederkommen, wenn Du es weisst. ");
+	}
+
+
 	DlgReset();
 }
