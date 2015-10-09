@@ -5,7 +5,17 @@ static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 
 func Initialize()
 {
-	CreateObject(DecoCity, 795, 1031, NO_OWNER);
+	var city_x = 795;
+	var city_y = 1031;
+	CreateObject(DecoCity, city_x, city_y, NO_OWNER);
+	var top = CreateObject(DecoCity, city_x, city_y, NO_OWNER);
+	top->SetGraphics("Top");
+	top.Plane = 10000;
+	CreateObject(DecoFlag, city_x - 256, city_y - 139);
+	CreateObject(DecoFlag, city_x - 16,  city_y - 100);
+	CreateObject(DecoFlag, city_x + 261, city_y - 115);
+	
+	
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 
 //	CreateObjectMapZoom(AB93,100,1335,0);
