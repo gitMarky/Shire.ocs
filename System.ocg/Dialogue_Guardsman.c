@@ -76,7 +76,4 @@ public func Dlg_Guardsman(object player)
 		DlgText("Tja, ich weiss nicht genau, was ich suche, aber ich...", player);
 		DlgText("Wenn Du nicht weisst, was Du suchst solltest|Du wiederkommen, wenn Du es weisst. ");
 	}
-
-
-	DlgReset();
 }

@@ -4,8 +4,9 @@
 public func Dlg_Pea(object player)
 {
 	var has_dialogue_east = !player.dialogue_pea_east;
-	var has_dialogue_tflint = player.dialogue_guardsman_asked_tflint; // talked to guardsman about t-flint
-	var has_dialogue_bread = player.dialogue_pea_asked_bread; //TODO: talked about bread
+	var has_dialogue_tflint = player.dialogue_guardsman_asked_tflint  // talked to guardsman about t-flint
+	                      && !player.dialogue_pea_asked_bread;
+	var has_dialogue_bread = player.dialogue_pea_asked_bread; // talked about bread
 	var has_dialogue_crowbar = false;
 
 	if (has_dialogue_east)
@@ -72,5 +73,4 @@ public func Dlg_Pea(object player)
 		DlgText("Hi, Pea!", player);
 		DlgText("Hi, Du!");
 	}
-	DlgReset();
 }
