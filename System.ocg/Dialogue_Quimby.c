@@ -3,8 +3,9 @@
 
 public func Dlg_Quimby(object player)
 {
-	var bottle_of_smett = player->FindContents(_SME);
-	if (true)
+	var bottle_of_smett = player->FindContents(sMett);
+
+	if (!player.dialogue_quimby_asked_smett)
 	{
 		DlgText("Hallo.", player);
 		DlgText("Hallo, Du.");
@@ -15,13 +16,17 @@ public func Dlg_Quimby(object player)
 		DlgText("Wenn ich das wuesste wuerde ich Dich nicht schicken.");
 		DlgText("Aber Du bekommst auch eine BELOHNUNG, wenn Du mir hilfst.");
 		DlgText("Okay, ich versuche eine Flasche aufzutreiben.", player);
+		if (DlgEvent())
+		{
+			player.dialogue_quimby_asked_smett = true;
+		}
 	}
 	else if (!bottle_of_smett)
 	{
 		DlgText("Hast Du eine Flasche?");
 		DlgText("Nee, noch nicht.", player);
 	}
-	else if (true)
+	else if (!player.dialogue_quimby_gave_smett)
 	{
 		DlgText("Hier ist eine Flasche sMett.", player);
 		if (DlgEvent())
@@ -34,6 +39,7 @@ public func Dlg_Quimby(object player)
 		if (DlgEvent())
 		{
 			player->CreateContents(RP93);
+			player.dialogue_quimby_gave_smett = true;
 		}
 		DlgText("Danke.", player);
 	}
