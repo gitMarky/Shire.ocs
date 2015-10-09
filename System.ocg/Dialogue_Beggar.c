@@ -20,5 +20,4 @@ public func Dlg_Beggar(object player)
 		}
 		DlgText("Gott segne Dich.");
 	}
-	DlgReset();
 }

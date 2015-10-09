@@ -31,7 +31,6 @@ public func Dlg_Pirat(object player)
 	    {
 	    	player.dlg_pirat_get_quest = DIALOGUE_Pirat_QuestWaiting;
 	    }
-		DlgReset();
 	}
 	else if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting)
 	{
@@ -40,7 +39,6 @@ public func Dlg_Pirat(object player)
 		if (!eyepatch)
 		{
 			DlgText("Noch nicht.", player);
-			DlgReset();
 		}
 		else
 		{
@@ -51,7 +49,6 @@ public func Dlg_Pirat(object player)
   				eyepatch->RemoveObject();
 		    	player.dlg_pirat_get_quest = DIALOGUE_Pirat_QuestFinished;
   			}
-			DlgReset();
 		}
 	}
 }

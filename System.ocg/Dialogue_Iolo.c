@@ -28,5 +28,4 @@ public func Dlg_Iolo(object player)
 		DlgText("Ich sehe mich nur um.", player);
 		DlgText("Geh raus aus meinem Zimmer!");
 	}
-	DlgReset();
 }

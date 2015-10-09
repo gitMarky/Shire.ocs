@@ -42,5 +42,4 @@ public func Dlg_Quimby(object player)
 		DlgText("Hast Du noch mehr sMett?");
 		DlgText("Nee, ich denke das war das letzte.", player);
 	}
-	DlgReset();
 }

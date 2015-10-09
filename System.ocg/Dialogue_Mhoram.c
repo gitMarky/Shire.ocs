@@ -28,5 +28,4 @@ public func Dlg_Mhoram(object player)
 	{
 		DlgText("Du solltest ueber den Berg gehen, wenn Du zurueck willst.");
 	}
-	DlgReset();
 }

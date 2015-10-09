@@ -10,7 +10,6 @@ public func Dlg_Bauarbeiter(object player)
 		DlgText("Woran arbeitest Du gerade?", player);
 		DlgText("An diesem Haus hier. Im Auftrag von Iolos Vater.");
 		DlgText("Wir sehen uns.", player);
-		DlgReset();
 	}
 	else // this is set in Script103 in the scenario script
 	{
@@ -23,6 +22,5 @@ public func Dlg_Bauarbeiter(object player)
 			CreateContents(_BRE, player);
 		}
 		DlgText("Danke.", player);
-		DlgReset();
 	}
 }

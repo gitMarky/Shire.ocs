@@ -29,5 +29,4 @@ public func Dlg_Merchant(object player)
 	{
 		DlgText("Danke nochmal fuer den Pulli.");
 	}
-	DlgReset();
 }

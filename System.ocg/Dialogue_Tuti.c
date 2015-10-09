@@ -1,35 +1,9 @@
 #include Library_Dialogue
 #appendto Library_Dialogue
 
-//func DlgNiclaus(object player)
-//{
-//	var jump;
-//	DlgText("Was willst du?");
-//	if (DlgOption("Was zu essen"))
-//	{
-//		if (DlgEvent()) player->CreateContents(Bread);
-//		DlgText("Hier, nimm dieses Brot!");
-//		DlgText("Danke", player);
-//		DlgReset();
-//	}
-//	if (DlgOption("Ich suche etwas"))
-//	{
-//		DlgText("Kein Problem, was denn?");
-//		if (DlgOption("Wo ist das Gold?")) DlgText("Gold ist in der Hoehle.");
-//		if (DlgOption("Wo sind die Rubine?")) DlgText("Rubine sind in der Hoehle");
-//		if (DlgOption("Wo ist Niklaus?")) DlgText("Beats me.");
-//		if (DlgOption("Kann man auch im Dialog kreuz und quer springen?")) jump = true;
-//		if (DlgOption("Ich suche doch nix...")) DlgReset();
-//		DlgOptionEnd();
-//	}
-//	if (DlgOption("Kann man auch im Dialog kreuz und quer springen?")) jump = true;
-//	// Mehrere Pfade zum gleichen Dialogteil
-//	if (jump) DlgText("Ja, springen geht auch.");
-//}
 
 public func Dlg_Tuti(object player)
 {
-	Log("Calling Dlg_Tuti on %s", player->GetName());
 	DlgText("Hallo! Koennen Sie mir sagen,|wo ich bin?", player);
 	DlgText("Du kannst Du sagen.");
 	DlgText("Du bist naemlich in Shîre.");
@@ -44,5 +18,4 @@ public func Dlg_Tuti(object player)
 	DlgText("Gibt es denn sonst eine logischere Erklaerung dafuer,|dass ich nicht mehr auf Mutter Erde bin, als meinen Tod?|Oder traeum ich?", player);
 	DlgText("Ich weiss nicht viel, vielleicht solltest Du mal jemand anderes fragen...");
 	DlgText("Ich glaube das ist wohl besser.|Ich will naemlich so schnell wie moeglich nach Hause.", player);
-	DlgReset();
 }

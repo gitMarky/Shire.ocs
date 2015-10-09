@@ -21,5 +21,4 @@ public func Dlg_NDo(object player)
 	{
 		DlgText("Fremder nicht gehen weiter sollte.|Er in Not geraten wird.");
 	}
-	DlgReset();
 }

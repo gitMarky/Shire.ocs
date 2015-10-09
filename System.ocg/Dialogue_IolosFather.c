@@ -45,6 +45,4 @@ public func Dlg_IolosFather(object player)
 		DlgText("Hallo!", player);
 		DlgText("Geh weg!|Siehst Du Gruenschnabel nicht,|dass ich beschaeftigt bin?");
 	}
-
-	DlgReset();
 }
