@@ -54,7 +54,7 @@ public func Dlg_Pea(object player)
 			{
 				player.dialogue_pea_gave_bread = true;
 				bread->RemoveObject();
-				player->CreateContents(Firestone); // this should always fit into the players inventory, because after all he was holding bread before
+				player->CreateContents(TFlint); // this should always fit into the players inventory, because after all he was holding bread before
 			}
 		}
 		else

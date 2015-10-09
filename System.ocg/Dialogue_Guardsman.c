@@ -45,7 +45,7 @@ public func Dlg_Guardsman(object player)
 	}
 	else if (has_dialogue_give_flint)
 	{
-		var tflint = player->FindContents(Firestone);
+		var tflint = player->FindContents(TFlint);
 		if (tflint)
 		{
 			DlgText("Hi, Waechter!|Hier ist Dein T-Flint.", player);
