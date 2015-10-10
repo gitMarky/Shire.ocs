@@ -118,9 +118,10 @@ func Initialize()
 
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
-    CreateObject(DecoShop, 985, 1002, NO_OWNER;
+    CreateObject(DecoShop, 985, 1002, NO_OWNER);
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
+	windmill->SetMeshMaterial("Windmill_Alternate");
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
 
@@ -335,7 +336,7 @@ func CreateNDo()
 
 func CreatePea()
 {
-	npc_pea=CreateObject(Clonk, 1020, 1020, NO_OWNER);
+	npc_pea=CreateObject(Clonk, 840, 1020, NO_OWNER);
 	npc_pea->SetName("$NPC_Pea$");
 	npc_pea->SetDialogueEx("Pea");
 	// pea may keep his backpack!
