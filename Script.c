@@ -117,11 +117,12 @@ func Initialize()
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
-//	CreateConstruction(SAWM,1200,1290,0,100,1);
-//	CreateConstruction(WMIL,1260,1290,0,100,1);
+	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
+	CreateObject(Windmill, 925, 985, NO_OWNER);
 //	CreateConstruction(_LA2,1320,1290,0,100,1);
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
+
 
 //	CreateObjectMapZoom(_TR1,2990,1290,0);
 //	CreateObjectMapZoom(_TR1,3050,1290,0);
