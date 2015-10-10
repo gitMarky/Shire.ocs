@@ -1,0 +1,11 @@
+[DefCore]
+id=DecoShop
+Category=C4D_StaticBack
+Width=60
+Height=50
+Offset=-30,-25
+Value=35
+Mass=1000
+Components=Wood=4;Rock=1;
+Vertices=1
+VertexY=1
