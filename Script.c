@@ -118,8 +118,9 @@ func Initialize()
 
 //	CreateConstruction(_HU2,1080,1290,0,100,1);
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
-	CreateObject(Windmill, 925, 985, NO_OWNER);
-//	CreateConstruction(_LA2,1320,1290,0,100,1);
+    CreateObject(DecoShop, 985, 1002, NO_OWNER;
+	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
+	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
 
