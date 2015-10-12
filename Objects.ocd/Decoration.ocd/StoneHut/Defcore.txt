@@ -1,0 +1,12 @@
+[DefCore]
+id=DecoStoneHut
+Category=C4D_StaticBack
+Width=60
+Height=50
+Offset=-30,-25
+Value=45
+Mass=1500
+Components=Rock=5;Wood=3;
+Vertices=1
+VertexY=1
+VertexFriction=100
