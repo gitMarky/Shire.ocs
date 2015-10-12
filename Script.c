@@ -116,7 +116,7 @@ func Initialize()
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
-//	CreateConstruction(_HU2,1080,1290,0,100,1);
+	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
@@ -275,7 +275,7 @@ func CreateCarpenter()
 
 func CreateBeggar()
 {
-	npc_beggar=CreateObject(Clonk, 855, 1020, NO_OWNER);
+	npc_beggar=CreateObject(Clonk, 708, 1020, NO_OWNER);
 	npc_beggar->SetName("$NPC_Beggar$");
 	npc_beggar->SetDialogueEx("Beggar");
 	npc_beggar->RemoveBackpack();
@@ -284,7 +284,7 @@ func CreateBeggar()
 
 func CreateDrin()
 {
-	npc_drin=CreateObject(Clonk, 1030, 1020, NO_OWNER);
+	npc_drin=CreateObject(Clonk, 945, 1020, NO_OWNER);
 	npc_drin->SetName("$NPC_Drin$");
 	npc_drin->SetDialogueEx("Drin");
 	npc_drin->RemoveBackpack();
@@ -301,7 +301,7 @@ func CreateMerchant()
 
 func CreateIolosFather()
 {
-	npc_iolos_father=CreateObject(Clonk, 915, 1020, NO_OWNER);
+	npc_iolos_father=CreateObject(Clonk, 785, 1020, NO_OWNER);
 	npc_iolos_father->SetName("$NPC_IolosFather$");
 	npc_iolos_father->SetDialogueEx("IolosFather");
 	npc_iolos_father->RemoveBackpack();
@@ -345,7 +345,7 @@ func CreatePea()
 
 func CreateQuimby()
 {
-	npc_quimby=CreateObject(Clonk, 1095, 1020, NO_OWNER);
+	npc_quimby=CreateObject(Clonk, 1015, 1020, NO_OWNER);
 	npc_quimby->SetName("$NPC_Quimby$");
 	npc_quimby->SetDialogueEx("Quimby");
 	npc_quimby->RemoveBackpack();
