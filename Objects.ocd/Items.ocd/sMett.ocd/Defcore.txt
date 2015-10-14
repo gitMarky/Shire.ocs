@@ -1,9 +1,9 @@
 [DefCore]
 id=sMett
 Category=C4D_Object
-Width=5
-Height=5
-Offset=-3,-3
+Width=7
+Height=7
+Offset=-4,-4
 Value=5
 Mass=15
 Components=Gold=1
