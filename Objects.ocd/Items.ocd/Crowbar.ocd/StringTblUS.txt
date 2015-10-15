@@ -1,0 +1,2 @@
+Name=Crowbar
+Description=A good tool for opening crates and doors, and said to be useful in alien infestations.
