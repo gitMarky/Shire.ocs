@@ -16,6 +16,7 @@ public func Dlg_Iolo(object player)
 			arrows->RemoveObject();
 			player.dialogue_iolo_has_arrow = true;
 			// TODO: sequence for shooting the elevator
+			StartSequence("Iolo_Elevator", 0, player);
 		}
 		else
 		{
