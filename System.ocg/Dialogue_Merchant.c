@@ -3,7 +3,11 @@
 
 public func Dlg_Merchant(object player)
 {
-	if (true)//TODO: actual condition - the pullover is in the merchant's cupboard
+	var has_dialogue_eyepatch = !player.dialogue_merchant_eyepatch;
+	var has_dialogue_pullover = player.dialouge_merchant_eyepatch
+	                        && !player.dialouge_merchant_pullover; 
+	
+	if (has_dialogue_eyepatch)
 	{
 		DlgText("Hallo. Wie siehts aus?", player);
 		DlgText("Schlecht.|Ich glaube ich werde den Laden schliessen muessen.");
@@ -20,21 +24,34 @@ public func Dlg_Merchant(object player)
 		DlgText("Wenn Du moechtest, kannst Du meinen Pulli haben.", player);
 		DlgText("WIRKLICH??? Das ist aber nett von Dir.|Wie kann ich Dir jemals danken?");
 		DlgText("Gib mir nur eine Augenklappe.", player);
-	}
-	else if (true) //TODO: actual condition - heard about the pullover, but not in the cupboard yet
-	{
-		DlgText("Gerne.|Tue den Pulli nur in den Schrank,|dann bekommst Du auch eine Augenklappe.");
-	}
-	else if (true)
-	{
-		DlgText("Danke für die Augenklappe.", player);
 		if (DlgEvent())
 		{
-			player->CreateContents(Eyepatch);
+			player.dialogue_merchant_eyepatch = true;
+		}
+	}
+	else if (has_dialogue_pullover)
+	{
+		var has_pullover = player->FindContents(Pullover);
+		if (has_pullover)
+		{
+			DlgText("Hier, da hast du meinen Pullover.", player);
+			DlgText("Danke, dann bekommst Du auch eine Augenklappe.");
+			if (DlgEvent())
+			{
+				has_pullover->RemoveObject();
+				player->CreateContents(Eyepatch);
+				player.dialogue_merchant_pullover = true;
+			}
+			DlgText("Danke für die Augenklappe.", player);
+		}
+		else
+		{
+			DlgText("Hast du schon einen Pullover für mich?");
+			DlgText("Leider nein, ich behalte ihn noch ein bisschen...", player);
 		}
 	}
 	else
 	{
-		DlgText("Danke nochmal fuer den Pulli.");
+		DlgText("Danke nochmal für den Pulli.");
 	}
 }
