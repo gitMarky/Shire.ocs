@@ -19,7 +19,7 @@ public func Dlg_Bauarbeiter(object player)
 		DlgText("Hier ist es.");
 		if (DlgEvent())
 		{
-			CreateContents(_BRE, player);
+			CreateContents(Crowbar, player);
 		}
 		DlgText("Danke.", player);
 	}
