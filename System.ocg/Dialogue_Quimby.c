@@ -38,7 +38,7 @@ public func Dlg_Quimby(object player)
 		DlgText("Hier nimm diesen Zauberstab, den ich gefunden habe.");
 		if (DlgEvent())
 		{
-			player->CreateContents(RP93);
+			player->CreateContents(WizardStaff);
 			player.dialogue_quimby_gave_smett = true;
 		}
 		DlgText("Danke.", player);
