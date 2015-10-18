@@ -180,7 +180,9 @@ func Initialize()
 //	spawn->SetAction("Respawn1000");  
 //	spawn->CreateContents(HN93);           
 
-//	CreateConstruction(ELEV,1590,915,0,99,1);
+	var elevator = CreateObject(Elevator, 1275, 703, NO_OWNER);
+	elevator->SetDir(DIR_Right);
+	//elevator->SetNoPowerNeed(true); // this causes a few errors because the elevator has no power network
 //	CreateObjectMapZoom(BRDG,1640,920,0);
 
 
