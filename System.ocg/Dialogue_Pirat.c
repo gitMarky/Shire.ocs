@@ -34,7 +34,7 @@ public func Dlg_Pirat(object player)
 	}
 	else if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting)
 	{
-		var eyepatch = player->FindContents(_AUK);
+		var eyepatch = player->FindContents(Eyepatch);
 		DlgText("Hast Du die Augenklappe?");
 		if (!eyepatch)
 		{

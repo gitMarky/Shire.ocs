@@ -25,6 +25,14 @@ public func Dlg_Merchant(object player)
 	{
 		DlgText("Gerne.|Tue den Pulli nur in den Schrank,|dann bekommst Du auch eine Augenklappe.");
 	}
+	else if (true)
+	{
+		DlgText("Danke für die Augenklappe.", player);
+		if (DlgEvent())
+		{
+			player->CreateContents(Eyepatch);
+		}
+	}
 	else
 	{
 		DlgText("Danke nochmal fuer den Pulli.");
