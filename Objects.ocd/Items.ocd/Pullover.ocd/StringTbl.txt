@@ -1,0 +1,3 @@
+Name=Pullover
+Description=Ein roter Pulli, daran haben zwei Grossmuetter drei Jahre lang gestrickt.
+
