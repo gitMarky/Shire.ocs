@@ -5,7 +5,11 @@ func Iolo_Elevator_Init()
 {
 	npc_iolo->SetPosition(npc_iolos_father->GetX() - 20, npc_iolos_father->GetY());
 
-	// create arrows, just in case
+	if (!npc_iolo->FindContents(Bow))
+	{
+		npc_iolo->CreateContents(Bow);
+	}
+
 	if (!npc_iolo->FindContents(BombArrow))
 	{
 		npc_iolo->CreateContents(BombArrow);

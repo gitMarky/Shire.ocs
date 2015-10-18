@@ -316,6 +316,7 @@ func CreateIolo()
 	npc_iolo->SetName("$NPC_Iolo$");
 	npc_iolo->RemoveBackpack();
 	npc_iolo->SetMeshMaterial("Clonk_Iolo");
+	npc_iolo->SetDialogueEx("Iolo");
 }
 
 func CreateMhoram()

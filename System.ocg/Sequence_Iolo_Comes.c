@@ -23,6 +23,7 @@ func Iolo_Comes_1()
 
 func Iolo_Comes_2()
 {
+	SetViewTarget(this.hero);
 	// this has to be called in an interaction, then it can stop:
 	// the interaction depends on the sequence being active
 	this.dialogue->Interact(this.hero);
