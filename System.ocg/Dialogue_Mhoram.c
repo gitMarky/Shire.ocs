@@ -3,7 +3,7 @@
 
 public func Dlg_Mhoram(object player)
 {
-	if (true) //TODO completed the first dialogue
+	if (!player.dialogue_mhoram_completed)
 	{
 		DlgText("Hallo!|Wissen Sie, wie ich wieder in meine Welt komme?", player);
 		DlgText("Ich weiss viel, mein Junge.");
@@ -22,6 +22,7 @@ public func Dlg_Mhoram(object player)
 		if (DlgEvent())
 		{
 			//TODO: explode the rocks
+			player.dialogue_mhoram_completed = true;
 		}
 	}
 	else
