@@ -3,7 +3,7 @@
 
 public func Dlg_NDo(object player)
 {
-	if (true) //TODO did not complete first dialogue
+	if (!player.dialogue_ndo_completed)
 	{
 		DlgText("Hallo.|Bist Du ein Buschmann?", player);
 		DlgText("Uhg, warum Fremder wissen wollen?");
@@ -16,6 +16,10 @@ public func Dlg_NDo(object player)
 		DlgText("Fremder nicht gehen weiter sollte.|Er in Not geraten wird.");
 		DlgText("Ich muss aber weiter.|Ich muss alles erforschen.|Ich muss nach Hause.", player);
 		DlgText("Und ich muss vielleicht sogar in Not geraten.", player);
+		if (DlgEvent())
+		{
+			player.dialogue_ndo_completed = true;
+		}
 	}
 	else
 	{
