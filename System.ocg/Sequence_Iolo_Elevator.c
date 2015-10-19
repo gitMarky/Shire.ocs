@@ -19,8 +19,9 @@ func Iolo_Elevator_Init()
 	
 }
 
-func Iolo_Elevator_Start(object hero)
+func Iolo_Elevator_Start(object dialogue, object hero)
 {
+	this.dialogue = dialogue;
 	this.hero = hero;
 
 	SetViewTarget(npc_iolo);
@@ -103,6 +104,8 @@ func Iolo_Elevator_6()
 	{
 		ShakeFree(1256, y, 12);
 	}
+	
+	// TODO: mystery sound
 	return ScheduleNext(50);
 }
 
@@ -114,16 +117,28 @@ func Iolo_Elevator_7()
 
 func Iolo_Elevator_8()
 {
-	return Stop();
-}
-
-func Iolo_Elevator_Stop()
-{
 	// dig again in case something got stuck
 	Iolo_Elevator_DigShaft();
 	this.elevator_case->ControlDown(this.hero);
 	// so that the elevator lands on a flat surface
 	DigFreeRect(1225, 1000, 60, 37, true);
+	return ScheduleNext(30);
+}
+
+func Iolo_Elevator_9()
+{
+	SetViewTarget(this.hero);
+	this.dialogue->Interact(this.hero);
+	return ScheduleNext(10);
+}
+
+func Iolo_Elevator_10() // dummy phase
+{
+	return ScheduleSame(50);
+}
+
+func Iolo_Elevator_Stop()
+{
 	return true;
 }
 
