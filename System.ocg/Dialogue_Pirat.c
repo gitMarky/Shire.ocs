@@ -7,7 +7,7 @@ static const DIALOGUE_Pirat_QuestFinished = 2;
 
 public func Dlg_Pirat(object player)
 {
-	if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_NoQuest)
+	if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_NoQuest || !player.dlg_pirat_get_quest)
 	{
 	    DlgText("Hallo.|Koennen Sie mir helfen nach Hause zu kommen?", player);
 	    DlgText("Har, ich bin schon viel rumgekommen, Du Landratte.");
