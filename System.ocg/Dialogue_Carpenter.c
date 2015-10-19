@@ -1,7 +1,7 @@
 #include Library_Dialogue
 #appendto Library_Dialogue
 
-public func Dlg_Bauarbeiter(object player)
+public func Dlg_Carpenter(object player)
 {
 	var has_dialogue_crowbar = player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
 	                       && !player.dialogue_carpenter_crowbar;
