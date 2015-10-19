@@ -6,6 +6,12 @@ public func Dlg_IolosFather(object player)
 	var has_dialogue_iolo = player.dialogue_guardsman_elevator
 	                    && !player.dialogue_iolo_arrow;  // talked to guardsman about the elevator
 
+	var has_dialogue_crowbar = player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
+	                       && !player.dialogue_carpenter_crowbar
+	                       && !player.dialogue_iolos_father_angry;
+
+	var has_final_dialogue = player.dialogue_iolos_father_angry;
+
 	if (has_dialogue_iolo)
 	{
 		var in_sequence = GetActiveSequence()
@@ -41,12 +47,16 @@ public func Dlg_IolosFather(object player)
 			}
 		}
 	}
-	else if (false) //TODO: asked about crowbar
+	else if (has_dialogue_crowbar)
 	{
 		DlgText("Hallo.|Sie haben nicht zufaellig ein Brecheisen oder so,|mit dem ich in den Laden kann?", player);
 		DlgText("Nein, ich habe keins.");
+		if (DlgEvent())
+		{
+			player.dialogue_iolos_father_angry = true;
+		}
 	}
-	else if (false)
+	else if (has_final_dialogue)
 	{
 		DlgText("Du faengst an mich zu nerven, Kleiner.");
 	}

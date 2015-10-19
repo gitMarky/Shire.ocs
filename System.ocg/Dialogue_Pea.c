@@ -7,7 +7,8 @@ public func Dlg_Pea(object player)
 	var has_dialogue_tflint = player.dialogue_guardsman_asked_tflint  // talked to guardsman about t-flint
 	                      && !player.dialogue_pea_asked_bread;
 	var has_dialogue_bread = player.dialogue_pea_asked_bread; // talked about bread
-	var has_dialogue_crowbar = false;
+	var has_dialogue_crowbar = player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
+	                       && !player.dialogue_carpenter_crowbar;
 
 	if (has_dialogue_east)
 	{
