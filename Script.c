@@ -118,6 +118,7 @@ func Initialize()
 	hut_low->SetGraphics("Inside");
 	var door_hut_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
 	var door_hut_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
+	door_hut_top->ConnectTo(door_hut_low);
 
 
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
@@ -125,18 +126,25 @@ func Initialize()
 	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
 	var stonehut_low = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
 	stonehut_low->SetGraphics("Inside");
-	var door_stonehut = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
+	var door_stonehut_top = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
+	var door_stonehut_low = CreateObject(DecoDoor, 742, 1744, NO_OWNER);
+	door_stonehut_top->ConnectTo(door_stonehut_low);
 
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
     var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
 	shop_low->SetGraphics("Inside");
-    var door_shop = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
+    var door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
+    var door_shop_low = CreateObject(DecoDoor, 970, 1744, NO_OWNER);
+	door_shop_top->ConnectTo(door_shop_low);
+
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
 	windmill->SetMeshMaterial("Windmill_Alternate");
 	
-	var door_castle = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
+	var door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
+	var door_castle_low = CreateObject(DecoDoor, 1064, 1744, NO_OWNER);
+	door_castle_top->ConnectTo(door_castle_low);
 	
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
