@@ -13,6 +13,8 @@ func Initialize()
 // can we open the door?
 public func IsInteractable() { return is_enabled && transfer_target; }
 
+public func SetEnabled(bool enabled){ is_enabled = enabled; }
+
 // Called on player interaction.
 public func Interact(object target)
 {

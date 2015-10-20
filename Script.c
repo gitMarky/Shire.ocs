@@ -2,7 +2,7 @@
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
-static door_hut_iolo_top, door_hut_iolo_low;
+static door_hut_iolo_top, door_hut_iolo_low, door_castle_top;
 
 func Initialize()
 {
@@ -147,11 +147,13 @@ func Initialize()
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
 	windmill->SetMeshMaterial("Windmill_Alternate");
 	
-	var door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
+	door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
 	var door_castle_low = CreateObject(DecoDoor, 1064, 1744, NO_OWNER);
 	door_castle_top->ConnectTo(door_castle_low);
 	door_castle_top->SetGraphics("Castle");
 	door_castle_low->SetGraphics("Castle");
+	door_castle_top->SetEnabled(false);
+	door_castle_top->SetDialogueEx("CastleDoor");
 
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
