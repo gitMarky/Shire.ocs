@@ -114,7 +114,10 @@ func Initialize()
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
-	var door_hut = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
+	CreateObject(DecoHut, 610, 1727, NO_OWNER);
+	var door_hut_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
+	var door_hut_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
+	
 	
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
@@ -311,7 +314,7 @@ func CreateDrin()
 
 func CreateMerchant()
 {
-	npc_merchant=CreateObject(Clonk, 1160, 1760, NO_OWNER);
+	npc_merchant=CreateObject(Clonk, 990, 1743, NO_OWNER);
 	npc_merchant->SetName("$NPC_Merchant$");
 	npc_merchant->SetDialogueEx("Merchant");
 	npc_merchant->RemoveBackpack();
@@ -328,7 +331,7 @@ func CreateIolosFather()
 
 func CreateIolo()
 {
-	npc_iolo=CreateObject(Clonk, 735, 1720, NO_OWNER);
+	npc_iolo=CreateObject(Clonk, 620, 1743, NO_OWNER);
 	npc_iolo->SetName("$NPC_Iolo$");
 	npc_iolo->RemoveBackpack();
 	npc_iolo->SetMeshMaterial("Clonk_Iolo");
