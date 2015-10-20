@@ -2,6 +2,7 @@
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
+static door_hut_iolo_top, door_hut_iolo_low;
 
 func Initialize()
 {
@@ -116,9 +117,9 @@ func Initialize()
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
 	var hut_low = CreateObject(DecoHut, 610, 1727, NO_OWNER);
 	hut_low->SetGraphics("Inside");
-	var door_hut_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
-	var door_hut_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
-	door_hut_top->ConnectTo(door_hut_low);
+	door_hut_iolo_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
+	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
+	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
 
 
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
