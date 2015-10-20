@@ -114,18 +114,23 @@ func Initialize()
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
-	CreateObject(DecoHut, 610, 1727, NO_OWNER);
+	var hut_low = CreateObject(DecoHut, 610, 1727, NO_OWNER);
+	hut_low->SetGraphics("Inside");
 	var door_hut_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
 	var door_hut_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
-	
-	
+
+
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
 	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
+	var stonehut_low = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
+	stonehut_low->SetGraphics("Inside");
 	var door_stonehut = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
-	
+
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
+    var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
+	shop_low->SetGraphics("Inside");
     var door_shop = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
