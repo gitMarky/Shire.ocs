@@ -130,6 +130,8 @@ func Initialize()
 	var door_stonehut_top = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
 	var door_stonehut_low = CreateObject(DecoDoor, 742, 1744, NO_OWNER);
 	door_stonehut_top->ConnectTo(door_stonehut_low);
+	door_stonehut_top->SetGraphics("Stone");
+	door_stonehut_low->SetGraphics("Stone");
 
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
@@ -138,6 +140,8 @@ func Initialize()
     var door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
     var door_shop_low = CreateObject(DecoDoor, 970, 1744, NO_OWNER);
 	door_shop_top->ConnectTo(door_shop_low);
+	door_shop_top->SetGraphics("Shop");
+	door_shop_low->SetGraphics("Shop");
 
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
@@ -146,7 +150,9 @@ func Initialize()
 	var door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
 	var door_castle_low = CreateObject(DecoDoor, 1064, 1744, NO_OWNER);
 	door_castle_top->ConnectTo(door_castle_low);
-	
+	door_castle_top->SetGraphics("Castle");
+	door_castle_low->SetGraphics("Castle");
+
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
 
