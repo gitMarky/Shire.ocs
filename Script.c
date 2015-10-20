@@ -114,14 +114,22 @@ func Initialize()
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
+	var door_hut = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
+	
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
 	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
+	var door_stonehut = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
+	
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
+    var door_shop = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
 	windmill->SetMeshMaterial("Windmill_Alternate");
+	
+	var door_castle = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
+	
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
 
