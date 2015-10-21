@@ -36,13 +36,13 @@ public func Dlg_Merchant(object player)
 		{
 			DlgText("Hier, da hast du meinen Pullover.", player);
 			DlgText("Danke, dann bekommst Du auch eine Augenklappe.");
+			DlgText("Danke für die Augenklappe.", player);
 			if (DlgEvent())
 			{
 				has_pullover->RemoveObject();
 				player->CreateContents(Eyepatch);
 				player.dialogue_merchant_pullover = true;
 			}
-			DlgText("Danke für die Augenklappe.", player);
 		}
 		else
 		{

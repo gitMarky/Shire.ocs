@@ -2,7 +2,7 @@
 static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
-static door_hut_iolo_top, door_hut_iolo_low, door_castle_top;
+static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
 
 func Initialize()
 {
@@ -137,11 +137,13 @@ func Initialize()
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
     var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
 	shop_low->SetGraphics("Inside");
-    var door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
+    door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
     var door_shop_low = CreateObject(DecoDoor, 970, 1744, NO_OWNER);
 	door_shop_top->ConnectTo(door_shop_low);
 	door_shop_top->SetGraphics("Shop");
 	door_shop_low->SetGraphics("Shop");
+	door_shop_top->SetEnabled(false);
+	door_shop_top->SetDialogueEx("DoorShop");
 
 	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
 	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
@@ -153,7 +155,7 @@ func Initialize()
 	door_castle_top->SetGraphics("Castle");
 	door_castle_low->SetGraphics("Castle");
 	door_castle_top->SetEnabled(false);
-	door_castle_top->SetDialogueEx("CastleDoor");
+	door_castle_top->SetDialogueEx("DoorCastle");
 
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);

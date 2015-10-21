@@ -1,7 +1,7 @@
 #include Library_Dialogue
 #appendto Library_Dialogue
 
-public func Dlg_CastleDoor(object player)
+public func Dlg_DoorCastle(object player)
 {
 	var can_enter = player.dialogue_guardsman_gave_tflint;
 
