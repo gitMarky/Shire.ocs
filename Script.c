@@ -138,7 +138,7 @@ func Initialize()
     kitchen->SetMeshMaterial("Kitchen_Alternate");
     CreateObject(Flour, 709, 1748, NO_OWNER);
     CreateObject(Flour, 713, 1748, NO_OWNER);
-    CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(35, 35, 35), Trans_Rotate(-3, 0, 0, 1));
+    CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(30, 35, 35), Trans_Rotate(-3, 0, 0, 1));
 	
 
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
