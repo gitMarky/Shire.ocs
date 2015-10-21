@@ -132,6 +132,13 @@ func Initialize()
 	door_stonehut_top->ConnectTo(door_stonehut_low);
 	door_stonehut_top->SetGraphics("Stone");
 	door_stonehut_low->SetGraphics("Stone");
+	var kitchen = CreateObject(Kitchen, 740, 1726);
+	kitchen.MeshTransformation = Trans_Mul(Trans_Rotate(30, 0, 1, 0), Trans_Scale(1200, 1200, 1200));
+    kitchen->SetShape(-25,-23,20,50);
+    kitchen->SetMeshMaterial("Kitchen_Alternate");
+    CreateObject(Flour, 709, 1748, NO_OWNER);
+    CreateObject(Flour, 713, 1748, NO_OWNER);
+	
 
 	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
