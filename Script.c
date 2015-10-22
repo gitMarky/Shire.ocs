@@ -6,17 +6,6 @@ static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
 
 func Initialize()
 {
-	var city_x = 795;
-	var city_y = 1031;
-	CreateObject(DecoCity, city_x, city_y, NO_OWNER);
-	var top = CreateObject(DecoCity, city_x, city_y, NO_OWNER);
-	top->SetGraphics("Top");
-	top.Plane = 10000;
-	CreateObject(DecoFlag, city_x - 256, city_y - 139);
-	CreateObject(DecoFlag, city_x - 16,  city_y - 100);
-	CreateObject(DecoFlag, city_x + 261, city_y - 115);
-	
-	
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 
 //	CreateObjectMapZoom(AB93,100,1335,0);
@@ -114,57 +103,16 @@ func Initialize()
 //	DigFree(150,660,90);
 //	CreateObjectMapZoom(BRDG,90,665,0);
 //	CreateObjectMapZoom(BRDG,210,665,0);
-	CreateObject(DecoHut, 610, 1007, NO_OWNER);
-	var hut_low = CreateObject(DecoHut, 610, 1727, NO_OWNER);
-	hut_low->SetGraphics("Inside");
-	door_hut_iolo_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
-	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
-	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
 
-
+	CreateCity();
+	CreateWoodHut();
 	CreateObject(DecoConstruction, 670, 1007, NO_OWNER);
 
-	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
-	var stonehut_low = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
-	stonehut_low->SetGraphics("Inside");
-	var door_stonehut_top = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
-	var door_stonehut_low = CreateObject(DecoDoor, 742, 1744, NO_OWNER);
-	door_stonehut_top->ConnectTo(door_stonehut_low);
-	door_stonehut_top->SetGraphics("Stone");
-	door_stonehut_low->SetGraphics("Stone");
-	var kitchen = CreateObject(Kitchen, 740, 1726);
-	kitchen.MeshTransformation = Trans_Mul(Trans_Rotate(30, 0, 1, 0), Trans_Scale(1200, 1200, 1200));
-    kitchen->SetShape(-25,-23,20,50);
-    kitchen->SetMeshMaterial("Kitchen_Alternate");
-    CreateObject(Flour, 709, 1748, NO_OWNER);
-    CreateObject(Flour, 713, 1748, NO_OWNER);
-    CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(30, 35, 35), Trans_Rotate(-3, 0, 0, 1));
-	
-
-	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
-    CreateObject(DecoShop, 985, 1002, NO_OWNER);
-    var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
-	shop_low->SetGraphics("Inside");
-    door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
-    var door_shop_low = CreateObject(DecoDoor, 970, 1744, NO_OWNER);
-	door_shop_top->ConnectTo(door_shop_low);
-	door_shop_top->SetGraphics("Shop");
-	door_shop_low->SetGraphics("Shop");
-	door_shop_top->SetEnabled(false);
-	door_shop_top->SetDialogueEx("DoorShop");
-	CreateObject(EnvPack_TreeTrunks, 804, 1033, NO_OWNER);
-
-	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
-	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
-	windmill->SetMeshMaterial("Windmill_Alternate");
-	
-	door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
-	var door_castle_low = CreateObject(DecoDoor, 1064, 1744, NO_OWNER);
-	door_castle_top->ConnectTo(door_castle_low);
-	door_castle_top->SetGraphics("Castle");
-	door_castle_low->SetGraphics("Castle");
-	door_castle_top->SetEnabled(false);
-	door_castle_top->SetDialogueEx("DoorCastle");
+	CreateStoneHut();
+	CreateSawmill();
+	CreateWindmill();
+	CreateShop();
+	CreateCastle();
 
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
@@ -425,5 +373,86 @@ func CreateScientist()
 	npc_scientist->SetGraphics("Alchemist");
 	npc_scientist->SetMeshMaterial("Clonk_Scientist");
 	npc_scientist->SetMeshMaterial("Clonk_Scientist", 1);
+}
+
+func CreateCastle()
+{
+	door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
+	var door_castle_low = CreateObject(DecoDoor, 1064, 1744, NO_OWNER);
+	door_castle_top->ConnectTo(door_castle_low);
+	door_castle_top->SetGraphics("Castle");
+	door_castle_low->SetGraphics("Castle");
+	door_castle_top->SetEnabled(false);
+	door_castle_top->SetDialogueEx("DoorCastle");
+}
+
+func CreateCity()
+{
+	var city_x = 795;
+	var city_y = 1031;
+	CreateObject(DecoCity, city_x, city_y, NO_OWNER);
+	var top = CreateObject(DecoCity, city_x, city_y, NO_OWNER);
+	top->SetGraphics("Top");
+	top.Plane = 10000;
+	CreateObject(DecoFlag, city_x - 256, city_y - 139);
+	CreateObject(DecoFlag, city_x - 16,  city_y - 100);
+	CreateObject(DecoFlag, city_x + 261, city_y - 115);
+}
+
+func CreateStoneHut()
+{
+	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
+	var stonehut_low = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
+	stonehut_low->SetGraphics("Inside");
+	var door_stonehut_top = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
+	var door_stonehut_low = CreateObject(DecoDoor, 742, 1744, NO_OWNER);
+	door_stonehut_top->ConnectTo(door_stonehut_low);
+	door_stonehut_top->SetGraphics("Stone");
+	door_stonehut_low->SetGraphics("Stone");
+	var kitchen = CreateObject(Kitchen, 740, 1726);
+	kitchen.MeshTransformation = Trans_Mul(Trans_Rotate(30, 0, 1, 0), Trans_Scale(1200, 1200, 1200));
+    kitchen->SetShape(-25,-23,20,50);
+    kitchen->SetMeshMaterial("Kitchen_Alternate");
+    CreateObject(Flour, 709, 1748, NO_OWNER);
+    CreateObject(Flour, 713, 1748, NO_OWNER);
+    CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(30, 35, 35), Trans_Rotate(-3, 0, 0, 1));
+}
+
+func CreateSawmill()
+{
+	CreateObject(DecoSawmill, 840, 1005, NO_OWNER);
+	CreateObject(EnvPack_TreeTrunks, 804, 1033, NO_OWNER);
+}
+
+func CreateShop()
+{
+
+    CreateObject(DecoShop, 985, 1002, NO_OWNER);
+    var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
+	shop_low->SetGraphics("Inside");
+    door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
+    var door_shop_low = CreateObject(DecoDoor, 970, 1744, NO_OWNER);
+	door_shop_top->ConnectTo(door_shop_low);
+	door_shop_top->SetGraphics("Shop");
+	door_shop_low->SetGraphics("Shop");
+	door_shop_top->SetEnabled(false);
+	door_shop_top->SetDialogueEx("DoorShop");
+}
+
+func CreateWindmill()
+{
+	var windmill = CreateObject(Windmill, 915, 985, NO_OWNER);
+	windmill.MeshTransformation = Trans_Rotate(-10, 0, 1 ,0);
+	windmill->SetMeshMaterial("Windmill_Alternate");
+}
+
+func CreateWoodHut()
+{
+	CreateObject(DecoHut, 610, 1007, NO_OWNER);
+	var hut_low = CreateObject(DecoHut, 610, 1727, NO_OWNER);
+	hut_low->SetGraphics("Inside");
+	door_hut_iolo_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
+	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
+	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
 }
 
