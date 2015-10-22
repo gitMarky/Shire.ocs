@@ -6,17 +6,7 @@ static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
 
 func Initialize()
 {
-	CreateWaterfall();
-//	CreateObjectMapZoom(AB93,100,1335,0); // apple tree
-//	CreateObjectMapZoom(TI93,300,300,0); // timer
-
-// some kind of interior, no idea for what building
-//	CreateObjectMapZoom(_SRK,1400,2200,-1);
-//	CreateObjectMapZoom(_BED,1400,2130,0);
-//	CreateObjectMapZoom(_TUL,1375,2200,-1);
-//	CreateObjectMapZoom(_ST2,1375,2130,0);
-//	CreateObjectMapZoom(_TIS,1437,2200,0);
-//	CreateObjectMapZoom(_BED,945,2150,0);
+	// buildings
 
 	CreateCity();
 	CreateWoodHut();
@@ -31,11 +21,14 @@ func Initialize()
 	CreateElevator();
 	CreatePirateCastle();
 	CreateScientistLab();
+	
+	// deco
 
-	CreateFields();
-	CreateJungle();
 	CreateButterflies();
 	CreateCorpses();
+	CreateFields();
+	CreateJungle();
+	CreateWaterfall();
 
 // some kind of barrier and book, maybe at the cyclops
 //	DigFreeRect(3910,1270,30,70);
@@ -43,6 +36,8 @@ func Initialize()
 //	CreateObjectMapZoom(_BU4,3650,2010,0);
 
 //	DigFreeRect(1020,1200,420,90);
+
+	// characters
 
 	CreateTuti();
 	CreatePirate();
@@ -218,6 +213,8 @@ func CreateScientist()
 	npc_scientist->SetMeshMaterial("Clonk_Scientist", 1);
 }
 
+// ----- *** Buildings Creation *** -----------------------------------------
+
 func CreateCastle()
 {
 	door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
@@ -385,6 +382,13 @@ func CreateShop()
 
 //	CreateObjectMapZoom(_HNS,1405,2260,0);
 //	CreateObjectMapZoom(_LIN,1400,2230,-1);
+
+//	CreateObjectMapZoom(_SRK,1400,2200,-1);
+//	CreateObjectMapZoom(_BED,1400,2130,0);
+//	CreateObjectMapZoom(_TUL,1375,2200,-1);
+//	CreateObjectMapZoom(_ST2,1375,2130,0);
+//	CreateObjectMapZoom(_TIS,1437,2200,0);
+//	CreateObjectMapZoom(_BED,945,2150,0);
 }
 
 func CreateWindmill()
@@ -415,6 +419,8 @@ func CreateWoodHut()
 //	CreateObjectMapZoom(_STU,945,2200,0);
 //	CreateObjectMapZoom(_ST2,915,2200,0);
 }
+
+// ----- *** Deco Creation *** -----------------------------------------
 
 func CreateButterflies()
 {
