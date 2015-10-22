@@ -424,14 +424,14 @@ func CreateWoodHut()
 
 func CreateButterflies()
 {
-//	CreateObjectMapZoom(SC93,1260,1200,0);
-//	CreateObjectMapZoom(SC93,1360,1200,0);
-//	CreateObjectMapZoom(SC93,1160,1200,0);
-//	CreateObjectMapZoom(SC93,1200,1200,0);
-//	CreateObjectMapZoom(SC93,1300,1200,0);
-//	CreateObjectMapZoom(SC93,300,1200,0);
-//	CreateObjectMapZoom(SC93,400,1200,0);
-//	CreateObjectMapZoom(SC93,270,1200,0);
+	CreateObject(Butterfly, 1000, 960, NO_OWNER);
+	CreateObject(Butterfly, 1090, 960, NO_OWNER);
+	CreateObject(Butterfly,  930, 960, NO_OWNER);
+	CreateObject(Butterfly,  960, 960, NO_OWNER);
+	CreateObject(Butterfly, 1040, 960, NO_OWNER);
+	CreateObject(Butterfly,  240, 960, NO_OWNER);
+	CreateObject(Butterfly,  320, 960, NO_OWNER);
+	CreateObject(Butterfly,  220, 960, NO_OWNER);
 }
 
 func CreateCorpses()
