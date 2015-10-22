@@ -503,3 +503,12 @@ func CreateWaterfall()
 {
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 }
+
+func RevealTunnel()
+{
+	DigFreeRect(2220,  496,  30, 534, false);
+	DigFreeRect(2192,  496,  40,  30, false);
+	DigFreeRect(2056,  648, 192,  30, false);
+	DigFreeRect(2232, 1000, 128,  30, false);
+	DigFreeRect(1830,  944, 400,  30, false);
+}
