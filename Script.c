@@ -436,10 +436,13 @@ func CreateButterflies()
 
 func CreateCorpses()
 {
-//	CreateObjectMapZoom(TC93,3800,1280,0)->SetAction("JungleClonk");
-//	CreateObjectMapZoom(TC93,3790,1280,0)->SetAction("JungleClonk");
-//	CreateObjectMapZoom(TC93,3700,1280,0)->SetAction("JungleClonk");
-//	CreateObjectMapZoom(TC93,3660,1280,0)->SetAction("JungleClonk");
+	for (var x in [2930, 2960, 3030, 3040])
+	{
+		var corpse = CreateObject(Clonk, x, 1010, NO_OWNER);
+		corpse->SetDir(Random(2));
+		corpse->SetMeshMaterial("Clonk_NDo");
+		corpse->Kill(corpse, true);
+	}
 }
 
 func CreateFields()
