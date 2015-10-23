@@ -53,6 +53,8 @@ func Initialize()
 	CreateQuimby();
 	CreateGuardsman();
 	CreateScientist();
+	
+	StartBackgroundSequence("Trigger_Bird_Elevator");
 }
 
 func InitializePlayer(int player)
