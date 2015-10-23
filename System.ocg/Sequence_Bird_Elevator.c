@@ -40,7 +40,7 @@ func Bird_Elevator_3()
 func Bird_Elevator_4()
 {
 	MessageBoxAll("Das muss ich mir eingebildet haben.", this.hero, true);
-	return ScheduleNext(this.delay);
+	return ScheduleNext(this.delay * 2); // the message takes some time
 }
 
 func Bird_Elevator_5()
