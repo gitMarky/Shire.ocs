@@ -3,6 +3,7 @@ static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
+static enemy_cyclops;
 
 func Initialize()
 {
