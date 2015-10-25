@@ -18,7 +18,16 @@ public func Dlg_Mage(object player)
 
 	DlgText("Ich habe Dich gewarnt. Oder erinnerst Du|Dich nicht mehr an den Vogel?");
 	DlgText("Du warst der Vogel???", player);
-	DlgText("Mhoram hat mir erzaehlt, dass Du vielleicht weisst,|wie ich wieder in meine Welt komme.", player);
+
+	if (knows_mhoram)
+	{
+		DlgText("Mhoram hat mir erzaehlt, dass Du vielleicht weisst,|wie ich wieder in meine Welt komme.", player);
+	}
+	else
+	{		
+		DlgText("Weisst du vielleicht,|wie ich wieder in meine Welt komme?", player);
+	}
+
 	DlgText("Ich habe davon schonmal gehoert.|Es gab mal einen Mann, der war in der gleichen Lage, wie Du.");
 	DlgText("Und er kam aus der gleichen Welt, wie Du.");
 	DlgText("Was??? Auch aus meiner Welt???", player);
