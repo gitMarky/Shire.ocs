@@ -63,29 +63,10 @@ func Bird_Rescue_6() // dummy phase, the dialogue continues the sequence once it
 
 func Bird_Rescue_7()
 {
-	DigFreeRect(1480, 86, 100,100);
-	CreateObject(BRDG,760,930,0);
-	CreateObject(BRDG,800,930,0);
-	CreateObject(BRDG,840,930,0);
-	CreateObject(BRDG,880,930,0);
-	CreateObject(BRDG,920,930,0);
-	CreateObject(BRDG,960,930,0);
-	CreateObject(BRDG,1000,930,0);
-	CreateObject(BRDG,1040,930,0);
-	CreateObject(BRDG,1080,930,0);
-	CreateObject(BRDG,1120,930,0);
-	CreateObject(BRDG,1160,930,0);
-	CreateObject(BRDG,1200,930,0);
-	CreateObject(BRDG,1240,930,0);
-	CreateObject(BRDG,1280,930,0);
-	CreateObject(BRDG,1320,930,0);
-	CreateObject(BRDG,1360,930,0);
-	CreateObject(BRDG,1400,930,0);
-	CreateObject(BRDG,1440,930,0);
-	CreateObject(BRDG,1480,930,0);
-	CreateObject(BRDG,1520,930,0);
-
-	return ScheduleNext(this.delay);
+	DigFreeRect(1040, 705, 200, 30);
+	DrawMaterialQuad("Brick-barrier", 600, 735, 1240, 735, 1240, 745, 600, 745);
+	
+	return ScheduleNext(1);
 }
 
 func Bird_Rescue_8()

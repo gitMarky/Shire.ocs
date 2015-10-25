@@ -51,3 +51,4 @@ OverloadTextures
 70=Snow-snow1
 
 73=Brick-brick1
+74=Brick-barrier
