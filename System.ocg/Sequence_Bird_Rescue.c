@@ -26,7 +26,7 @@ func Bird_Rescue_2()
 
 func Bird_Rescue_3()
 {
-	MessageBoxAll("", this.hero, true);
+	MessageBoxClearAll();
 	this.bird->FadeOut(20, false);
 	this.hero->FadeOut(20, false);
 	BirdSparks();
@@ -51,6 +51,7 @@ func Bird_Rescue_4()
 func Bird_Rescue_5()
 {
 	// dialogue
+	MessageBoxClearAll();
 	this.dialogue->Interact(this.hero);
 	return ScheduleNext(1);
 }

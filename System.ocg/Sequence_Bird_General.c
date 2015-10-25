@@ -29,3 +29,17 @@ func BirdSparks()
 		this.bird->CreateParticle("Dust", 0, 0, PV_Random(-10, 10), PV_Random(-10, 10), PV_Random(18, 36), this.dust_particles, 10);
 	}
 }
+
+func MessageBoxClearAll()
+{
+	for(var i = 0; i < GetPlayerCount(C4PT_User); ++i)
+	{
+		var plr = GetPlayerByIndex(i, C4PT_User);
+		MessageBoxClear(plr);
+	}
+}
+
+func MessageBoxClear(int for_player)
+{
+	CustomMessage("", nil, for_player, 0, 0);  // clear prev msg
+}

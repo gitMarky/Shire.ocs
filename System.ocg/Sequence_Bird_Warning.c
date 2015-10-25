@@ -31,7 +31,7 @@ func Bird_Warning_3()
 
 func Bird_Warning_4()
 {
-	MessageBoxAll("", this.hero, true);
+	MessageBoxClearAll();
 	this.bird->FadeOut(20, true);
 	BirdSparks();
 
