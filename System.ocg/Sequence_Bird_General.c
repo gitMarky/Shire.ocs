@@ -3,6 +3,7 @@
 
 func BirdSetup()
 {
+	this.delay = 80;
 	this.dust_particles =
 	{
 		Prototype = Particles_Dust(),

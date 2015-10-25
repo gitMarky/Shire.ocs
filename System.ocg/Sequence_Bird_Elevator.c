@@ -4,7 +4,6 @@
 func Bird_Elevator_Start(object hero)
 {
 	this.hero = hero;
-	this.delay = 80;
 	BirdSetup();
 
 	return ScheduleNext(1);
