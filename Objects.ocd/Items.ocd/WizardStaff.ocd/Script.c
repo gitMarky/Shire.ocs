@@ -97,8 +97,8 @@ private func FireWeapon(object clonk, int angle)
 		IY=Cos(180-angle, MuskDown) + MuskOffset;
 	
 	// enchantment effect 
-	var dx = Sin(angle, 60);
-	var dy =-Cos(angle, 60);
+	var dx = Sin(angle, 90);
+	var dy =-Cos(angle, 90);
 	
 	var can_enchant = false;
 	for (var target in FindObjects(Find_OnLine(IX, IY, IX + dx, IY + dy), Find_ID(Clonk)))
@@ -120,6 +120,7 @@ private func FireWeapon(object clonk, int angle)
 	else
 	{
 		Dialogue->MessageBox("Nimm dies, Clonkarabas!!!", clonk, clonk, clonk->GetOwner(), true);
+		this->FadeOut(10, true);
 	}
 
 	// effects!	
