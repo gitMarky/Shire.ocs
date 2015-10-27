@@ -50,6 +50,9 @@ func Trigger_Clonkarabas_Wait()
 		this.clonkarabas = CreateObject(Clonk, 1000, 725, NO_OWNER);
 		this.clonkarabas->SetDir(DIR_Right);
 		this.clonkarabas->FadeIn(20);
+		
+		var staff = this.clonkarabas->CreateContents(WizardStaff);
+		staff->SetMeshMaterial("Wizard_Staff_Clonkarabas");
 		ClonkarabasSparks();
 		this.sequence = StartSequence("Clonkarabas", 0, this.hero);
 		return ScheduleNext(30, "Appear");

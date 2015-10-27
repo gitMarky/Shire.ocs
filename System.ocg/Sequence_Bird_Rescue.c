@@ -42,6 +42,8 @@ func Bird_Rescue_4()
 	this.bird->FadeIn(20);
 	this.bird->Sound("Thunder?");
 	this.bird->SetDir(DIR_Right);
+	var staff = this.bird->CreateContents(WizardStaff);
+	staff->SetMeshMaterial("Wizard_Staff_Mage");
 	this.dialogue = this.bird->SetDialogueEx("Mage");	
 	BirdSparks();
 	CreateObject(Rock, this.hero->GetX(), 950)->Explode(15);
