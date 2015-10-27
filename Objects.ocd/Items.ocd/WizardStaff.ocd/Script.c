@@ -1,26 +1,24 @@
-/*--
-	Javelin
-	Author: Ringwaul
-	
-	A simple but dangerous throwing weapon.
---*/
-
-#include Library_Stackable
-
-public func MaxStackCount() { return 3; }
 
 local animation_set;
 
+local MuskUp; local MuskFront; local MuskDown; local MuskOffset;
+
+
 func Initialize()
 {
+	//Tweaking options
+	MuskUp = 12;
+	MuskFront = 13;
+	MuskDown = 16;
+	MuskOffset = -8;
+
 	animation_set = {
 		AimMode         = AIM_Position, // The aiming animation is done by adjusting the animation position to fit the angle
-		AnimationAim    = "SpearAimArms",
-		AnimationShoot  = "SpearThrowArms",
-		AnimationShoot2 = "SpearThrow2Arms",
-		AnimationShoot3 = "SpearThrow3Arms",
-		ShootTime       = 16,
-		ShootTime2      =  8,
+		AnimationAim   = "MusketAimArms",
+		AnimationLoad  = "MusketLoadArms",
+		LoadTime       = 80,
+		AnimationShoot = nil,
+		ShootTime      = 20,
 		WalkBack        =  0,
 	};
 }
@@ -32,7 +30,7 @@ local aiming;
 public func GetCarryMode(clonk) { if(aiming >= 0) return CARRY_HandBack; }
 public func GetCarryBone() { return "Javelin"; }
 public func GetCarrySpecial(clonk) { if(aiming > 0) return "pos_hand2"; }
-public func GetCarryTransform() { if(aiming == 1) return Trans_Rotate(180, 0, 0, 1); }
+public func GetCarryTransform() { if(aiming == 1) return Trans_Translate(4000, 0, 0); }
 
 public func RejectUse(object clonk)
 {
@@ -47,7 +45,6 @@ public func ControlUseStart(object clonk, int x, int y)
 
 	ControlUseHolding(clonk, x, y);
 	
-	Sound("DrawJavelin");
 	return 1;
 }
 
@@ -73,6 +70,8 @@ protected func ControlUseStop(object clonk, ix, iy)
 // Callback from the clonk, when he actually has stopped aiming
 public func FinishedAiming(object clonk, int angle)
 {
+	FireWeapon(clonk, angle);
+//	clonk->CancelAiming(this);
 	clonk->StartShoot(this);
 	return true;
 }
@@ -88,136 +87,67 @@ public func Reset(clonk)
 	aiming = 0;
 }
 
-// Called in the half of the shoot animation (when ShootTime2 is over)
-public func DuringShoot(object clonk, int angle)
+
+private func FireWeapon(object clonk, int angle)
 {
-	DoThrow(clonk, angle);
-}
-
-public func DoThrow(object clonk, int angle)
-{
-	var javelin=TakeObject();
+	// calculate offset for shot and effects
+	var IX=Sin(180-angle, MuskFront);
+	var IY=Cos(180-angle, MuskUp) + MuskOffset;
+	if(Abs(Normalize(angle,-180)) > 90)
+		IY=Cos(180-angle, MuskDown) + MuskOffset;
 	
-	var div = 60; // 40% is converted to the direction of the throwing angle.
-	var xdir = clonk->GetXDir(1000);
-	var ydir = clonk->GetYDir(1000);
-	var speed = clonk.ThrowSpeed * 21 + (100 - div) * Sqrt(xdir**2 + ydir**2) / 100;
-	var jav_x = div * xdir / 100 + Sin(angle, speed);
-	var jav_y = div * ydir / 100 - Cos(angle, speed);
-		
-	javelin->SetXDir(jav_x, 1000);
-	javelin->SetYDir(jav_y, 1000);
-	javelin->SetPosition(javelin->GetX(),javelin->GetY()+6);
+	// enchantment effect 
+	var dx = Sin(angle, 60);
+	var dy =-Cos(angle, 60);
 	
-	SetController(clonk->GetController());
-	javelin->AddEffect("Flight",javelin,1,1,javelin,nil);
-	javelin->AddEffect("HitCheck",javelin,1,1,nil,nil,clonk);
+	var can_enchant = false;
+	for (var target in FindObjects(Find_OnLine(IX, IY, IX + dx, IY + dy), Find_ID(Clonk)))
+	{
+		var effect = GetEffect("CanBeEnchanted", target); 
+		if (effect)
+		{
+			can_enchant = true;
+			AddEffect("Enchanted", target);
+			RemoveEffect(nil, nil, effect);
+			break;
+		}
+	}
 	
-	Sound("ThrowJavelin?");
-	
-	aiming = -1;
-	clonk->UpdateAttach();
-}
-
-protected func JavelinStrength() { return 14; }
-
-//slightly modified HitObject() from arrow
-public func HitObject(object obj)
-{
-	var relx = GetXDir() - obj->GetXDir();
-	var rely = GetYDir() - obj->GetYDir();
-	var speed = Sqrt(relx*relx+rely*rely);
-
-	var dmg = JavelinStrength()*speed/100;
-	ProjectileHit(obj,dmg,ProjectileHit_tumble);
-	
-	Stick();
-}
-
-// called by successful hit of object after from ProjectileHit(...)
-public func OnStrike(object obj)
-{
-	if(obj->GetAlive())
-		Sound("ProjectileHitLiving?");
+	if (!can_enchant)
+	{
+		Dialogue->MessageBox("Hier ist nichts, was ich verzaubern koennte.", clonk, clonk, clonk->GetOwner(), true);
+	}
 	else
-		Sound("JavelinHitGround");
+	{
+		Dialogue->MessageBox("Nimm dies, Clonkarabas!!!", clonk, clonk, clonk->GetOwner(), true);
+		
+	}
+
+	// effects!	
+	var crazy_glimmer = Particles_Glimmer();
+	crazy_glimmer.B = 255;
+	crazy_glimmer.R = PV_Linear(128,32);
+	crazy_glimmer.G = PV_Random(0, 128, 2);
+
+	var size = 10;
+	var x = Sin(angle, size * 10);
+	var y = -Cos(angle, size * 10);
+	CreateParticle("StarFlash", IX, IY, PV_Random(x - size, x + size), PV_Random(y - size, y + size), PV_Random(20, 60), crazy_glimmer, size * 10);
+	
+	var crazy_flash = Particles_Flash();
+	crazy_flash.Size = PV_KeyFrames(0, 0, 0, 100 / 4, 160 / 4, 1000 / 4, 0);
+	//crazy_flash.B = 255;
+	//crazy_flash.G = PV_Linear(128,32);
+	//crazy_flash.R = PV_Random(0, 128, 2);
+	
+	CreateParticle("Flash", IX, IY, 0, 0, 8, crazy_flash);
 }
 
 protected func Hit()
 {
-	if(GetEffect("Flight",this))
-	{
-		Stick();
-		Sound("JavelinHitGround");
-	}
-	else
-		Sound("WoodHit?");
+	Sound("WoodHit?");
 }
 
-protected func Stick()
-{
-	if(GetEffect("Flight",this))
-	{
-		SetXDir(0);
-		SetYDir(0);
-		SetRDir(0);
-
-		RemoveEffect("Flight",this);
-		RemoveEffect("HitCheck",this);
-		
-		var x=Sin(GetR(),+16);
-		var y=Cos(GetR(),-16);
-		var mat = GetMaterial(x,y);
-		if(mat != -1)
-		{
-			//if(GetMaterialVal("DigFree","Material",mat))
-			//{
-			// stick in landscape
-			SetVertex(2,VTX_Y,-18,1);
-			//}
-		}
-		return;
-	}
-}
-
-func Entrance()
-{
-	// reset sticky-vertex
-	SetVertex(2,VTX_Y,0,1);
-}
-
-protected func FxFlightStart(object pTarget, effect)
-{
-	pTarget->SetProperty("Collectible",0);
-	pTarget->SetR(Angle(0,0,pTarget->GetXDir(),pTarget->GetYDir()));
-}
-
-protected func FxFlightTimer(object pTarget, effect, int iEffectTime)
-{
-	//Using Newton's arrow rotation. This would be much easier if we had tan^-1 :(
-	var oldx = effect.x;
-	var oldy = effect.y;
-	var newx = GetX();
-	var newy = GetY();
-
-	var anglediff = Normalize(Angle(oldx,oldy,newx,newy)-GetR(),-180);
-	pTarget->SetRDir(anglediff/2);
-	effect.x = newx;
-	effect.y = newy;
-	pTarget->SetR(Angle(0,0,pTarget->GetXDir(),pTarget->GetYDir()));
-}
-
-protected func FxFlightStop(object pTarget, effect)
-{
-	pTarget->SetProperty("Collectible", 1);
-}
-
-public func IsWeapon() { return true; }
-public func IsArmoryProduct() { return true; }
-
-func Definition(def) {
-	SetProperty("PictureTransformation", Trans_Mul(Trans_Rotate(40,0,0,1),Trans_Rotate(-10,1,0,0)),def);
-}
 
 local Collectible = 1;
 local Name = "$Name$";
