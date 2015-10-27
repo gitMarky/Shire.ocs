@@ -57,6 +57,7 @@ func Initialize()
 
 	StartBackgroundSequence("Trigger_Bird_Elevator");
 	StartBackgroundSequence("Trigger_Bird_Cyclops");
+	StartBackgroundSequence("Trigger_Clonkarabas");
 }
 
 func InitializePlayer(int player)
