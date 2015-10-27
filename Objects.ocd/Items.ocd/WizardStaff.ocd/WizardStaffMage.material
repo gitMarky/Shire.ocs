@@ -1,4 +1,4 @@
-material Wizard_Staff
+material Wizard_Staff_Mage
 {
 	receive_shadows on
 	technique
@@ -13,7 +13,7 @@ material Wizard_Staff
 			emissive 0.000000 0.000000 0.000000 1.000000
 			texture_unit
 			{
-				texture staff.png
+				texture staff_mage.png
 				tex_address_mode wrap
 				filtering trilinear
 			}
