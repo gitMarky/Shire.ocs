@@ -12,6 +12,6 @@ public func Dlg_Clonkarabas(object player)
 	DlgText("Als Strafe, dafuer, dass Du mich fast getoetet haettest,|wirst Du ewig hier bleiben.");
 	if (DlgEvent())
 	{
-		RemoveObject();
+		GetActiveSequence()->Stop();
 	}
 }

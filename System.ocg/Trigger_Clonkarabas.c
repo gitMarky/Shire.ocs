@@ -50,9 +50,10 @@ func Trigger_Clonkarabas_Wait()
 		this.clonkarabas = CreateObject(Clonk, 1000, 725, NO_OWNER);
 		this.clonkarabas->SetDir(DIR_Right);
 		this.clonkarabas->FadeIn(20);
+		AddEffect("CanBeEnchanted", this.clonkarabas, 1);
 		
-		var staff = this.clonkarabas->CreateContents(WizardStaff);
-		staff->SetMeshMaterial("Wizard_Staff_Clonkarabas");
+		this.staff = this.clonkarabas->CreateContents(WizardStaff);
+		this.staff->SetMeshMaterial("Wizard_Staff_Clonkarabas");
 		ClonkarabasSparks();
 		this.sequence = StartSequence("Clonkarabas", 0, this.hero);
 		return ScheduleNext(30, "Appear");
@@ -71,8 +72,28 @@ func Trigger_Clonkarabas_WaitDefeat()
 {
 	if (GetEffect("Enchanted", this.clonkarabas))
 	{
-		// TODO: defeat him, maybe a sequence?
-		// TODO: remove the barriers
+		this.staff->FadeOut(48, true);
+		this.clonkarabas->FadeOut(50, true);
+		return ScheduleNext(1, "Defeat");
 	}
 	return ScheduleSame(5);
+}
+
+func Trigger_Clonkarabas_Defeat()
+{
+	if (this.clonkarabas)
+	{
+		// effects!	
+		var crazy_glimmer = Particles_Glimmer();
+		crazy_glimmer.B = 255;
+		crazy_glimmer.R = PV_Linear(128,32);
+		crazy_glimmer.G = PV_Random(0, 128, 2);
+
+		var size = 20;
+		var x = this.clonkarabas->GetX();
+		var y = this.clonkarabas->GetY();
+		CreateParticle("StarFlash", PV_Random(x - 5, x + 5), PV_Random(y - 5, y + 5), PV_Random(-size, +size), PV_Random(-2 * size, -size), PV_Random(20, 60), crazy_glimmer, size / 2);
+		return ScheduleSame(1);
+	}
+	return Stop();
 }

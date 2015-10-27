@@ -13,7 +13,9 @@ func Bird_Rescue_1()
 	this.bird = CreateObject(Clonk, this.hero->GetX() + 30, 960, NO_OWNER);
 	this.bird->SetDir(DIR_Left);
 	this.bird->FadeIn(20);
-	this.bird->Sound("Magic");	
+	this.bird->Sound("Magic");
+	this.staff = this.bird->CreateContents(WizardStaff);
+	this.staff->SetMeshMaterial("Wizard_Staff_Mage");	
 	BirdSparks();
 	return ScheduleNext(30);
 }
@@ -42,8 +44,6 @@ func Bird_Rescue_4()
 	this.bird->FadeIn(20);
 	this.bird->Sound("Thunder?");
 	this.bird->SetDir(DIR_Right);
-	var staff = this.bird->CreateContents(WizardStaff);
-	staff->SetMeshMaterial("Wizard_Staff_Mage");
 	this.dialogue = this.bird->SetDialogueEx("Mage");	
 	BirdSparks();
 	CreateObject(Rock, this.hero->GetX(), 950)->Explode(15);
@@ -73,6 +73,7 @@ func Bird_Rescue_7()
 
 func Bird_Rescue_8()
 {
+	this.staff->FadeOut(19, true); // fade the staff faster, so that it does not drop
 	this.bird->FadeOut(20, true);
 	BirdSparks();
 	return Stop();

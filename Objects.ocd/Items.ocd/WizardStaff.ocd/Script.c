@@ -103,11 +103,11 @@ private func FireWeapon(object clonk, int angle)
 	var can_enchant = false;
 	for (var target in FindObjects(Find_OnLine(IX, IY, IX + dx, IY + dy), Find_ID(Clonk)))
 	{
-		var effect = GetEffect("CanBeEnchanted", target); 
+		var effect = GetEffect("CanBeEnchanted", target);
 		if (effect)
 		{
 			can_enchant = true;
-			AddEffect("Enchanted", target);
+			AddEffect("Enchanted", target, 1);
 			RemoveEffect(nil, nil, effect);
 			break;
 		}
@@ -120,7 +120,6 @@ private func FireWeapon(object clonk, int angle)
 	else
 	{
 		Dialogue->MessageBox("Nimm dies, Clonkarabas!!!", clonk, clonk, clonk->GetOwner(), true);
-		
 	}
 
 	// effects!	
