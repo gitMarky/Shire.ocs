@@ -95,24 +95,33 @@ func Trigger_Clonkarabas_WaitDefeat()
 			}
 			
 			var reach = 90;
+			var spray_max = 10;
 			
 			// effects
 			if (ObjectDistance(this.hero, this.clonkarabas) < reach)
 			{
+				this.spraying = Min(spray_max, this.spraying);
 				var angle = Angle(0, 0, dx, dy);
 				var sx = +Sin(angle, 15);
 				var sy = -Cos(angle, 15);
 				sy -= 3;
 
 				var fuzzy = 10;
-				var velocity = 2 * reach / 3; // should take 20 frames to reach the end
+				var velocity = reach; // should take 20 frames to reach the end
 				var vx = +Sin(angle, velocity);
 				var vy = -Cos(angle, velocity);
-				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(15, 20), Particles_Smoke(), 10);
+
+				var smoke = Particles_Smoke();
+				smoke.R = PV_KeyFrames(0, 0, 100, 500, 10, 1000, 5);
+				smoke.G = PV_Linear(0, 5);
+				smoke.B = PV_Linear(0, 5);
+	
+				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(15, 20), smoke, 3);
+				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx/2 - fuzzy, vx/2 + fuzzy), PV_Random(vy/2 - fuzzy, vy/2 + fuzzy), PV_Random(15, 20), smoke, 3);
 			}
 			
 			// fling the clonk
-			if (ObjectDistance(this.hero, this.clonkarabas) < (reach-fuzzy) && this.hero->GetAction() != "Tumble")
+			if (ObjectDistance(this.hero, this.clonkarabas) < (spray_max + this.spraying)*(reach-fuzzy)/(2*spray_max) && this.hero->GetAction() != "Tumble")
 			{
 				if (this.hero->GetAction() == "Walk")
 				{
