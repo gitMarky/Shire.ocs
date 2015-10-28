@@ -2,14 +2,17 @@
 
 func Trigger_Clonkarabas_Init()
 {
+	this.cSmokeR = PV_KeyFrames(0, 0, 100, 500, 10, 1000, 5);
+	this.cSmokeG = PV_Linear(0, 5);
+	this.cSmokeB = PV_Linear(0, 5);
 	this.dust_particles =
 	{
 		Prototype = Particles_Dust(),
 		Size = PV_KeyFrames(0, 0, 0, 100, 10, 1000, 0),
 		Alpha = PV_KeyFrames(0, 0, 255, 750, 255, 1000, 0),
-		R = 80,
-		G = 80,
-		B = 125,
+		R = this.cSmokeR,
+		G = this.cSmokeG,
+		B = this.cSmokeB,
 	};
 	this.flash_particles =
 	{ 
@@ -71,14 +74,14 @@ func Trigger_Clonkarabas_Appear()
 
 func Trigger_Clonkarabas_WaitDefeat()
 {
-	if (!GetActiveSequence() && GetEffect("Enchanted", this.clonkarabas))
+	if (GetEffect("Enchanted", this.clonkarabas))
 	{
 		this.staff->FadeOut(48, true);
 		this.clonkarabas->FadeOut(50, true);
 		StartSequence("Clonkarabas", 12, this.clonkarabas);
 		return Stop();
 	}
-	else // clonkarabas shoots at clonk
+	else if (!GetActiveSequence()) // clonkarabas shoots at clonk
 	{
 		var dx = this.hero->GetX() - this.clonkarabas->GetX();
 		var dy = this.hero->GetY() - this.clonkarabas->GetY();
@@ -100,7 +103,7 @@ func Trigger_Clonkarabas_WaitDefeat()
 			// effects
 			if (ObjectDistance(this.hero, this.clonkarabas) < reach)
 			{
-				this.spraying = Min(spray_max, this.spraying);
+				this.spraying = Min(spray_max, this.spraying + 1);
 				var angle = Angle(0, 0, dx, dy);
 				var sx = +Sin(angle, 15);
 				var sy = -Cos(angle, 15);
@@ -112,9 +115,9 @@ func Trigger_Clonkarabas_WaitDefeat()
 				var vy = -Cos(angle, velocity);
 
 				var smoke = Particles_Smoke();
-				smoke.R = PV_KeyFrames(0, 0, 100, 500, 10, 1000, 5);
-				smoke.G = PV_Linear(0, 5);
-				smoke.B = PV_Linear(0, 5);
+				smoke.R = this.cSmokeR;
+				smoke.G = this.cSmokeG;
+				smoke.B = this.cSmokeB;
 	
 				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(15, 20), smoke, 3);
 				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx/2 - fuzzy, vx/2 + fuzzy), PV_Random(vy/2 - fuzzy, vy/2 + fuzzy), PV_Random(15, 20), smoke, 3);
@@ -134,7 +137,6 @@ func Trigger_Clonkarabas_WaitDefeat()
 		{
 			this.staff->ControlUseStop(this.clonkarabas, dx, dy);
 		}
-
-		return ScheduleSame(2);
 	}
+	return ScheduleSame(2);
 }
