@@ -2,7 +2,7 @@
 local animation_set;
 
 local MuskUp; local MuskFront; local MuskDown; local MuskOffset;
-
+local disabled;
 
 func Initialize()
 {
@@ -50,6 +50,8 @@ public func ControlUseStart(object clonk, int x, int y)
 
 public func HoldingEnabled() { return true; }
 
+public func Disable(){ disabled = true; }
+
 func ControlUseHolding(object clonk, ix, iy)
 {
 	var angle = Angle(0,0,ix,iy);
@@ -90,6 +92,8 @@ public func Reset(clonk)
 
 private func FireWeapon(object clonk, int angle)
 {
+	if (disabled) return;
+
 	// calculate offset for shot and effects
 	var IX=Sin(180-angle, MuskFront);
 	var IY=Cos(180-angle, MuskUp) + MuskOffset;

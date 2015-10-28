@@ -25,9 +25,7 @@ func Clonkarabas_13()
 		var x = this.hero->GetX();
 		var y = this.hero->GetY();
 		CreateParticle("StarFlash", PV_Random(x - 5, x + 5), PV_Random(y - 5, y + 5), PV_Random(-size, +size), PV_Random(-2 * size, -size), PV_Random(20, 60), crazy_glimmer, size / 2);
-		return ScheduleSame(1);
-	
-		return ScheduleSame(1);
+		return ScheduleSame(1);	
 	}
 	return Stop();
 }
