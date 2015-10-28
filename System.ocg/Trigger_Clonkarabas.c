@@ -98,7 +98,7 @@ func Trigger_Clonkarabas_WaitDefeat()
 			}
 			
 			var reach = 90;
-			var spray_max = 10;
+			var spray_max = 20;
 			
 			// effects
 			if (ObjectDistance(this.hero, this.clonkarabas) < reach)
@@ -121,6 +121,10 @@ func Trigger_Clonkarabas_WaitDefeat()
 	
 				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(15, 20), smoke, 3);
 				CreateParticle("Smoke", this.clonkarabas->GetX() + sx, this.clonkarabas->GetY() + sy, PV_Random(vx/2 - fuzzy, vx/2 + fuzzy), PV_Random(vy/2 - fuzzy, vy/2 + fuzzy), PV_Random(15, 20), smoke, 3);
+			}
+			else
+			{
+				this.spraying = 0;
 			}
 			
 			// fling the clonk
