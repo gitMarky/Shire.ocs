@@ -101,11 +101,11 @@ private func FireWeapon(object clonk, int angle)
 		IY=Cos(180-angle, MuskDown) + MuskOffset;
 	
 	// enchantment effect 
-	var dx = Sin(angle, 90);
-	var dy =-Cos(angle, 90);
+	var dx = Sin(angle, 110);
+	var dy =-Cos(angle, 110);
 	
 	var can_enchant = false;
-	for (var target in FindObjects(Find_OnLine(IX, IY, IX + dx, IY + dy), Find_ID(Clonk)))
+	for (var target in FindObjects(Find_OnLine(IX, IY, IX + dx, IY + dy), Find_ID(Clonk), Find_AnyLayer()))
 	{
 		var effect = GetEffect("CanBeEnchanted", target);
 		if (effect)
