@@ -56,9 +56,20 @@ func Trigger_Clonkarabas_Wait()
 		this.clonkarabas->SetLayer(this.clonkarabas);
 		AddEffect("CanBeEnchanted", this.clonkarabas, 1);
 		
+		// staff
 		this.staff = this.clonkarabas->CreateContents(WizardStaff);
 		this.staff->SetMeshMaterial("Wizard_Staff_Clonkarabas");
 		this.staff->Disable();
+		
+		// hat
+		var hat = npc_pirate->CreateContents(ClonkarabasHat);
+		this.clonkarabas->AttachMesh(hat, "skeleton_head", "Base", Trans_Mul(Trans_Translate(4500, -500, 0),
+		                                                                     Trans_Rotate(90, 0, 0, 1),
+		                                                                     Trans_Rotate(90, 0, 1, 0),
+		                                                                     Trans_Rotate(-30, 1, 0, 0),
+		                                                                     Trans_Scale(1500, 1500, 1500)));
+
+		
 		ClonkarabasSparks();
 		this.sequence = StartSequence("Clonkarabas", 0, this.hero);
 		return ScheduleNext(30, "Appear");
@@ -77,6 +88,7 @@ func Trigger_Clonkarabas_WaitDefeat()
 {
 	if (GetEffect("Enchanted", this.clonkarabas))
 	{
+		this.clonkarabas->FindContents(ClonkarabasHat)->FadeOut(48, true);
 		this.staff->FadeOut(48, true);
 		this.clonkarabas->FadeOut(50, true);
 		StartSequence("Clonkarabas", 12, this.clonkarabas);

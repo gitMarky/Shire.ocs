@@ -1,0 +1,28 @@
+material clonkarabas_hat 
+{
+    receive_shadows on 
+
+    technique
+    {
+        pass S2Hat
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+
+            alpha_to_coverage off
+            cull_hardware clockwise
+            depth_check on
+            depth_write on
+            scene_blend one zero
+
+            texture_unit 
+            {
+                texture clonkarabas_hat.png
+                tex_address_mode wrap
+                scale 1.0 1.0
+            }
+        }
+    }
+}
