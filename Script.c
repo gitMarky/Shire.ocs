@@ -99,13 +99,15 @@ func CreatePirate()
 	npc_pirate->SetGraphics("Alchemist");
 	npc_pirate->SetMeshMaterial("Clonk_Pirate");
 	npc_pirate->SetMeshMaterial("Clonk_PirateTunic", 1);
+	npc_pirate->SetDir(DIR_Left);
 	
 	// hat
-	var hat = npc_pirate->CreateContents(Hat);
-	npc_pirate->AttachMesh(hat, "skeleton_head", "main", Trans_Mul(Trans_Scale(1000, 1000, 2000),
-	                                                               Trans_Translate(4000, 0, 0),
-	                                                               Trans_Rotate(-60, 0, 1, 0),
-	                                                               Trans_Rotate(-40, 0, 0, 1)));
+	var hat = npc_pirate->CreateContents(PirateHat);
+	npc_pirate->AttachMesh(hat, "skeleton_head", "Base", Trans_Mul(Trans_Rotate(20, 0, 1, 0),
+	                                                               Trans_Rotate(115, 0, 0, 1),
+	                                                               Trans_Rotate(10, 0, 1, 0),
+	                                                               Trans_Translate(-3500, -3500, 3000),
+	                                                               Trans_Scale(2500, 2500, 2500)));
 	hat->SetClrModulation(RGB(50, 50, 50));
 }
 
