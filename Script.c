@@ -54,6 +54,7 @@ func Initialize()
 	CreateQuimby();
 	CreateGuardsman();
 	CreateScientist();
+	CreateCyclops();
 
 	StartBackgroundSequence("Trigger_Bird_Elevator");
 	StartBackgroundSequence("Trigger_Bird_Cyclops");
@@ -218,6 +219,21 @@ func CreateScientist()
 	npc_scientist->SetGraphics("Alchemist");
 	npc_scientist->SetMeshMaterial("Clonk_Scientist");
 	npc_scientist->SetMeshMaterial("Clonk_Scientist", 1);
+}
+
+func CreateCyclops()
+{
+	// Cyclops
+	enemy_cyclops = CreateObject(Clonk, 3085, 1010, NO_OWNER);
+	enemy_cyclops->SetCon(250);
+	enemy_cyclops->SetObjectLayer(enemy_cyclops);
+	enemy_cyclops->SetDir(DIR_Left);
+	enemy_cyclops->SetMeshMaterial("Cyclops_Body");
+	enemy_cyclops->RemoveBackpack();
+	enemy_cyclops->CreateContents(Club);
+
+	var head = enemy_cyclops->CreateContents(CyclopsHead);
+	enemy_cyclops->AttachMesh(head, "skeleton_head", "main", Trans_Mul(Trans_Translate(-500, 0, 0), Trans_Rotate(90, 0, 0, 1)), AM_DrawBefore);
 }
 
 // ----- *** Buildings Creation *** -----------------------------------------

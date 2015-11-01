@@ -1,0 +1,2 @@
+Description=A monstrous head.
+Name=Cyclops head
