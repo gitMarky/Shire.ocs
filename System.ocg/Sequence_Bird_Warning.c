@@ -35,11 +35,6 @@ func Bird_Warning_4()
 	this.bird->FadeOut(20, true);
 	BirdSparks();
 
-	// Cyclops
-	enemy_cyclops = CreateObject(Clonk, 3850, 1280, 0);
-	enemy_cyclops->SetCon(400);
-	enemy_cyclops->SetObjectLayer(enemy_cyclops);
-	enemy_cyclops->SetDir(DIR_Left);
 	return ScheduleNext(20);
 }
 

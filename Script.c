@@ -248,23 +248,18 @@ func CreateCastle()
 	door_castle_top->SetEnabled(false);
 	door_castle_top->SetDialogueEx("DoorCastle");
 
-//	CreateObjectMapZoom(_HNB,2025,2260,0);
-//	CreateObjectMapZoom(_CSI,2050,2230,-1);
-//	CreateObjectMapZoom(_TUC,2050,2200,-1);
-//	CreateObjectMapZoom(CANN,1950,2200,0);
-//	CreateObjectMapZoom(CATA,2150,2200,0);
-//	CreateObjectMapZoom(_BED,1930,2157,0);
+//	CreateObjectMapZoom(CANN,1950,2200,0); // cannon
+//	CreateObjectMapZoom(CATA,2150,2200,0); // catapult
+//	CreateObjectMapZoom(_BED,1930,2157,0); // bed
 //	CreateObjectMapZoom(_BED,1958,2157,0);
 //	CreateObjectMapZoom(_SRK,2090,2115,0);
 
 //	var cupboard3 = CreateObjectMapZoom(_SRK,2125,2200,0);
-//	cupboard3->CreateContents(_BU1);
+//	cupboard3->CreateContents(_BU1); // book
 
 //	var cupboard4 = CreateObjectMapZoom(_SRK,2115,2115,0);
-//	cupboard4->CreateContents(TFLN);
-//	cupboard4->CreateContents(XARP);  
-//	cupboard4->CreateContents(TFLN);
-//	cupboard4->CreateContents(TFLN);
+//	cupboard4->CreateContents(TFLN); // 3x t-flint
+//	cupboard4->CreateContents(XARP); // arrows
 }
 
 func CreateCity()
@@ -290,7 +285,6 @@ func CreateElevator()
 
 func CreatePirateCastle()
 {
-//	CreateObjectMapZoom(_HNP,2715,2260,0);
 //	var cupboard5 = CreateObjectMapZoom(_SRK,2815,2157,0);
 //	cupboard5->CreateContents(_SME); // smett!
 
@@ -300,7 +294,6 @@ func CreatePirateCastle()
 //	cupboard6->CreateContents(GoldCoin);
 
 //	CreateObjectMapZoom(SLBT,2640,2200,0); // sail boat
-//	CreateObjectMapZoom(_PBI,2740,2230,-1);
 //	CreateObjectMapZoom(_TUP,2740,2200,0); // secret door?
 
 
@@ -326,28 +319,15 @@ func CreateStoneHut()
     CreateObject(Flour, 713, 1748, NO_OWNER);
     CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(30, 35, 35), Trans_Rotate(-3, 0, 0, 1));
 
-//	CreateObjectMapZoom(_HN2,405,2260,0);
-//	CreateObjectMapZoom(_HI2,400,2230,-1);
-//	CreateObjectMapZoom(_BED,425,2150,0);
-//	CreateObjectMapZoom(_TIS,395,2150,0);
-//	CreateObjectMapZoom(_ST2,380,2150,0);
-//	CreateObjectMapZoom(_STU,450,2200,0);
-
-//	CreateObjectMapZoom(OV23,385,2210,0); // oven
+//	CreateObjectMapZoom(_BED,425,2150,0); // bed
+//	CreateObjectMapZoom(_TIS,395,2150,0); // table
+//	CreateObjectMapZoom(_ST2,380,2150,0); // chair 1
+//	CreateObjectMapZoom(_STU,450,2200,0); // chair 2
 
 //	var cupboard2 = CreateObjectMapZoom(_SRK,352,2200,0);
 //	cupboard2->CreateContents(COAL);
-//	cupboard2->CreateContents(FB23);
 //	cupboard2->CreateContents(WBRL);
-//	cupboard2->CreateContents(_BU2);
-
-//	CreateObjectMapZoom(_TU2,425,2200,-1);
-
-// honey spawn
-//	var spawn = CreateObjectMapZoom(RP02,410,2200,-1); 
-//	spawn->SetAction("Respawn1000");  
-//	spawn->CreateContents(HN93);           
-
+//	cupboard2->CreateContents(_BU2); // book!
 }
 
 func CreateSawmill()
@@ -403,12 +383,9 @@ func CreateShop()
 	door_shop_top->SetEnabled(false);
 	door_shop_top->SetDialogueEx("DoorShop");
 
-//	CreateObjectMapZoom(_HNS,1405,2260,0);
-//	CreateObjectMapZoom(_LIN,1400,2230,-1);
 
-//	CreateObjectMapZoom(_SRK,1400,2200,-1);
-//	CreateObjectMapZoom(_BED,1400,2130,0);
-//	CreateObjectMapZoom(_TUL,1375,2200,-1);
+//	CreateObjectMapZoom(_SRK,1400,2200,-1); // cupboard
+//	CreateObjectMapZoom(_BED,1400,2130,0); // table, chairs, bed
 //	CreateObjectMapZoom(_ST2,1375,2130,0);
 //	CreateObjectMapZoom(_TIS,1437,2200,0);
 //	CreateObjectMapZoom(_BED,945,2150,0);
@@ -430,17 +407,13 @@ func CreateWoodHut()
 	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
 	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
 	
-//	CreateObjectMapZoom(_HNH,905,2260,0);
-//	CreateObjectMapZoom(_HUI,900,2230,-1); 
-//	CreateObjectMapZoom(_TUH,875,2200,-1);
-
 //	var cupboard1 = CreateObjectMapZoom(_SRK,920,2150,0);
 //	cupboard1->CreateContents(GoldCoin);
 //	cupboard1->CreateContents(GoldCoin);
 
-//	CreateObjectMapZoom(_TIS,930,2200,0);
-//	CreateObjectMapZoom(_STU,945,2200,0);
-//	CreateObjectMapZoom(_ST2,915,2200,0);
+//	CreateObjectMapZoom(_TIS,930,2200,0); // table
+//	CreateObjectMapZoom(_STU,945,2200,0); // chair
+//	CreateObjectMapZoom(_ST2,915,2200,0); // second chair
 }
 
 // ----- *** Deco Creation *** -----------------------------------------
