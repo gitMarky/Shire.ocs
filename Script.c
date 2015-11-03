@@ -240,6 +240,13 @@ func CreateCyclops()
 
 func CreateCastle()
 {
+	var castle_low = CreateObject(DecoCastle, 1070, 1727, NO_OWNER);
+	castle_low->SetGraphics("Inside");
+
+	var castle_low_top = CreateObject(DecoCastle, 1070, 1727, NO_OWNER);
+	castle_low_top->SetGraphics("InsideTop");
+	castle_low_top.Plane = 10000;
+
 	door_castle_top = CreateObject(DecoDoor, 1064, 1024, NO_OWNER);
 	var door_castle_low = CreateObject(DecoDoor, 1064, 1744, NO_OWNER);
 	door_castle_top->ConnectTo(door_castle_low);
@@ -248,18 +255,17 @@ func CreateCastle()
 	door_castle_top->SetEnabled(false);
 	door_castle_top->SetDialogueEx("DoorCastle");
 
-//	CreateObjectMapZoom(CANN,1950,2200,0); // cannon
-//	CreateObjectMapZoom(CATA,2150,2200,0); // catapult
-//	CreateObjectMapZoom(_BED,1930,2157,0); // bed
-//	CreateObjectMapZoom(_BED,1958,2157,0);
-//	CreateObjectMapZoom(_SRK,2090,2115,0);
+	var bed = CreateObject(Bed, 1050, 1738, NO_OWNER);
+	bed.MeshTransformation = Trans_Mul(Trans_Scale(700, 700, 700), Trans_Rotate(75, 0, 1, 0));
 
-//	var cupboard3 = CreateObjectMapZoom(_SRK,2125,2200,0);
+	var cupboard3 = CreateObject(Cupboard, 1080, 1742, NO_OWNER);
 //	cupboard3->CreateContents(_BU1); // book
 
-//	var cupboard4 = CreateObjectMapZoom(_SRK,2115,2115,0);
-//	cupboard4->CreateContents(TFLN); // 3x t-flint
-//	cupboard4->CreateContents(XARP); // arrows
+	var cupboard4 = CreateObject(Cupboard, 1090, 1742, NO_OWNER);
+	cupboard4->CreateContents(TFlint);
+	cupboard4->CreateContents(TFlint);
+	cupboard4->CreateContents(TFlint);
+	cupboard4->CreateContents(BombArrow); // arrows
 }
 
 func CreateCity()
@@ -280,18 +286,32 @@ func CreateElevator()
 	var elevator = CreateObject(Elevator, 1275, 703, NO_OWNER);
 	elevator->SetDir(DIR_Right);
 	//elevator->SetNoPowerNeed(true); // this causes a few errors because the elevator has no power network
-//	CreateObjectMapZoom(BRDG,1640,920,0);
 }
 
 func CreatePirateCastle()
 {
-//	var cupboard5 = CreateObjectMapZoom(_SRK,2815,2157,0);
-//	cupboard5->CreateContents(_SME); // smett!
+	CreateObject(DecoCastle, 2245, 423, NO_OWNER);
+	var castle_low = CreateObject(DecoCastle, 2245, 1727, NO_OWNER);
+	castle_low->SetGraphics("Inside");
 
-//	CreateObjectMapZoom(_BED,2620,2157,0);
-//	var cupboard6 = CreateObjectMapZoom(_SRK,2780,2115,0);
-//	cupboard6->CreateContents(GoldCoin);
-//	cupboard6->CreateContents(GoldCoin);
+	var castle_low_top = CreateObject(DecoCastle, 2245, 1727, NO_OWNER);
+	castle_low_top->SetGraphics("InsideWaterTop");
+	castle_low_top.Plane = 10000;
+	
+	var door_pcastle_top = CreateObject(DecoDoor, 2239, 440, NO_OWNER);
+	var door_pcastle_low = CreateObject(DecoDoor, 2239, 1744, NO_OWNER);
+	door_pcastle_top->ConnectTo(door_pcastle_low);
+	door_pcastle_top->SetGraphics("WaterCastle");
+	door_pcastle_low->SetGraphics("Castle");
+
+	var cupboard5 = CreateObject(Cupboard, 2815, 2157, NO_OWNER);
+	cupboard5->CreateContents(_SME); // smett!
+	cupboard5->CreateContents(GoldCoin);
+	cupboard5->CreateContents(GoldCoin);
+	
+	var skull = CreateObject(Skull, 2222, 1722, NO_OWNER);
+	skull->SetCategory(C4D_StaticBack);
+	skull->SetObjectLayer(skull);
 
 //	CreateObjectMapZoom(SLBT,2640,2200,0); // sail boat
 //	CreateObjectMapZoom(_TUP,2740,2200,0); // secret door?
@@ -299,6 +319,7 @@ func CreatePirateCastle()
 
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
+	CreateObject(Bed, 2263, 1738, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(700, 700, 700), Trans_Rotate(70, 0, 1, 0));
 }
 
 func CreateStoneHut()
@@ -318,11 +339,6 @@ func CreateStoneHut()
     CreateObject(Flour, 709, 1748, NO_OWNER);
     CreateObject(Flour, 713, 1748, NO_OWNER);
     CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(30, 35, 35), Trans_Rotate(-3, 0, 0, 1));
-
-//	CreateObjectMapZoom(_BED,425,2150,0); // bed
-//	CreateObjectMapZoom(_TIS,395,2150,0); // table
-//	CreateObjectMapZoom(_ST2,380,2150,0); // chair 1
-//	CreateObjectMapZoom(_STU,450,2200,0); // chair 2
 
 //	var cupboard2 = CreateObjectMapZoom(_SRK,352,2200,0);
 //	cupboard2->CreateContents(COAL);
