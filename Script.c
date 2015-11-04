@@ -35,6 +35,8 @@ func Initialize()
 //	DigFreeRect(3910,1270,30,70);
 //	CreateObjectMapZoom(_BWL,3940,1280,0);
 //	CreateObjectMapZoom(_BU4,3650,2010,0);
+//	var book = CreateObject(Book, 3650, 2010, NO_OWNER);
+//	book->SetDialogue("Book_Mystery");
 
 //	DigFreeRect(1020,1200,420,90);
 
