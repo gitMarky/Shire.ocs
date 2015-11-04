@@ -306,7 +306,7 @@ func CreatePirateCastle()
 	door_pcastle_low->SetGraphics("Castle");
 
 	var cupboard5 = CreateObject(Cupboard, 2815, 2157, NO_OWNER);
-	cupboard5->CreateContents(_SME); // smett!
+	cupboard5->CreateContents(sMett);
 	cupboard5->CreateContents(GoldCoin);
 	cupboard5->CreateContents(GoldCoin);
 	
