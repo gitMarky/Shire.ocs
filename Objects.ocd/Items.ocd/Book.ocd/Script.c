@@ -13,6 +13,7 @@ An item, that looks like a book. Can have a dialogue.
 protected func Initialize()
 {
 	SetColor(HSL(Random(256), 255, Random(128) + 128));
+	_inherited(...);
 }
  
 /**
