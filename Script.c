@@ -259,7 +259,8 @@ func CreateCastle()
 	bed.MeshTransformation = Trans_Mul(Trans_Scale(700, 700, 700), Trans_Rotate(75, 0, 1, 0));
 
 	var cupboard3 = CreateObject(Cupboard, 1080, 1742, NO_OWNER);
-//	cupboard3->CreateContents(_BU1); // book
+	var book = cupboard3->CreateContents(Book);
+	book->SetDialogue("Book_Guardsman");
 
 	var cupboard4 = CreateObject(Cupboard, 1090, 1742, NO_OWNER);
 	cupboard4->CreateContents(TFlint);
