@@ -1,0 +1,16 @@
+[DefCore]
+id=Book
+Version=6,0
+Category=C4D_Object
+Width=7
+Height=7
+Offset=-4,-4
+Value=50
+Mass=2
+Components=Wood=1
+Vertices=4
+VertexX=-3,2,-3,2
+VertexY=1,1,-2,-2
+VertexFriction=50,50,50,50
+Rotate=1
+ColorByOwner=1

@@ -1,0 +1,4 @@
+Name=Book
+Description=What might be written in there?
+CtrlRead=Read
+MsgCantRead=I can't read it.
