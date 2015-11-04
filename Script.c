@@ -344,7 +344,8 @@ func CreateStoneHut()
 //	var cupboard2 = CreateObjectMapZoom(_SRK,352,2200,0);
 //	cupboard2->CreateContents(COAL);
 //	cupboard2->CreateContents(WBRL);
-//	cupboard2->CreateContents(_BU2); // book!
+//	var book = cupboard2->CreateContents(Book);
+//	book->SetDialogue("Book_Mhoram");
 }
 
 func CreateSawmill()
