@@ -492,27 +492,90 @@ func CreateFields()
 
 func CreateJungle()
 {
+	Grass->Place(100, Shape->Rectangle(2400, 1020, 620, 20));
+	PlaceForestCustom(2455, 1040, 570);
+}
 
-//	CreateObjectMapZoom(_TR1,2990,1290,0);
-//	CreateObjectMapZoom(_TR1,3050,1290,0);
-//	CreateObjectMapZoom(_TR2,3100,1290,0);
-//	CreateObjectMapZoom(_TR1,3130,1290,0);
-//	CreateObjectMapZoom(_TR1,3170,1290,0);
-//	CreateObjectMapZoom(_TR2,3250,1290,0);
-//	CreateObjectMapZoom(_TR1,3300,1290,0);
-//	CreateObjectMapZoom(_TR1,3360,1290,0);
-//	CreateObjectMapZoom(_TR2,3405,1290,0);
-//	CreateObjectMapZoom(_TR1,3440,1290,0);
-//	CreateObjectMapZoom(_TR2,3500,1290,0);
-//	CreateObjectMapZoom(_TR1,3520,1290,0);
-//	CreateObjectMapZoom(_TR2,3580,1290,0);
-//	CreateObjectMapZoom(_TR1,3600,1290,0);
-//	CreateObjectMapZoom(_TR1,3650,1290,0);
-//	CreateObjectMapZoom(_TR2,3710,1290,0);
-//	CreateObjectMapZoom(_TR1,3780,1290,0);
-//	CreateObjectMapZoom(_TR1,3850,1290,0);
-//	CreateObjectMapZoom(_BIR,3380,1110,0);
-//	CreateObjectMapZoom(_BIR,3700,1110,0);
+func PlaceForestCustom(int x, int y, int width)
+{
+	if (!x) x = 0;
+	if (!y) y = LandscapeHeight();
+	if (!width) width = LandscapeWidth();
+	var plant_type = Cotton;
+
+	// Roughly 20% of the size (10% per side) are taken for 'forest ending zones'. Plants will be smaller there.
+	var end_zone = width * 10 / 100;
+	// The width of the standard plants will roughly be the measure for our plant size
+	var plant_size = plant_type->GetDefWidth(); // our plants will be a lot larger
+
+	var growth, y_pos, plant, x_variance; //, variance = 0, count, j, spot;
+	for (var i = plant_size; i < width; i += plant_size)
+	{
+		growth = 100;
+		y_pos = y;
+		x_variance = RandomX(-plant_size/2, plant_size/2);
+		// End zone check
+		if (i < end_zone)
+			growth = BoundBy(90 / ((end_zone * 100 / plant_size)/100) * (i/plant_size), 10, 90);
+		else if (i > width - end_zone)
+			growth = BoundBy(90 / ((end_zone * 100 / plant_size)/100) * ((width-i)/plant_size), 10, 90);
+
+		// No ground at y_pos?
+		if (!GBackSolid(x + i + x_variance, y_pos)) continue;
+		// Get level ground
+		while (!GBackSky(x + i + x_variance, y_pos) && y_pos > 0) y_pos--;
+		if (y_pos == 0) continue;
+
+		plant = CreateObjectAbove(plant_type, x + i + x_variance, y_pos+5, NO_OWNER);
+		SetPlantToDeco(plant);
+		
+		RandomGrowth(plant, growth);
+		RandomModulation(plant);
+
+		if (!Random(3)) plant.Plane = 510;
+		// Every ~7th plant: double plant!
+		if (x_variance != 0 && !Random(7))
+		{
+			y_pos = y;
+			if (!GBackSolid(x + i - x_variance, y_pos)) continue;
+			while (!GBackSky(x + i - x_variance, y_pos) && y_pos > 0) y_pos--;
+			if (y_pos == 0) continue;
+			plant = CreateObjectAbove(plant_type, x + i - x_variance, y_pos+5, NO_OWNER);
+			plant->SetObjectLayer(plant);
+			RandomGrowth(plant, growth);
+			RandomModulation(plant);
+			if (!Random(3)) plant.Plane = 510;
+		}
+	}
+}
+
+func SetPlantToDeco(object plant)
+{
+		plant->SetObjectLayer(plant);
+		plant.MeshTransformation = Trans_Rotate(Random(360), 0, 1, 0);
+		plant->RemoveTimer("Reproduction");
+}
+
+func RandomGrowth(object plant, int growth)
+{
+	var min = growth * growth / 20 + 500;
+	var max = min + 45 * Sqrt(min);
+	
+	var scale = RandomX(min, max);
+	
+	var m = -18;
+//	var t = plant->GetY();
+
+	//var y = m * scale / 1000 -m + t;
+	var y = m * scale  - m * 1000;
+	
+	plant->SetObjDrawTransform(scale, 0, 0, 0, scale, y);
+}
+
+func RandomModulation(object plant)
+{
+	var dark = RandomX(150, 255);
+	plant->SetClrModulation(RGB(dark, dark, dark));
 }
 
 func CreateWaterfall()
