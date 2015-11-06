@@ -430,10 +430,6 @@ func CreateWoodHut()
 	var cupboard1 = CreateObject(Cupboard, 630, 1742, NO_OWNER);
 	cupboard1->CreateContents(GoldCoin);
 	cupboard1->CreateContents(GoldCoin);
-
-//	CreateObjectMapZoom(_TIS,930,2200,0); // table
-//	CreateObjectMapZoom(_STU,945,2200,0); // chair
-//	CreateObjectMapZoom(_ST2,915,2200,0); // second chair
 }
 
 // ----- *** Deco Creation *** -----------------------------------------
@@ -564,9 +560,7 @@ func RandomGrowth(object plant, int growth)
 	var scale = RandomX(min, max);
 	
 	var m = -18;
-//	var t = plant->GetY();
 
-	//var y = m * scale / 1000 -m + t;
 	var y = m * scale  - m * 1000;
 	
 	plant->SetObjDrawTransform(scale, 0, 0, 0, scale, y);
