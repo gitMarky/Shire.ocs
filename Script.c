@@ -258,7 +258,7 @@ func CreateCastle()
 	door_castle_top->SetDialogueEx("DoorCastle");
 
 	var bed = CreateObject(Bed, 1050, 1738, NO_OWNER);
-	bed.MeshTransformation = Trans_Mul(Trans_Scale(700, 700, 700), Trans_Rotate(75, 0, 1, 0));
+	bed->Turn(75);
 
 	var cupboard3 = CreateObject(Cupboard, 1080, 1742, NO_OWNER);
 	var book = cupboard3->CreateContents(Book);
@@ -322,7 +322,7 @@ func CreatePirateCastle()
 
 //	CreateConstruction(_PBG,2820,550,0,100,1);
 //	CreateObjectMapZoom(SLBT,2820,510,0);
-	CreateObject(Bed, 2263, 1738, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(700, 700, 700), Trans_Rotate(70, 0, 1, 0));
+	CreateObject(Bed, 2263, 1738, NO_OWNER)->Turn(70);
 }
 
 func CreateStoneHut()
@@ -433,6 +433,10 @@ func CreateWoodHut()
 	var cupboard1 = CreateObject(Cupboard, 630, 1742, NO_OWNER);
 	cupboard1->CreateContents(GoldCoin);
 	cupboard1->CreateContents(GoldCoin);
+	
+	var bed = CreateObject(Bed, 620, 1738, NO_OWNER);
+	bed->Turn(120);
+	bed->SetObjectLayer(bed);
 }
 
 // ----- *** Deco Creation *** -----------------------------------------

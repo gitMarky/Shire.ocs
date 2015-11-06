@@ -9,7 +9,12 @@ local current_animation;
 /* Initialize */
 protected func Initialize()
 {
-	this.MeshTransformation = Trans_Rotate(20, 0, 1, 0);
+	Turn(20);
+}
+
+protected func Turn(int angle)
+{
+	this.MeshTransformation = Trans_Mul(Trans_Scale(700, 700, 700), Trans_Rotate(angle, 0, 1, 0));
 }
 
 private func IsOccupied()
@@ -47,7 +52,7 @@ private func OnEntrance(object clonk)
     clonk->Enter(this);
     if (attached_mesh)
         DetachMesh(attached_mesh);
-    attached_mesh = AttachMesh(clonk, "Clonk", "Master", Trans_Scale(1100));
+    attached_mesh = AttachMesh(clonk, "Clonk", "Master", Trans_Mul(Trans_Scale(1400, 1000, 1400), Trans_Translate(-5500, 2500, 0)));
     current_animation = clonk->PlayAnimation("Sleep", CLONK_ANIM_SLOT_Death, Anim_Const(clonk->GetAnimationLength("Sleep")), Anim_Const(1000));
     return 1;
 }
