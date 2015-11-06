@@ -550,6 +550,8 @@ func SetPlantToDeco(object plant)
 		plant->SetObjectLayer(plant);
 		plant.MeshTransformation = Trans_Rotate(Random(360), 0, 1, 0);
 		plant->RemoveTimer("Reproduction");
+		plant->RemoveTimer("Seed");
+		plant->RemoveTimer("WaterCheck");
 }
 
 func RandomGrowth(object plant, int growth)
