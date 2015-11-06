@@ -349,8 +349,7 @@ func CreateStoneHut()
 	var book = chest->CreateContents(Book);
 	book->SetDialogue("Book_Mhoram");
 	var barrel = CreateObject(Barrel, 756, 1026, NO_OWNER);
-	barrel->SetFilled("Water", 300);
-	
+	barrel->SetFilled("Water", 300);	
 }
 
 func CreateSawmill()
@@ -425,7 +424,10 @@ func CreateWoodHut()
 {
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
 	var hut_low = CreateObject(DecoHut, 610, 1727, NO_OWNER);
+	var hut_low_top = CreateObject(DecoHut, 610, 1727, NO_OWNER);
 	hut_low->SetGraphics("Inside");
+	hut_low_top->SetGraphics("Top");
+	hut_low_top.Plane=10000;
 	door_hut_iolo_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
 	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
 	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
