@@ -431,7 +431,7 @@ func CreateWoodHut()
 	door_hut_iolo_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
 	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
 	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
-	
+
 	var cupboard1 = CreateObject(Cupboard, 630, 1742, NO_OWNER);
 	cupboard1->CreateContents(GoldCoin);
 	cupboard1->CreateContents(GoldCoin);
