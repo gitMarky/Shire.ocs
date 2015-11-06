@@ -343,11 +343,14 @@ func CreateStoneHut()
     CreateObject(Flour, 713, 1748, NO_OWNER);
     CreateObject(EnvPack_Painting, 711, 1734, NO_OWNER).MeshTransformation = Trans_Mul(Trans_Scale(30, 35, 35), Trans_Rotate(-3, 0, 0, 1));
 
-//	var cupboard2 = CreateObjectMapZoom(_SRK,352,2200,0);
-//	cupboard2->CreateContents(COAL);
-//	cupboard2->CreateContents(WBRL);
-//	var book = cupboard2->CreateContents(Book);
-//	book->SetDialogue("Book_Mhoram");
+	var chest = CreateObject(Chest, 752, 1740, NO_OWNER);
+	chest.MeshTransformation = Trans_Scale(400, 400, 400);
+	chest->CreateContents(Coal);
+	var book = chest->CreateContents(Book);
+	book->SetDialogue("Book_Mhoram");
+	var barrel = CreateObject(Barrel, 756, 1026, NO_OWNER);
+	barrel->SetFilled("Water", 300);
+	
 }
 
 func CreateSawmill()
