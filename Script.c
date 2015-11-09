@@ -400,7 +400,11 @@ func CreateShop()
 {
     CreateObject(DecoShop, 985, 1002, NO_OWNER);
     var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
+    var shop_low_top = CreateObject(DecoShop, 985, 1722, NO_OWNER);
 	shop_low->SetGraphics("Inside");
+	shop_low_top->SetGraphics("Top");
+	shop_low_top.Plane = 10000;
+
     door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
     var door_shop_low = CreateObject(DecoDoor, 970, 1744, NO_OWNER);
 	door_shop_top->ConnectTo(door_shop_low);
