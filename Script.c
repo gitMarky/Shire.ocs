@@ -329,7 +329,11 @@ func CreateStoneHut()
 {
 	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
 	var stonehut_low = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
+	var stonehut_low_top = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
 	stonehut_low->SetGraphics("Inside");
+	stonehut_low_top->SetGraphics("Top");
+	stonehut_low_top.Plane = 10000;
+	
 	var door_stonehut_top = CreateObject(DecoDoor, 742, 1024, NO_OWNER);
 	var door_stonehut_low = CreateObject(DecoDoor, 742, 1744, NO_OWNER);
 	door_stonehut_top->ConnectTo(door_stonehut_low);
