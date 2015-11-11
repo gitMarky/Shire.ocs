@@ -319,12 +319,7 @@ func CreatePirateCastle()
 // 	Door, 2207, 519, NO_OWNER);
 // 	Door, 2225, 1744, NO_OWNER)
 
-//	CreateObjectMapZoom(SLBT,2640,2200,0); // sail boat
-//	CreateObjectMapZoom(_TUP,2740,2200,0); // secret door?
-
-
-//	CreateConstruction(_PBG,2820,550,0,100,1);
-//	CreateObjectMapZoom(SLBT,2820,510,0);
+	CreateObject(Sailboat, 2205, 374, NO_OWNER);
 	CreateObject(Bed, 2263, 1738, NO_OWNER)->Turn(70);
 }
 
