@@ -315,6 +315,9 @@ func CreatePirateCastle()
 	var skull = CreateObject(Skull, 2222, 1722, NO_OWNER);
 	skull->SetCategory(C4D_StaticBack);
 	skull->SetObjectLayer(skull);
+	
+// 	Door, 2207, 519, NO_OWNER);
+// 	Door, 2225, 1744, NO_OWNER)
 
 //	CreateObjectMapZoom(SLBT,2640,2200,0); // sail boat
 //	CreateObjectMapZoom(_TUP,2740,2200,0); // secret door?
