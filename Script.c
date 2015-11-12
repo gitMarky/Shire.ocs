@@ -474,31 +474,10 @@ func CreateCorpses()
 
 func CreateFields()
 {
-//	CreateObjectMapZoom(MO93,380,1293,0);
-//	CreateObjectMapZoom(MO93,390,1293,0);
-//	CreateObjectMapZoom(MO93,400,1293,0);
-//	CreateObjectMapZoom(MO93,410,1293,0);
-//	CreateObjectMapZoom(MO93,420,1293,0); 
-//	CreateObjectMapZoom(MO93,430,1293,0);
-//	CreateObjectMapZoom(MO93,440,1293,0);
-//	CreateObjectMapZoom(MO93,450,1293,0);
-//	CreateObjectMapZoom(MO93,460,1293,0);
-//	CreateObjectMapZoom(MO93,470,1293,0);
-//	CreateObjectMapZoom(MO93,480,1293,0);
-//	CreateObjectMapZoom(MO93,490,1293,0);
-
-//	CreateObjectMapZoom(MO93,640,1293,0);
-//	CreateObjectMapZoom(MO93,650,1293,0);
-//	CreateObjectMapZoom(MO93,660,1293,0);
-//	CreateObjectMapZoom(MO93,670,1293,0);
-//	CreateObjectMapZoom(MO93,680,1293,0);
-//	CreateObjectMapZoom(MO93,690,1293,0);
-//	CreateObjectMapZoom(MO93,700,1293,0);
-//	CreateObjectMapZoom(MO93,710,1293,0);
-//	CreateObjectMapZoom(MO93,720,1293,0);
-//	CreateObjectMapZoom(MO93,730,1293,0);
-//	CreateObjectMapZoom(MO93,740,1293,0);
-//	CreateObjectMapZoom(MO93,750,1293,0);
+	PlaceForest([Wheat], 220, 1040, 180);
+	Grass->Place(80, Shape->Rectangle(50, 1020, 170, 50));
+	Grass->Place(60, Shape->Rectangle(410, 1020, 100, 50));
+	Grass->Place(50, Shape->Rectangle(1300, 720, 100, 40));
 }
 
 func CreateJungle()
@@ -591,6 +570,7 @@ func RandomModulation(object plant)
 
 func CreateWaterfall()
 {
+	Seaweed->Place(15, Shape->Rectangle(2170, 420, 180, 50));
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 }
 
