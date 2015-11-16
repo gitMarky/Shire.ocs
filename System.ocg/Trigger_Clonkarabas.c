@@ -53,7 +53,7 @@ func Trigger_Clonkarabas_Wait()
 		this.clonkarabas = CreateObject(Clonk, 1000, 725, NO_OWNER);
 		this.clonkarabas->SetDir(DIR_Right);
 		this.clonkarabas->FadeIn(20);
-		this.clonkarabas->SetLayer(this.clonkarabas);
+		this.clonkarabas->SetObjectLayer(this.clonkarabas);
 		AddEffect("CanBeEnchanted", this.clonkarabas, 1);
 		
 		// staff
