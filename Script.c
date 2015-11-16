@@ -388,10 +388,14 @@ func CreateScientistLab()
 
 	CreateObject(DecoLab, 125, 527, NO_OWNER);
 	DigFreeRect(88 , 520 , 70, 7);	
-	CreateObject(DecoLab, 125, 1751, NO_OWNER);
 	DigFreeRect(88 , 1744 , 70, 7);
+	var lab_low = CreateObject(DecoLab, 125, 1751, NO_OWNER);
+	var lab_low_top = CreateObject(DecoLab, 125, 1751, NO_OWNER);
+	lab_low->SetGraphics("Inside");
+	lab_low_top->SetGraphics("Top");
+	lab_low_top.Plane = 10000;
 
-	CreateObjectMapZoom(DimensionVector, 55, 525, NO_OWNER);  // dimension-vector
+	CreateObject(DimensionVector, 55, 525, NO_OWNER);
 }
 
 func CreateShop()
