@@ -1,0 +1,13 @@
+[DefCore]
+id=DecoLab
+Category=C4D_StaticBack
+Width=70
+Height=90
+Offset=-36,-89
+Value=200
+Mass=4500
+Components=Wood=6;Metal=3;Rock=4;
+Vertices=4
+VertexX=-21,14,-33,30
+VertexY=0,0,24,24
+VertexFriction=50,50,100,100

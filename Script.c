@@ -386,12 +386,12 @@ func CreateScientistLab()
 //	CreateObjectMapZoom(_WA3,3655,2147,-1);  
 //	CreateObjectMapZoom(_WA2,3687,2147,-1);
 
-//	CreateConstruction(_ZWS,150,660,0,100,1);
-//	DigFree(150,660,90);
-//	CreateObjectMapZoom(BRDG,90,665,0);
-//	CreateObjectMapZoom(BRDG,210,665,0);
+	CreateObject(DecoLab, 125, 527, NO_OWNER);
+	DigFreeRect(88 , 520 , 70, 7);	
+	CreateObject(DecoLab, 125, 1751, NO_OWNER);
+	DigFreeRect(88 , 1744 , 70, 7);
 
-//	CreateObjectMapZoom(DV93,50,400,0);  // dimension-vector
+	CreateObjectMapZoom(DimensionVector, 55, 525, NO_OWNER);  // dimension-vector
 }
 
 func CreateShop()
