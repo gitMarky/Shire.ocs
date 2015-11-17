@@ -486,25 +486,35 @@ func CreateFields()
 	Grass->Place(80, Shape->Rectangle(50, 1020, 170, 50));
 	Grass->Place(60, Shape->Rectangle(410, 1020, 100, 50));
 	Grass->Place(50, Shape->Rectangle(1300, 720, 100, 40));
+	
+	PlaceForestCustom(Tree_Coniferous2, 30, 1070, 200, false);
+	PlaceForestCustom(Tree_Coniferous2, 405, 1050, 100, false);
+	PlaceForestCustom(Tree_Coniferous2, 1130, 1050, 150, false);
+	
+	CreateObject(Mushroom, 1435, 1031, NO_OWNER);
+	CreateObject(Mushroom, 1415, 1033, NO_OWNER);
+	CreateObject(Mushroom, 1428, 1043, NO_OWNER);
+	CreateObject(Mushroom, 1448, 1026, NO_OWNER);
+	CreateObject(Mushroom, 1439, 1027, NO_OWNER);
+	CreateObject(Mushroom, 1423, 1042, NO_OWNER);
 }
 
 func CreateJungle()
 {
 	Grass->Place(100, Shape->Rectangle(2400, 1020, 620, 20));
-	PlaceForestCustom(2455, 1040, 570);
+	PlaceForestCustom(Cotton, 2455, 1040, 570, true);
 }
 
-func PlaceForestCustom(int x, int y, int width)
+func PlaceForestCustom(id plant_type, int x, int y, int width, bool oversize)
 {
 	if (!x) x = 0;
 	if (!y) y = LandscapeHeight();
 	if (!width) width = LandscapeWidth();
-	var plant_type = Cotton;
 
 	// Roughly 20% of the size (10% per side) are taken for 'forest ending zones'. Plants will be smaller there.
-	var end_zone = width * 10 / 100;
+	var end_zone = Max(1, width * 10 / 100);
 	// The width of the standard plants will roughly be the measure for our plant size
-	var plant_size = plant_type->GetDefWidth(); // our plants will be a lot larger
+	var plant_size = Max(1, plant_type->GetDefWidth()); // our plants will be a lot larger
 
 	var growth, y_pos, plant, x_variance; //, variance = 0, count, j, spot;
 	for (var i = plant_size; i < width; i += plant_size)
@@ -514,9 +524,9 @@ func PlaceForestCustom(int x, int y, int width)
 		x_variance = RandomX(-plant_size/2, plant_size/2);
 		// End zone check
 		if (i < end_zone)
-			growth = BoundBy(90 / ((end_zone * 100 / plant_size)/100) * (i/plant_size), 10, 90);
+			growth = BoundBy(90 / Max(1, (end_zone * 100 / plant_size)/100) * (i/plant_size), 10, 90);
 		else if (i > width - end_zone)
-			growth = BoundBy(90 / ((end_zone * 100 / plant_size)/100) * ((width-i)/plant_size), 10, 90);
+			growth = BoundBy(90 / Max(1, (end_zone * 100 / plant_size)/100) * ((width-i)/plant_size), 10, 90);
 
 		// No ground at y_pos?
 		if (!GBackSolid(x + i + x_variance, y_pos)) continue;
@@ -527,7 +537,7 @@ func PlaceForestCustom(int x, int y, int width)
 		plant = CreateObjectAbove(plant_type, x + i + x_variance, y_pos+5, NO_OWNER);
 		SetPlantToDeco(plant);
 		
-		RandomGrowth(plant, growth);
+		RandomGrowth(plant, growth, oversize);
 		RandomModulation(plant);
 
 		if (!Random(3)) plant.Plane = 510;
@@ -540,7 +550,7 @@ func PlaceForestCustom(int x, int y, int width)
 			if (y_pos == 0) continue;
 			plant = CreateObjectAbove(plant_type, x + i - x_variance, y_pos+5, NO_OWNER);
 			plant->SetObjectLayer(plant);
-			RandomGrowth(plant, growth);
+			RandomGrowth(plant, growth, oversize);
 			RandomModulation(plant);
 			if (!Random(3)) plant.Plane = 510;
 		}
@@ -556,18 +566,26 @@ func SetPlantToDeco(object plant)
 		plant->RemoveTimer("WaterCheck");
 }
 
-func RandomGrowth(object plant, int growth)
+func RandomGrowth(object plant, int growth, bool oversize)
 {
 	var min = growth * growth / 20 + 500;
 	var max = min + 45 * Sqrt(min);
 	
 	var scale = RandomX(min, max);
 	
+
 	var m = -18;
 
 	var y = m * scale  - m * 1000;
 	
+	if (!oversize)
+	{
+		scale = 1000 * scale / max;
+		y = (plant->GetDefHeight() + plant->GetDefOffset(1)) * (1000 - scale); 
+	}
+	
 	plant->SetObjDrawTransform(scale, 0, 0, 0, scale, y);
+	plant.deco_scale = scale;
 }
 
 func RandomModulation(object plant)
