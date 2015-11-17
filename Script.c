@@ -394,6 +394,10 @@ func CreateScientistLab()
 	lab_low->SetGraphics("Inside");
 	lab_low_top->SetGraphics("Top");
 	lab_low_top.Plane = 10000;
+	
+	var door_lab_top = CreateObject(DecoSteelDoor, 135, 519, NO_OWNER);
+	var door_lab_low = CreateObject(DecoSteelDoor, 135, 1743, NO_OWNER);
+	door_lab_top->ConnectTo(door_lab_low);
 
 	CreateObject(DimensionVector, 55, 525, NO_OWNER);
 }
