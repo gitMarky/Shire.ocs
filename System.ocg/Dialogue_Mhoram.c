@@ -21,12 +21,31 @@ public func Dlg_Mhoram(object player)
 		DlgText("So gehe.");
 		if (DlgEvent())
 		{
-			//TODO: explode the rocks
 			player.dialogue_mhoram_completed = true;
+			
+			var action = "IdleStrech";
+			var duration = 30;
+			dlg_target->PlayAnimation(action, CLONK_ANIM_SLOT_Arms, Anim_Linear(0, 0, dlg_target->GetAnimationLength(action), duration, ANIM_Remove), Anim_Linear(0, 0, 1000, 5, ANIM_Remove));
+
+			ScheduleCall(this, "Dlg_Mhoram_Explosion", 20);
 		}
 	}
 	else
 	{
 		DlgText("Du solltest ueber den Berg gehen, wenn Du zurueck willst.");
+	}
+}
+
+func Dlg_Mhoram_Explosion()
+{
+	CreateObject(Rock, AbsX(1641), AbsY(1010))->Explode(25);
+	ScheduleCall(this, "Dlg_Mhoram_RemoveRocks", 2);
+}
+
+func Dlg_Mhoram_RemoveRocks()
+{
+	for (var rock in FindObjects(Find_ID(Rock), Find_InRect(AbsX(1615), AbsY(1000), 100, 50)))
+	{
+		rock->RemoveObject();
 	}
 }

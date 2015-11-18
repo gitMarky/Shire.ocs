@@ -1,1 +1,0 @@
-CreateObject(Rock, 1641, 1010)->Explode(25)
