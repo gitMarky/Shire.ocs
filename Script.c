@@ -487,16 +487,90 @@ func CreateFields()
 	Grass->Place(60, Shape->Rectangle(410, 1020, 100, 50));
 	Grass->Place(50, Shape->Rectangle(1300, 720, 100, 40));
 	
-	PlaceForestCustom(Tree_Coniferous2, 30, 1070, 200, false);
-	PlaceForestCustom(Tree_Coniferous2, 405, 1050, 100, false);
-	PlaceForestCustom(Tree_Coniferous2, 1130, 1050, 150, false);
-	
 	CreateObject(Mushroom, 1435, 1031, NO_OWNER);
 	CreateObject(Mushroom, 1415, 1033, NO_OWNER);
 	CreateObject(Mushroom, 1428, 1043, NO_OWNER);
 	CreateObject(Mushroom, 1448, 1026, NO_OWNER);
 	CreateObject(Mushroom, 1439, 1027, NO_OWNER);
 	CreateObject(Mushroom, 1423, 1042, NO_OWNER);
+}
+
+func CreateFlintTrees()
+{
+	PlaceForestCustom(Tree_Coniferous2, 30, 1070, 200, false);
+	PlaceForestCustom(Tree_Coniferous2, 405, 1050, 100, false);
+	PlaceForestCustom(Tree_Coniferous2, 1130, 1050, 150, false);
+
+	for (var tree in FindObjects(Find_ID(Tree_Coniferous2)))
+	{
+		AttachFlints(tree);
+	}
+}
+
+func AttachFlints(object tree)
+{
+	var precision = 1000;
+	var scale = tree.deco_scale;
+//	var y_tree_top = tree->GetY() - tree->GetDefOffset(1);
+//	y_tree_top *= precision;
+
+//	var dy_tree_top = tree->GetDefHeight() + tree->GetDefOffset(1);
+
+	var dy_tree_bottom = tree->GetDefHeight() + tree->GetDefOffset(1);
+	var y_tree_bottom = (tree->GetY() + dy_tree_bottom) * precision;
+
+	// the actual center of the scaled tree
+	var x_origin = tree->GetX() * precision;
+	var y_origin = y_tree_bottom - dy_tree_bottom * scale;
+
+	// calculate the position for the topmost point of a triangle
+	var x_top = x_origin;
+	var y_top = y_origin -33 * scale;
+	
+	// difference from topmost point to leftmost point
+	var dx_left = -13 * scale;
+	var dy_left = +25 * scale;
+	
+	// difference from topmost point to rightmost point
+	var dx_right = +12 * scale;
+	var dy_right = +25 * scale;
+	
+	var factor_max = 100;
+	
+	// place actual flints
+	var last_factor_sum = 0;
+	var flint_amount = RandomX(1, Max(1, scale * 5 / precision));
+	for (var i = 1; i <= flint_amount; i++)
+	{
+		// random factors for placing the flints inside the triangle
+		var factor_left = RandomX(0, factor_max);
+		var factor_right = RandomX(0, factor_max);
+		
+		// reroll the factors to get a nicer distribution of flint positions
+		for (var factor_sum = factor_left + factor_right; Abs(factor_sum - last_factor_sum) < 20; )
+		{
+			factor_left = RandomX(0, factor_max);
+			factor_right = RandomX(0, factor_max);
+			factor_sum = factor_left + factor_right;
+		}
+
+		last_factor_sum = factor_left + factor_right;
+		
+
+		var x = x_top + (factor_left * dx_left + factor_right * dx_right) / (2 * factor_max);
+		var y = y_top + (factor_left * dy_left + factor_right * dy_right) / (2 * factor_max);
+		
+		var flint = CreateObject(TFlint);
+		flint->SetPosition(x, y, false, precision);
+		flint->SetCategory(C4D_StaticBack);
+		flint.Collectible = false;
+		flint.Plane = tree.Plane + i;
+	}
+
+//	120 1033 //-> Tanne::Log("%d %d", GetX(), GetY())
+//	120 1000 //-> T-Flint::Log("%d %d", GetX(), GetY())
+//	107 1025 //-> T-Flint::Log("%d %d", GetX(), GetY())
+//	132 1025 //-> T-Flint::Log("%d %d", GetX(), GetY())
 }
 
 func CreateJungle()
