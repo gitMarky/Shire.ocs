@@ -28,6 +28,7 @@ func Initialize()
 	CreateButterflies();
 	CreateCorpses();
 	CreateFields();
+	CreateFlintTrees();
 	CreateJungle();
 	CreateWaterfall();
 
@@ -511,10 +512,6 @@ func AttachFlints(object tree)
 {
 	var precision = 1000;
 	var scale = tree.deco_scale;
-//	var y_tree_top = tree->GetY() - tree->GetDefOffset(1);
-//	y_tree_top *= precision;
-
-//	var dy_tree_top = tree->GetDefHeight() + tree->GetDefOffset(1);
 
 	var dy_tree_bottom = tree->GetDefHeight() + tree->GetDefOffset(1);
 	var y_tree_bottom = (tree->GetY() + dy_tree_bottom) * precision;
@@ -539,7 +536,7 @@ func AttachFlints(object tree)
 	
 	// place actual flints
 	var last_factor_sum = 0;
-	var flint_amount = RandomX(1, Max(1, scale * 5 / precision));
+	var flint_amount = RandomX(1, Max(1, scale * 4 / precision));
 	for (var i = 1; i <= flint_amount; i++)
 	{
 		// random factors for placing the flints inside the triangle
@@ -556,7 +553,7 @@ func AttachFlints(object tree)
 
 		last_factor_sum = factor_left + factor_right;
 		
-
+		// actually create the flint and make it non-collectible
 		var x = x_top + (factor_left * dx_left + factor_right * dx_right) / (2 * factor_max);
 		var y = y_top + (factor_left * dy_left + factor_right * dy_right) / (2 * factor_max);
 		
@@ -566,11 +563,6 @@ func AttachFlints(object tree)
 		flint.Collectible = false;
 		flint.Plane = tree.Plane + i;
 	}
-
-//	120 1033 //-> Tanne::Log("%d %d", GetX(), GetY())
-//	120 1000 //-> T-Flint::Log("%d %d", GetX(), GetY())
-//	107 1025 //-> T-Flint::Log("%d %d", GetX(), GetY())
-//	132 1025 //-> T-Flint::Log("%d %d", GetX(), GetY())
 }
 
 func CreateJungle()
