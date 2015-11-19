@@ -363,29 +363,23 @@ func CreateSawmill()
 
 func CreateScientistLab()
 {
-//	CreateObjectMapZoom(_HNZ,3650,2245,0);
-//	CreateObjectMapZoom(_ZWI,3720,2230,-1);
-//	CreateObjectMapZoom(_BRT,3600,2120,-1); // brett
-//	CreateObjectMapZoom(_BRT,3630,2120,-1); // brett
-//	CreateObjectMapZoom(_BRT,3660,2120,-1); // brett
+	var cupboard7 = CreateObject(Cupboard, 103, 1741, NO_OWNER);
+//	cupboard7->CreateContents(XARP);
+//	cupboard7->CreateContents(XARP);
+	cupboard7->SetGraphics("Lab");
 
-//	var cupboard7 = CreateObjectMapZoom(_SRK,3585,2150,-1);
-//	cupboard7->CreateContents(XARP);
-//	cupboard7->CreateContents(XARP);
-//	var cupboard8 = CreateObjectMapZoom(_SRK,3680,2200,-1);
+	var cupboard8 = CreateObject(Cupboard, 114, 1741, NO_OWNER);
 //	cupboard8->CreateContents(ARWP);
 //	cupboard8->CreateContents(ARWP);
 //	cupboard8->CreateContents(_HPK);
+	cupboard8->SetGraphics("Lab");
+	var grenade_launcher = cupboard8->CreateContents(GrenadeLauncher);
+	grenade_launcher->SetMeshMaterial("grenade_launcher_alt");
+
 //	CreateObjectMapZoom(RU10,3680,2200,0); // backpack
 //	CreateObjectMapZoom(_SCP,3600,2210,0)->SetAction("on");
 //	CreateObjectMapZoom(_SCH,3590,2110,0)->SetAction("1off");
 //	CreateObjectMapZoom(_SCH,3610,2110,0)->SetAction("1on");
-//	CreateObjectMapZoom(_TUZ,3725,2200,-1);
-//	CreateObjectMapZoom(_WA3,3655,2217,-1);
-//	CreateObjectMapZoom(_WA3,3655,2190,-1);
-//	CreateObjectMapZoom(_WA3,3655,2160,-1);
-//	CreateObjectMapZoom(_WA3,3655,2147,-1);  
-//	CreateObjectMapZoom(_WA2,3687,2147,-1);
 
 	CreateObject(DecoLab, 125, 527, NO_OWNER);
 	DigFreeRect(88 , 520 , 70, 7);	
@@ -395,7 +389,7 @@ func CreateScientistLab()
 	lab_low->SetGraphics("Inside");
 	lab_low_top->SetGraphics("Top");
 	lab_low_top.Plane = 10000;
-	
+
 	var door_lab_top = CreateObject(DecoSteelDoor, 135, 519, NO_OWNER);
 	var door_lab_low = CreateObject(DecoSteelDoor, 135, 1743, NO_OWNER);
 	door_lab_top->ConnectTo(door_lab_low);
