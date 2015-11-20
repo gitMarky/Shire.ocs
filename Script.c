@@ -367,12 +367,14 @@ func CreateScientistLab()
 //	cupboard7->CreateContents(XARP);
 //	cupboard7->CreateContents(XARP);
 	cupboard7->SetGraphics("Lab");
+	AddEffect("IntRespawnGrenades", cupboard7, 1, 300);
 
 	var cupboard8 = CreateObject(Cupboard, 114, 1741, NO_OWNER);
 //	cupboard8->CreateContents(ARWP);
 //	cupboard8->CreateContents(ARWP);
 //	cupboard8->CreateContents(_HPK);
 	cupboard8->SetGraphics("Lab");
+	AddEffect("IntRespawnGrenades", cupboard8, 1, 300);
 	var grenade_launcher = cupboard8->CreateContents(GrenadeLauncher);
 	grenade_launcher->SetMeshMaterial("grenade_launcher_alt");
 
@@ -667,4 +669,12 @@ func RevealTunnel()
 	DigFreeRect(2056,  648, 192,  30, false);
 	DigFreeRect(2232, 1000, 128,  30, false);
 	DigFreeRect(1830,  944, 400,  30, false);
+}
+
+global func FxIntRespawnGrenadesTimer(object target, proplist effect, int timer)
+{
+	if (ObjectCount(Find_ID(Grenade)) < 5)
+	{
+		target->CreateContents(Grenade);
+	}
 }
