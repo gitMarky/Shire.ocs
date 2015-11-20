@@ -364,24 +364,14 @@ func CreateSawmill()
 func CreateScientistLab()
 {
 	var cupboard7 = CreateObject(Cupboard, 103, 1741, NO_OWNER);
-//	cupboard7->CreateContents(XARP);
-//	cupboard7->CreateContents(XARP);
 	cupboard7->SetGraphics("Lab");
 	AddEffect("IntRespawnGrenades", cupboard7, 1, 300);
 
 	var cupboard8 = CreateObject(Cupboard, 114, 1741, NO_OWNER);
-//	cupboard8->CreateContents(ARWP);
-//	cupboard8->CreateContents(ARWP);
-//	cupboard8->CreateContents(_HPK);
 	cupboard8->SetGraphics("Lab");
 	AddEffect("IntRespawnGrenades", cupboard8, 1, 300);
 	var grenade_launcher = cupboard8->CreateContents(GrenadeLauncher);
 	grenade_launcher->SetMeshMaterial("grenade_launcher_alt");
-
-//	CreateObjectMapZoom(RU10,3680,2200,0); // backpack
-//	CreateObjectMapZoom(_SCP,3600,2210,0)->SetAction("on");
-//	CreateObjectMapZoom(_SCH,3590,2110,0)->SetAction("1off");
-//	CreateObjectMapZoom(_SCH,3610,2110,0)->SetAction("1on");
 
 	CreateObject(DecoLab, 125, 527, NO_OWNER);
 	DigFreeRect(88 , 520 , 70, 7);	
