@@ -148,6 +148,12 @@ func CreateMerchant()
 	npc_merchant->SetName("$NPC_Merchant$");
 	npc_merchant->SetDialogueEx("Merchant");
 	npc_merchant->RemoveBackpack();
+	
+	var plane = npc_merchant.Plane;
+	var counter =  CreateObject(DecoShop, 985, 1722, NO_OWNER);
+	counter->SetGraphics("Counter");
+	counter.Plane = plane - 1;
+	npc_merchant.Plane = plane - 2;
 }
 
 func CreateIolosFather()
@@ -409,8 +415,9 @@ func CreateShop()
 
 	// cool effects
 	shop->SetGraphics("Inside");
-	shop->SetGraphics(nil, nil, 2, GFXOV_MODE_Object, nil, nil, shop_low_top);
-	shop->SetGraphics(nil, DecoShop, 3, GFXOV_MODE_Base);
+	shop->SetGraphics("Counter", DecoShop, 2, GFXOV_MODE_Base);
+	shop->SetGraphics(nil, nil, 3, GFXOV_MODE_Object, nil, nil, shop_low_top);
+	shop->SetGraphics(nil, DecoShop, 4, GFXOV_MODE_Base);
 	AddEffect("IntDisplayMerchant", shop, 1, 1);
 
 //	CreateObjectMapZoom(_SRK,1400,2200,-1); // cupboard
