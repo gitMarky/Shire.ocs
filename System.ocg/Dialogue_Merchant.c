@@ -4,9 +4,9 @@
 public func Dlg_Merchant(object player)
 {
 	var has_dialogue_eyepatch = !player.dialogue_merchant_eyepatch;
-	var has_dialogue_pullover = player.dialouge_merchant_eyepatch
-	                        && !player.dialouge_merchant_pullover; 
-	
+	var has_dialogue_pullover = player.dialogue_merchant_eyepatch
+	                        && !player.dialogue_merchant_pullover; 
+
 	if (has_dialogue_eyepatch)
 	{
 		DlgText("Hallo. Wie siehts aus?", player);
@@ -42,6 +42,7 @@ public func Dlg_Merchant(object player)
 				has_pullover->RemoveObject();
 				player->CreateContents(Eyepatch);
 				player.dialogue_merchant_pullover = true;
+				shop_low_top->SetGraphics("Pullover", DecoShop, 1, GFXOV_MODE_Base);
 			}
 		}
 		else
