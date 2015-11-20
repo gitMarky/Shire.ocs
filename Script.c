@@ -391,11 +391,12 @@ func CreateScientistLab()
 
 func CreateShop()
 {
-    CreateObject(DecoShop, 985, 1002, NO_OWNER);
+    var shop = CreateObject(DecoShop, 985, 1002, NO_OWNER);
     var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
     var shop_low_top = CreateObject(DecoShop, 985, 1722, NO_OWNER);
 	shop_low->SetGraphics("Inside");
-	shop_low_top->SetGraphics("Top");
+	shop_low_top->SetGraphics("Jeans");
+	shop_low_top->SetGraphics("Top", DecoShop, 2, GFXOV_MODE_Base);
 	shop_low_top.Plane = 10000;
 
     door_shop_top = CreateObject(DecoDoor, 970, 1024, NO_OWNER);
@@ -406,6 +407,11 @@ func CreateShop()
 	door_shop_top->SetEnabled(false);
 	door_shop_top->SetDialogueEx("DoorShop");
 
+	// cool effects
+	shop->SetGraphics("Inside");
+	shop->SetGraphics(nil, nil, 2, GFXOV_MODE_Object, nil, nil, shop_low_top);
+	shop->SetGraphics(nil, DecoShop, 3, GFXOV_MODE_Base);
+	AddEffect("IntDisplayMerchant", shop, 1, 1);
 
 //	CreateObjectMapZoom(_SRK,1400,2200,-1); // cupboard
 //	CreateObjectMapZoom(_BED,1400,2130,0); // table, chairs, bed
@@ -667,4 +673,15 @@ global func FxIntRespawnGrenadesTimer(object target, proplist effect, int timer)
 	{
 		target->CreateContents(Grenade);
 	}
+}
+
+global func FxIntDisplayMerchantTimer(object target, proplist effect, int timer)
+{
+	if (npc_merchant)
+	{
+		var precision = 1000;
+		var x = npc_merchant->GetX(precision) - target->GetX(precision);
+		target->SetGraphics(nil, nil, 1, GFXOV_MODE_Object, nil, nil, npc_merchant);
+	    target->SetObjDrawTransform(1000, 0, x, 0, 1000, 20 * precision, 1);
+    }
 }
