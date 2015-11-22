@@ -3,7 +3,7 @@ static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
-static enemy_cyclops, shop_low_top;
+static enemy_cyclops, shop, shop_low_top;
 
 func Initialize()
 {
@@ -397,7 +397,7 @@ func CreateScientistLab()
 
 func CreateShop()
 {
-    var shop = CreateObject(DecoShop, 985, 1002, NO_OWNER);
+    shop = CreateObject(DecoShop, 985, 1002, NO_OWNER);
     var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
     shop_low_top = CreateObject(DecoShop, 985, 1722, NO_OWNER);
 	shop_low->SetGraphics("Inside");
@@ -417,7 +417,7 @@ func CreateShop()
 	shop->SetGraphics("Inside");
 	shop->SetGraphics("Counter", DecoShop, 2, GFXOV_MODE_Base);
 	shop->SetGraphics(nil, nil, 3, GFXOV_MODE_Object, nil, nil, shop_low_top);
-	shop->SetGraphics(nil, DecoShop, 4, GFXOV_MODE_Base);
+	shop->SetGraphics(nil, DecoShop, 5, GFXOV_MODE_Base);
 	AddEffect("IntDisplayMerchant", shop, 1, 1);
 
 //	CreateObjectMapZoom(_SRK,1400,2200,-1); // cupboard

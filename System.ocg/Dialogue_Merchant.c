@@ -27,6 +27,8 @@ public func Dlg_Merchant(object player)
 		if (DlgEvent())
 		{
 			player.dialogue_merchant_eyepatch = true;
+			player->CreateObject(Pullover);
+			player->SetMeshMaterial("Clonk_Player");
 		}
 	}
 	else if (has_dialogue_pullover)
@@ -39,16 +41,17 @@ public func Dlg_Merchant(object player)
 			DlgText("Danke für die Augenklappe.", player);
 			if (DlgEvent())
 			{
-				has_pullover->RemoveObject();
+				if (has_pullover) has_pullover->RemoveObject();
 				player->CreateContents(Eyepatch);
 				player.dialogue_merchant_pullover = true;
 				shop_low_top->SetGraphics("Pullover", DecoShop, 1, GFXOV_MODE_Base);
+				shop->SetGraphics("Pullover", DecoShop, 4, GFXOV_MODE_Base); // workaround for bug #0001458
 			}
 		}
 		else
 		{
 			DlgText("Hast du schon einen Pullover für mich?");
-			DlgText("Leider nein, ich behalte ihn noch ein bisschen...", player);
+		    DlgText("Leider nein, ich behalte ihn noch ein bisschen...", player);
 		}
 	}
 	else
