@@ -110,7 +110,7 @@ func CreatePirate()
 	npc_pirate->AttachMesh(hat, "skeleton_head", "Base", Trans_Mul(Trans_Rotate(20, 0, 1, 0),
 	                                                               Trans_Rotate(115, 0, 0, 1),
 	                                                               Trans_Rotate(10, 0, 1, 0),
-	                                                               Trans_Translate(-3500, -3500, 3000),
+	                                                               Trans_Translate(-2200, -4200, 1500),
 	                                                               Trans_Scale(2500, 2500, 2500)));
 	hat->SetClrModulation(RGB(50, 50, 50));
 }
@@ -665,7 +665,7 @@ func CreateWaterfall()
 //	CreateObjectMapZoom(_WAF,2920,515,0);
 }
 
-func RevealTunnel()
+global func RevealTunnel()
 {
 	DigFreeRect(2220,  496,  30, 534, false);
 	DigFreeRect(2192,  496,  40,  30, false);

@@ -52,6 +52,10 @@ func SyncAction(string action)
 func Transfer(object target)
 {
 	target->SetPosition(transfer_target->GetX(), transfer_target->GetY());
+	if (target->GBackLiquid()) // move clonks upwards if in water
+	{
+		target->MovePosition(0, -7);
+	}
 }
 
 func ConnectTo(object target)

@@ -48,7 +48,29 @@ public func Dlg_Pirat(object player)
   			{
   				eyepatch->RemoveObject();
 		    	player.dlg_pirat_get_quest = DIALOGUE_Pirat_QuestFinished;
+		    	
+		    	var secret_door = CreateObject(DecoDoor, AbsX(2220), AbsY(1744), NO_OWNER);
+		    	secret_door->SetClrModulation(RGB(180, 180, 180));
+		    	secret_door->SetObjDrawTransform(600, 0, 0, 0, 1000);
+		    	secret_door->SetGraphics("Stone");
+		    	
+		    	var secret_exit = CreateObject(DecoDoor, AbsX(2205), AbsY(518), NO_OWNER);
+		    	secret_exit->ConnectTo(secret_door);
+		    	secret_exit.Visibility = VIS_None;
+		    	
+		    	var effect = AddEffect("IntRevealTunnel", secret_door, 1, 1, this);
+		    	effect.secret_exit = secret_exit;
   			}
 		}
+	}
+}
+
+func FxIntRevealTunnelTimer(object target, proplist effect, int timer)
+{
+	if (target->GetAction() == "OpenDoor")
+	{
+		effect.secret_exit.Visibility = VIS_All;
+		RevealTunnel();
+		return FX_Execute_Kill;
 	}
 }
