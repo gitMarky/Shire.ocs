@@ -43,11 +43,25 @@ func DoorIsClosed()
 //  SetComDir("COMD_Up");
 //  return(1);
 
-func TakeOff()
+func TakeOff(object controller)
 {
-	SetAction("Fly");
-	Sound("Energize");
-	SetYDir(-30);
+	var tarydium = controller->FindContents(Tarydium);
+	if (this.fuel)
+	{
+		SetAction("Fly");
+		Sound("Energize");
+		SetYDir(-30);
+	}
+	else if (tarydium)
+	{
+		tarydium->RemoveObject();
+		this.fuel = true;
+		TakeOff(controller);
+	}
+	else
+	{
+		Dialogue->MessageBox("Hmm, das Ding braucht wohl noch Treibstoff...", controller, controller);
+	}
 }
 
 func Hit()
