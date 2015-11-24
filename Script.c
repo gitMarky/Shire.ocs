@@ -7,6 +7,7 @@ static enemy_cyclops, shop, shop_low_top;
 
 func Initialize()
 {
+	var debug = true;
 	// buildings
 
 	CreateCity();
@@ -59,9 +60,12 @@ func Initialize()
 	CreateScientist();
 	CreateCyclops();
 
-	StartBackgroundSequence("Trigger_Bird_Elevator");
-	StartBackgroundSequence("Trigger_Bird_Cyclops");
-	StartBackgroundSequence("Trigger_Clonkarabas");
+	if (!debug)
+	{
+		StartBackgroundSequence("Trigger_Bird_Elevator");
+		StartBackgroundSequence("Trigger_Bird_Cyclops");
+		StartBackgroundSequence("Trigger_Clonkarabas");
+	}
 }
 
 func InitializePlayer(int player)
