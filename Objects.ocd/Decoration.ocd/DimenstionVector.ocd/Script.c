@@ -4,9 +4,26 @@ func Initialize()
 }
 
 
-func ActivateEntrance()
-{ 
-    if (ActIdle()) SetAction("OpenDoor");
+func ActivateEntrance(object controller)
+{
+	var tarydium = controller->FindContents(Tarydium);
+	if (this.fuel)
+	{
+        if (GetAction() != "OpenDoor" && GetAction() != "DoorOpen") SetAction("OpenDoor");
+	}
+	else
+	{
+		if (tarydium)
+		{
+			tarydium->RemoveObject();
+			this.fuel = true;
+		}
+		else
+		{
+			Dialogue->MessageBox("Hmm, das Ding braucht wohl noch Treibstoff...", controller, controller);
+			controller->SetCommand("None");
+		}
+	}
     return true;
 }
 
@@ -43,24 +60,13 @@ func DoorIsClosed()
 //  SetComDir("COMD_Up");
 //  return(1);
 
-func TakeOff(object controller)
+func TakeOff()
 {
-	var tarydium = controller->FindContents(Tarydium);
 	if (this.fuel)
 	{
 		SetAction("Fly");
 		Sound("Energize");
 		SetYDir(-30);
-	}
-	else if (tarydium)
-	{
-		tarydium->RemoveObject();
-		this.fuel = true;
-		TakeOff(controller);
-	}
-	else
-	{
-		Dialogue->MessageBox("Hmm, das Ding braucht wohl noch Treibstoff...", controller, controller);
 	}
 }
 
@@ -86,8 +92,22 @@ func Fly()
 func Puff()
 {
 	Sound("Chuff");
-	Smoke(-19, -27, 5 + Random(4));
+	SmokeCrazy(-19, -27, 5 + Random(4));
 }
+
+func SmokeCrazy(int x, int y, int level)
+{
+	level = level ?? 10;
+	var particles = Particles_Smoke(false);
+	
+		particles.R = PV_KeyFrames(0, 0,   0, 300,  0, 600, 244, 900, 252);
+		particles.G = PV_KeyFrames(0, 0,   0, 300, 80, 600,   0, 900, 244);
+		particles.B = PV_KeyFrames(0, 0, 152, 300,  0, 600,   0, 900,   8);
+
+	particles.Size = PV_Linear(PV_Random(level/2, level), PV_Random(2 * level, 3 * level));
+	CreateParticle("Smoke", x, y, PV_Random(-level/3, level/3), PV_Random(-level/2, -level/3), PV_Random(level * 2, level * 10), particles, BoundBy(level/5, 3, 20));
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
