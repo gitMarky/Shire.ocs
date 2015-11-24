@@ -247,6 +247,8 @@ func CreateCyclops()
 
 	var head = enemy_cyclops->CreateContents(CyclopsHead);
 	enemy_cyclops->AttachMesh(head, "skeleton_head", "main", Trans_Mul(Trans_Translate(-500, 0, 0), Trans_Rotate(90, 0, 0, 1)), AM_DrawBefore);
+	
+	CreateObject(Tarydium, 3125, 1080, NO_OWNER);
 }
 
 // ----- *** Buildings Creation *** -----------------------------------------
