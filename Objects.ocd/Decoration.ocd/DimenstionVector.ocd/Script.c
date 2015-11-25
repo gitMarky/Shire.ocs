@@ -1,6 +1,15 @@
+#include Plane
+
 func Initialize()
 {
-    SetAction("Ruhe");
+	AddEffect("IntPlane", this, 1, 1, this);
+	SetAction("Land");
+	throttle = 0;
+	thrust = 0;
+	rdir = 0;
+	dir = 0;
+	health = 50000;
+	SetR();
 }
 
 
@@ -14,7 +23,7 @@ func ActivateEntrance(object controller)
          && GetAction() != "Fly")
          {
          	SetAction("OpenDoor");
-     	}
+     	 }
 	}
 	else
 	{
@@ -72,6 +81,7 @@ func TakeOff()
 		SetAction("Fly");
 		Sound("Energize");
 		SetYDir(-30);
+		ScheduleCall(this, "StartInstantFlight", 30, 0, GetR(), 15);
 	}
 }
 
@@ -79,25 +89,35 @@ func Hit()
 {
 	if(GetAction() == "Fly")
 	{
-		SetAction("Idle");
+		SetAction("Land");
 		Sound("DeEnergize");
 	}
 }
 
 func Fly()
 {
-	if (GetComDir() == COMD_Up) SetYDir(-15);
-	if (GetComDir() == COMD_Down) SetYDir(10);
-	if (GetComDir() == COMD_Left) SetXDir(-20);
-	if (GetComDir() == COMD_Right) SetXDir(15);
-	if (GetComDir() == COMD_None) SetXDir(0);
+//	if (GetComDir() == COMD_Up) SetYDir(-15);
+//	if (GetComDir() == COMD_Down) SetYDir(10);
+//	if (GetComDir() == COMD_Left) SetXDir(-20);
+//	if (GetComDir() == COMD_Right) SetXDir(15);
+//	if (GetComDir() == COMD_None) SetXDir(0);
+	if (GetXDir() > 0)
+	{
+		SetDir(DIR_Right);
+	}
+	else
+	{
+		SetDir(DIR_Left);
+	}
+
 	Puff();
 }
 
 func Puff()
 {
 	Sound("Chuff");
-	SmokeCrazy(-19, -27, 5 + Random(4));
+	var index = 4 + GetDir();
+	SmokeCrazy(GetVertex(index, 0), GetVertex(index, 1), 5 + Random(4));
 }
 
 func SmokeCrazy(int x, int y, int level)
@@ -141,6 +161,8 @@ OpenDoor = {
 	FacetBase = 1,
 	NextAction = "DoorOpen",
 	StartCall = "OpenDoorSound",
+	Directions = 2,
+	FlipDir = 1,
 },
 
 DoorOpen = {
@@ -156,6 +178,8 @@ DoorOpen = {
 	FacetBase = 1,
 	NextAction = "CloseDoor",
 	StartCall = "DoorIsOpen",
+	Directions = 2,
+	FlipDir = 1,
 },
 
 CloseDoor = {
@@ -170,30 +194,123 @@ CloseDoor = {
 	OffX = 36,
 	OffY = 48,
 	FacetBase = 1,
-	NextAction = "Idle",
+	NextAction = "Land",
 	StartCall = "DoorIsClosed",
 	Reverse = 1,
+	Directions = 2,
+	FlipDir = 1,
 },
 
 Fly = {
 	Prototype = Action,
 	Name = "Fly",
-	Procedure = DFA_FLOAT,
+	Procedure = DFA_NONE,
 	Length = 1,
 	Delay = 1,
 	FacetBase = 1,
 	NextAction = "Fly",
 	StartCall = "Fly",
+	Directions = 2,
+	FlipDir = 1,
 },
 
-Ruhe = {
+Land = {
 	Prototype = Action,
-	Name = "Ruhe",
+	Name = "Land",
 	Procedure = DFA_NONE,
 	Delay = 1,
 	FacetBase = 1,
-	NextAction = "Ruhe",
+	NextAction = "Land",
 	ObjectDisabled = 1,
+	Directions = 2,
+	FlipDir = 1,
 },
 
 };
+
+private func FxIntPlaneTimer(object target, effect, int timer)
+{
+	//Lift
+	var lift = Distance(0,0,GetXDir(),GetYDir()) / 2;
+	if(lift > 20) lift = 20;
+	if(throttle < 1) lift = 0;
+
+	if(GetAction() == "Fly")
+	{
+	//--Ailerons--
+		//clockwise
+		if(rdir == 1)
+			if(GetRDir() < 5) SetRDir(GetRDir() + 3);
+		//counter-clockwise
+		if(rdir == -1)
+			if(GetRDir() > -5) SetRDir(GetRDir() - 3);
+		if(rdir == 0) SetRDir();
+
+		//Roll plane to movement direction
+		if(throttle > 0)
+		{
+			if(GetXDir() > 10 && dir != 1) RollPlane(1);
+			if(GetXDir() < -10 && dir != 0) RollPlane(0);
+		}
+
+		//Vfx
+//		var colour = 255 - (GetDamage() * 3);
+//		var particles = 
+//		{
+//			Prototype = Particles_Smoke(),
+//			R = colour, G = colour, B = colour,
+//			Size = PV_Linear(PV_Random(20, 30), PV_Random(70, 100))
+//		};
+//		CreateParticle("Smoke", 0, 0, 0, 0, PV_Random(36, 2 * 36), particles, 2);
+	}
+
+	//Throttle-to-thrust lag
+	if(timer % 10 == 0)
+	{
+		if(throttle > thrust) ++thrust;
+		if(throttle < thrust) --thrust;
+	}
+	
+	//propellor
+//	var change = GetAnimationPosition(propanim) + thrust * 3;
+//	if(change > GetAnimationLength("Propellor"))
+//		change = (GetAnimationPosition(propanim) + thrust * 3) - GetAnimationLength("Propellor");
+//	if(change < 0)
+//		change = (GetAnimationLength("Propellor") - thrust * 3);
+//
+//	SetAnimationPosition(propanim, Anim_Const(change));
+
+	//Thrust
+	SetXDir(Sin(GetR()+90,thrust) + GetXDir(100), 100);
+	SetYDir(-Cos(GetR()+90,thrust) + GetYDir(100) - lift, 100);
+
+	//Drag
+	var maxspeed = 40;
+	var speed = Distance(0,0,GetXDir(),GetYDir());
+	if(speed > 40)
+	{
+		SetXDir(GetXDir(100)*maxspeed/speed,100);
+		SetYDir(GetYDir(100)*maxspeed/speed,100);
+	}
+
+	// No pilot? Look for all layers, since an NPC might be in a different layer.
+	var pilot = FindObject(Find_OCF(OCF_CrewMember), Find_Container(this), Find_AnyLayer());
+	if(!pilot && throttle != 0) CancelFlight();
+
+	//Planes cannot fly underwater!
+	if(GBackLiquid())
+	{
+		if(pilot) Ejection(pilot);
+		if(throttle != 0) CancelFlight();
+	}
+
+	//Pilot, but no mesh? In case they are scripted into the plane.
+//	if(FindContents(Clonk) && !clonkmesh)
+//		PlaneMount(FindContents(Clonk));
+}
+
+public func StartFlight(int new_throttle)
+{
+	TakeOff();
+	_inherited(...);
+}
