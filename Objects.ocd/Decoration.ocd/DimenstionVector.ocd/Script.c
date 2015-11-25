@@ -9,7 +9,12 @@ func ActivateEntrance(object controller)
 	var tarydium = controller->FindContents(Tarydium);
 	if (this.fuel)
 	{
-        if (GetAction() != "OpenDoor" && GetAction() != "DoorOpen") SetAction("OpenDoor");
+        if (GetAction() != "OpenDoor"
+         && GetAction() != "DoorOpen"
+         && GetAction() != "Fly")
+         {
+         	SetAction("OpenDoor");
+     	}
 	}
 	else
 	{
