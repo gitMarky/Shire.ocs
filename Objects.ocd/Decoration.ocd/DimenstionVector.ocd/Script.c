@@ -1,15 +1,7 @@
-#include Plane
 
 func Initialize()
 {
-	AddEffect("IntPlane", this, 1, 1, this);
 	SetAction("Land");
-	throttle = 0;
-	thrust = 0;
-	rdir = 0;
-	dir = 0;
-	health = 50000;
-	SetR();
 }
 
 
@@ -57,22 +49,35 @@ func DoorIsClosed()
 	Sound("SteelGate2");
 }
 
-//ContainedLeft:
-//  if (SEqual(GetAction(),"Idle")) return(1);
-//  SetComDir("COMD_Left");
-//  return(1);
-//ContainedRight:
-//  if (SEqual(GetAction(),"Idle")) return(1);
-//  SetComDir("COMD_Right");
-//  return(1);
-//ContainedDown:
-//  if (SEqual(GetAction(),"Idle")) return(1);
-//  SetComDir("COMD_Down");
-//  return(1);
-//ContainedUp:
-//  if (SEqual(GetAction(),"Idle")) return(Call("TakeOff"));
-//  SetComDir("COMD_Up");
-//  return(1);
+
+public func ContainedUp(object clonk)
+{
+	if (GetAction() == "Land")
+	{
+		TakeOff();
+	}
+	else if (GetAction() == "Fly")
+	{
+	 	SetComDir(COMD_Up);
+	}
+}
+
+
+public func ContainedDown(object clonk)
+{
+	SetComDir(COMD_Down);
+}
+
+public func ContainedLeft(object clonk)
+{
+	SetComDir(COMD_Left);
+}
+
+public func ContainedRight(object clonk)
+{
+	SetComDir(COMD_Right);
+}
+
 
 func TakeOff()
 {
@@ -81,7 +86,6 @@ func TakeOff()
 		SetAction("Fly");
 		Sound("Energize");
 		SetYDir(-30);
-		ScheduleCall(this, "StartInstantFlight", 30, 0, GetR(), 15);
 	}
 }
 
@@ -96,11 +100,11 @@ func Hit()
 
 func Fly()
 {
-//	if (GetComDir() == COMD_Up) SetYDir(-15);
-//	if (GetComDir() == COMD_Down) SetYDir(10);
-//	if (GetComDir() == COMD_Left) SetXDir(-20);
-//	if (GetComDir() == COMD_Right) SetXDir(15);
-//	if (GetComDir() == COMD_None) SetXDir(0);
+	if (GetComDir() == COMD_Up) SetYDir(-15);
+	if (GetComDir() == COMD_Down) SetYDir(10);
+	if (GetComDir() == COMD_Left) SetXDir(-20);
+	if (GetComDir() == COMD_Right) SetXDir(20);
+	if (GetComDir() == COMD_None) SetXDir(0);
 	if (GetXDir() > 0)
 	{
 		SetDir(DIR_Right);
@@ -227,90 +231,3 @@ Land = {
 },
 
 };
-
-private func FxIntPlaneTimer(object target, effect, int timer)
-{
-	//Lift
-	var lift = Distance(0,0,GetXDir(),GetYDir()) / 2;
-	if(lift > 20) lift = 20;
-	if(throttle < 1) lift = 0;
-
-	if(GetAction() == "Fly")
-	{
-	//--Ailerons--
-		//clockwise
-		if(rdir == 1)
-			if(GetRDir() < 5) SetRDir(GetRDir() + 3);
-		//counter-clockwise
-		if(rdir == -1)
-			if(GetRDir() > -5) SetRDir(GetRDir() - 3);
-		if(rdir == 0) SetRDir();
-
-		//Roll plane to movement direction
-		if(throttle > 0)
-		{
-			if(GetXDir() > 10 && dir != 1) RollPlane(1);
-			if(GetXDir() < -10 && dir != 0) RollPlane(0);
-		}
-
-		//Vfx
-//		var colour = 255 - (GetDamage() * 3);
-//		var particles = 
-//		{
-//			Prototype = Particles_Smoke(),
-//			R = colour, G = colour, B = colour,
-//			Size = PV_Linear(PV_Random(20, 30), PV_Random(70, 100))
-//		};
-//		CreateParticle("Smoke", 0, 0, 0, 0, PV_Random(36, 2 * 36), particles, 2);
-	}
-
-	//Throttle-to-thrust lag
-	if(timer % 10 == 0)
-	{
-		if(throttle > thrust) ++thrust;
-		if(throttle < thrust) --thrust;
-	}
-	
-	//propellor
-//	var change = GetAnimationPosition(propanim) + thrust * 3;
-//	if(change > GetAnimationLength("Propellor"))
-//		change = (GetAnimationPosition(propanim) + thrust * 3) - GetAnimationLength("Propellor");
-//	if(change < 0)
-//		change = (GetAnimationLength("Propellor") - thrust * 3);
-//
-//	SetAnimationPosition(propanim, Anim_Const(change));
-
-	//Thrust
-	SetXDir(Sin(GetR()+90,thrust) + GetXDir(100), 100);
-	SetYDir(-Cos(GetR()+90,thrust) + GetYDir(100) - lift, 100);
-
-	//Drag
-	var maxspeed = 40;
-	var speed = Distance(0,0,GetXDir(),GetYDir());
-	if(speed > 40)
-	{
-		SetXDir(GetXDir(100)*maxspeed/speed,100);
-		SetYDir(GetYDir(100)*maxspeed/speed,100);
-	}
-
-	// No pilot? Look for all layers, since an NPC might be in a different layer.
-	var pilot = FindObject(Find_OCF(OCF_CrewMember), Find_Container(this), Find_AnyLayer());
-	if(!pilot && throttle != 0) CancelFlight();
-
-	//Planes cannot fly underwater!
-	if(GBackLiquid())
-	{
-		if(pilot) Ejection(pilot);
-		if(throttle != 0) CancelFlight();
-	}
-
-	//Pilot, but no mesh? In case they are scripted into the plane.
-//	if(FindContents(Clonk) && !clonkmesh)
-//		PlaneMount(FindContents(Clonk));
-}
-
-public func StartFlight(int new_throttle)
-{
-	TakeOff();
-	_inherited(...);
-}
