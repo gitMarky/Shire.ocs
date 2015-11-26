@@ -1,4 +1,7 @@
 
+local thrust_y;
+local thrust_x;
+
 func Initialize()
 {
 	SetAction("Land");
@@ -58,24 +61,24 @@ public func ContainedUp(object clonk)
 	}
 	else if (GetAction() == "Fly")
 	{
-	 	SetComDir(COMD_Up);
+	 	thrust_y -= 1;
 	}
 }
 
 
 public func ContainedDown(object clonk)
 {
-	SetComDir(COMD_Down);
+	thrust_y += 1;
 }
 
 public func ContainedLeft(object clonk)
 {
-	SetComDir(COMD_Left);
+	thrust_x -= 1;
 }
 
 public func ContainedRight(object clonk)
 {
-	SetComDir(COMD_Right);
+	thrust_x += 1;
 }
 
 
@@ -83,9 +86,9 @@ func TakeOff()
 {
 	if (this.fuel)
 	{
+		thrust_y = -1;
 		SetAction("Fly");
 		Sound("Energize");
-		SetYDir(-30);
 	}
 }
 
@@ -100,11 +103,12 @@ func Hit()
 
 func Fly()
 {
-	if (GetComDir() == COMD_Up) SetYDir(-15);
-	if (GetComDir() == COMD_Down) SetYDir(10);
-	if (GetComDir() == COMD_Left) SetXDir(-20);
-	if (GetComDir() == COMD_Right) SetXDir(20);
-	if (GetComDir() == COMD_None) SetXDir(0);
+	thrust_y = BoundBy(thrust_y, -2, 2);
+	thrust_x = BoundBy(thrust_x, -6, 6);
+
+	SetYDir(15 * thrust_y);
+	SetXDir(5 * thrust_x);
+
 	if (GetXDir() > 0)
 	{
 		SetDir(DIR_Right);
@@ -129,9 +133,12 @@ func SmokeCrazy(int x, int y, int level)
 	level = level ?? 10;
 	var particles = Particles_Smoke(false);
 	
-		particles.R = PV_KeyFrames(0, 0,   0, 300,  0, 600, 244, 900, 252);
-		particles.G = PV_KeyFrames(0, 0,   0, 300, 80, 600,   0, 900, 244);
-		particles.B = PV_KeyFrames(0, 0, 152, 300,  0, 600,   0, 900,   8);
+//	var pos = [300, 600, 900];
+	var pos = [100, 300, 600];
+	
+		particles.R = PV_KeyFrames(0, 0,   0, pos[0],  0, pos[1], 244, pos[2], 252);
+		particles.G = PV_KeyFrames(0, 0,   0, pos[0], 80, pos[1],   0, pos[2], 244);
+		particles.B = PV_KeyFrames(0, 0, 152, pos[0],  0, pos[1],   0, pos[2],   8);
 
 	particles.Size = PV_Linear(PV_Random(level/2, level), PV_Random(2 * level, 3 * level));
 	CreateParticle("Smoke", x, y, PV_Random(-level/3, level/3), PV_Random(-level/2, -level/3), PV_Random(level * 2, level * 10), particles, BoundBy(level/5, 3, 20));
