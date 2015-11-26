@@ -11,16 +11,8 @@ func Initialize()
 func ActivateEntrance(object controller)
 {
 	var tarydium = controller->FindContents(Tarydium);
-	if (this.fuel)
-	{
-        if (GetAction() != "OpenDoor"
-         && GetAction() != "DoorOpen"
-         && GetAction() != "Fly")
-         {
-         	SetAction("OpenDoor");
-     	 }
-	}
-	else
+
+	if (!this.fuel)
 	{
 		if (tarydium)
 		{
@@ -33,6 +25,21 @@ func ActivateEntrance(object controller)
 			controller->SetCommand("None");
 		}
 	}
+	else if (!dimension_rift)
+	{
+		Dialogue->MessageBox("Jetzt habe ich ein Fahrzeug, aber ich habe noch keinen Weg in meine eigene Welt gefunden...", controller, controller);
+		controller->SetCommand("None");
+	}
+	else
+	{
+        if (GetAction() != "OpenDoor"
+         && GetAction() != "DoorOpen"
+         && GetAction() != "Fly")
+         {
+         	SetAction("OpenDoor");
+     	 }
+	}
+	
     return true;
 }
 
