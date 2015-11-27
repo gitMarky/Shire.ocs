@@ -62,6 +62,7 @@ func DoorIsClosed()
 
 func TakeOff()
 {
+	SetYDir(-20);
 	SetDir(DIR_Right);
 	ScheduleCall(this, "SetAction", 10, 0, "Fly");
 	Sound("Energize");
@@ -71,14 +72,7 @@ func Fly()
 {
 	ApproachRift();
 
-	if (GetXDir() > 0)
-	{
-		SetDir(DIR_Right);
-	}
-	else
-	{
-		SetDir(DIR_Left);
-	}
+	SetDir(DIR_Right);
 
 	Puff();
 }
@@ -113,31 +107,35 @@ func ApproachRift()
 	var target_r = Angle(GetX(), GetY(), dimension_rift->GetX(), dimension_rift->GetY());
 	var actual_r = GetR() + 90;
 	var dist = Distance(GetX(), GetY(), dimension_rift->GetX(), dimension_rift->GetY());
-	var max_thrust = 150;
+	var max_thrust = 300;
 	var min_thrust = 30;
+	
+	target_r = Normalize(target_r, -180);
+	actual_r = Normalize(actual_r, -180);
 
 	if (target_r < actual_r)
 	{
-		SetRDir(-2);
+		SetRDir(-2, 100);
 	}
 	else
 	{
-		SetRDir(+2);
+		SetRDir(+2, 100);
 	}
 	
 	if (Abs(actual_r - target_r) <= 2)
 	{
 		SetRDir();
+		SetR(target_r);
 		actual_r = target_r;
 	}
 	
 	if (thrust  < dist)
 	{
-		thrust = Min(max_thrust, thrust + 2);
+		thrust = Min(max_thrust, thrust + 5);
 	}
-	else
+	else if (dist < max_thrust / 2)
 	{
-		thrust = Max(min_thrust, dist);
+		thrust = Max(min_thrust, dist * 2);
 	}
 	
 	SetXDir(+Sin(actual_r, thrust), 100);
