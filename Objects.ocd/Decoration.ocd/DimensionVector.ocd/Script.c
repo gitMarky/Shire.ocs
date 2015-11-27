@@ -111,7 +111,7 @@ func ApproachRift()
 	if (!dimension_rift) return;
 	
 	var target_r = Angle(GetX(), GetY(), dimension_rift->GetX(), dimension_rift->GetY());
-	var actual_r = GetR() + -90 + 180 * GetDir();
+	var actual_r = GetR() + 90;
 	var dist = Distance(GetX(), GetY(), dimension_rift->GetX(), dimension_rift->GetY());
 	var max_thrust = 150;
 	var min_thrust = 30;
@@ -133,7 +133,7 @@ func ApproachRift()
 	
 	if (thrust  < dist)
 	{
-		thrust += 2;
+		thrust = Min(max_thrust, thrust + 2);
 	}
 	else
 	{
