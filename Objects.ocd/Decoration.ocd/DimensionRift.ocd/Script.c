@@ -1,29 +1,48 @@
 
 func Initialize()
 {
+	var priority_warp = 4;
+	var priority_pulse = 2;
+	var priority_growth = 3;
     SetGraphics("2", this, 0, 1);
-	var effect = AddEffect("IntWarp", this, 1, 1, this);
+	var effect = AddEffect("IntWarp", this, priority_warp, 1, this);
 	effect.scale = 1000;
 	effect.precision = 100;
-	effect.dir = -45;
+	effect.dir = -90;
 	
-	var pulse = AddEffect("IntPulse", this, 1, 1, this);
+	var pulse = AddEffect("IntPulse", this, priority_pulse, 1, this);
 	pulse.target = effect;
 	pulse.scale = 1000;
 	pulse.range = 200;
+	
+	var growth = AddEffect("IntGrowth", this, priority_growth, 1, this);
+	growth.target = effect;
+	growth.speed = 40;
 
     SetGraphics(nil, this, 1, 1);
-	effect = AddEffect("IntWarp", this, 1, 1, this);
+	effect = AddEffect("IntWarp", this, priority_warp, 1, this);
 	effect.scale = 1000;
 	effect.precision = 100;
-	effect.dir = -45;
+	effect.dir = -110;
 	effect.layer = 1;
 
-	pulse = AddEffect("IntPulse", this, 1, 1, this);
+	pulse = AddEffect("IntPulse", this, priority_pulse, 1, this);
 	pulse.target = effect;
 	pulse.scale = 1000;
 	pulse.range = 100;
 	pulse.offset = 300;
+
+	var growth = AddEffect("IntGrowth", this, priority_growth, 1, this);
+	growth.target = effect;
+	growth.speed = 40;
+	
+	this.Visibility = VIS_None;
+	ScheduleCall(this, "Display", 1);
+}
+
+func Display()
+{
+	this.Visibility = VIS_All;
 }
 
 func FxIntWarpTimer(object target, proplist effect, int timer)
@@ -42,6 +61,19 @@ func FxIntWarpTimer(object target, proplist effect, int timer)
 func FxIntPulseTimer(object target, proplist effect, int timer)
 {
 	effect.target.scale = effect.scale + Sin(effect.offset + timer, effect.range);
+}
+
+func FxIntGrowthTimer(object target, proplist effect, int timer)
+{
+	if (effect.progress == 1000)
+	{
+		return FX_Execute_Kill;
+	}
+	else
+	{
+		effect.target.scale = effect.progress * effect.target.scale / 1000;
+		effect.progress = Min(1000, effect.progress + effect.speed);
+	}
 }
 
 func SetRotation (int r, int precision, int layer, int scale)
