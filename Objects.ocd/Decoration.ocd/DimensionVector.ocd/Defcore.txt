@@ -16,3 +16,4 @@ VertexFriction=80,80,10,10,10,10
 Entrance=0,-19,20,20
 Float=75
 BorderBound=1
+Rotate=1

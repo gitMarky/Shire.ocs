@@ -1,6 +1,5 @@
 
-local thrust_y;
-local thrust_x;
+local thrust;
 
 func Initialize()
 {
@@ -57,64 +56,20 @@ func DoorIsClosed()
 {
 	SetEntrance(0);
 	Sound("SteelGate2");
-}
-
-
-public func ContainedUp(object clonk)
-{
-	if (GetAction() == "Land")
-	{
-		TakeOff();
-	}
-	else if (GetAction() == "Fly")
-	{
-	 	thrust_y -= 1;
-	}
-}
-
-
-public func ContainedDown(object clonk)
-{
-	thrust_y += 1;
-}
-
-public func ContainedLeft(object clonk)
-{
-	thrust_x -= 1;
-}
-
-public func ContainedRight(object clonk)
-{
-	thrust_x += 1;
+	TakeOff();
 }
 
 
 func TakeOff()
 {
-	if (this.fuel)
-	{
-		thrust_y = -1;
-		SetAction("Fly");
-		Sound("Energize");
-	}
-}
-
-func Hit()
-{
-	if(GetAction() == "Fly")
-	{
-		SetAction("Land");
-		Sound("DeEnergize");
-	}
+	SetDir(DIR_Right);
+	ScheduleCall(this, "SetAction", 10, 0, "Fly");
+	Sound("Energize");
 }
 
 func Fly()
 {
-	thrust_y = BoundBy(thrust_y, -2, 2);
-	thrust_x = BoundBy(thrust_x, -6, 6);
-
-	SetYDir(15 * thrust_y);
-	SetXDir(5 * thrust_x);
+	ApproachRift();
 
 	if (GetXDir() > 0)
 	{
@@ -151,6 +106,43 @@ func SmokeCrazy(int x, int y, int level)
 	CreateParticle("Smoke", x, y, PV_Random(-level/3, level/3), PV_Random(-level/2, -level/3), PV_Random(level * 2, level * 10), particles, BoundBy(level/5, 3, 20));
 }
 
+func ApproachRift()
+{
+	if (!dimension_rift) return;
+	
+	var target_r = Angle(GetX(), GetY(), dimension_rift->GetX(), dimension_rift->GetY());
+	var actual_r = GetR() + -90 + 180 * GetDir();
+	var dist = Distance(GetX(), GetY(), dimension_rift->GetX(), dimension_rift->GetY());
+	var max_thrust = 150;
+	var min_thrust = 30;
+
+	if (target_r < actual_r)
+	{
+		SetRDir(-2);
+	}
+	else
+	{
+		SetRDir(+2);
+	}
+	
+	if (Abs(actual_r - target_r) <= 2)
+	{
+		SetRDir();
+		actual_r = target_r;
+	}
+	
+	if (thrust  < dist)
+	{
+		thrust += 2;
+	}
+	else
+	{
+		thrust = Max(min_thrust, dist);
+	}
+	
+	SetXDir(+Sin(actual_r, thrust), 100);
+	SetYDir(-Cos(actual_r, thrust), 100);
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
