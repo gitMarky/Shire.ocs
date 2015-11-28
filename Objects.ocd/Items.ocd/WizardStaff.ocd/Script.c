@@ -21,6 +21,8 @@ func Initialize()
 		ShootTime      = 20,
 		WalkBack        =  0,
 	};
+	
+	this.MeshTransformation = Trans_Rotate(90, 0, 0, 1);
 }
 
 public func GetAnimationSet() { return animation_set; }
@@ -30,7 +32,7 @@ local aiming;
 public func GetCarryMode(clonk) { if(aiming >= 0) return CARRY_HandBack; }
 public func GetCarryBone() { return "Javelin"; }
 public func GetCarrySpecial(clonk) { if(aiming > 0) return "pos_hand2"; }
-public func GetCarryTransform() { if(aiming == 1) return Trans_Translate(4000, 0, 0); }
+public func GetCarryTransform() { return Trans_Mul(Trans_Rotate(90, 0, 0, 1), Trans_Translate(0, -4000 * aiming, 0)); }
 
 public func RejectUse(object clonk)
 {
