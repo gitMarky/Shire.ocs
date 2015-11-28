@@ -125,7 +125,7 @@ func ApproachRift()
 	if (Abs(actual_r - target_r) <= 2)
 	{
 		SetRDir();
-		SetR(target_r);
+		SetR(target_r - 90);
 		actual_r = target_r;
 	}
 	
