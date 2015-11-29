@@ -1,0 +1,11 @@
+[DefCore]
+id=Porsche
+Category=C4D_StaticBack
+Width=51
+Height=17
+Offset=-26,-17
+Value=35
+Mass=1000
+Components=Metal=1;
+Vertices=1
+VertexY=1
