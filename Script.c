@@ -3,7 +3,7 @@ static npc_tuti, npc_pirate, npc_carpenter, npc_beggar, npc_drin;
 static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
-static enemy_cyclops, shop, shop_low_top, dimension_rift;
+static enemy_cyclops, shop, shop_low_top, dimension_rift, npc_doctor;
 
 func Initialize()
 {
@@ -23,6 +23,8 @@ func Initialize()
 	CreateElevator();
 	CreatePirateCastle();
 	CreateScientistLab();
+	
+	CreateRealWorld();
 	
 	// deco
 
@@ -50,6 +52,7 @@ func Initialize()
 	CreateGuardsman();
 	CreateScientist();
 	CreateCyclops();
+	CreateDoctor();
 
 	if (!debug)
 	{
@@ -242,6 +245,16 @@ func CreateCyclops()
 	enemy_cyclops->AttachMesh(head, "skeleton_head", "main", Trans_Mul(Trans_Translate(-500, 0, 0), Trans_Rotate(90, 0, 0, 1)), AM_DrawBefore);
 	
 	CreateObject(Tarydium, 3125, 1080, NO_OWNER);
+}
+
+func CreateDoctor()
+{
+	npc_doctor = CreateObject(Clonk, 3000, 230, NO_OWNER);
+	npc_doctor->SetName("$NPC_Doctor$");
+	npc_doctor->SetDialogueEx("Doctor");
+	npc_doctor->RemoveBackpack();
+	npc_doctor->SetGraphics("Alchemist");
+
 }
 
 // ----- *** Buildings Creation *** -----------------------------------------
@@ -665,6 +678,12 @@ func CreateWaterfall()
 {
 	Seaweed->Place(15, Shape->Rectangle(2170, 420, 180, 50));
 //	CreateObjectMapZoom(_WAF,2920,515,0);
+}
+
+func CreateRealWorld()
+{
+	CreateObject(Porsche, 2955, 240, NO_OWNER);
+	CreateObject(Ambulance, 3035, 250, NO_OWNER);
 }
 
 global func RevealTunnel()
