@@ -66,6 +66,8 @@ func InitializePlayer(int player)
 	crew->Fling(100, 1335);
 	crew->RemoveBackpack();
 	crew->SetMeshMaterial("Clonk_PlayerPullover");
+	
+	SetPlrKnowledge(player, Bread);
 }
 
 
