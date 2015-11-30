@@ -256,7 +256,7 @@ func CreateDoctor()
 	npc_doctor->SetGraphics("Alchemist");
 	npc_doctor->SetMeshMaterial("Clonk_Doctor");
 	npc_doctor->SetMeshMaterial("Clonk_Doctor", 1);
-
+	npc_doctor->SetDir(DIR_Left);
 }
 
 // ----- *** Buildings Creation *** -----------------------------------------
@@ -685,7 +685,7 @@ func CreateWaterfall()
 func CreateRealWorld()
 {
 	CreateObject(Porsche, 2955, 240, NO_OWNER);
-	CreateObject(Ambulance, 3035, 250, NO_OWNER);
+	CreateObject(Ambulance, 3035, 240, NO_OWNER);
 }
 
 global func RevealTunnel()
