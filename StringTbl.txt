@@ -12,3 +12,4 @@ NPC_Pea=Pea
 NPC_Quimby=Quimby
 NPC_Guardsman=Wächter
 NPC_Scientist=Wissenschaftler
+NPC_Doctor=Arzt
