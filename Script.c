@@ -254,6 +254,8 @@ func CreateDoctor()
 	npc_doctor->SetDialogueEx("Doctor");
 	npc_doctor->RemoveBackpack();
 	npc_doctor->SetGraphics("Alchemist");
+	npc_doctor->SetMeshMaterial("Clonk_Doctor");
+	npc_doctor->SetMeshMaterial("Clonk_Doctor", 1);
 
 }
 
