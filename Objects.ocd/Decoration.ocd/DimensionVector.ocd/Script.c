@@ -1,5 +1,6 @@
 
 local thrust;
+local seq;
 
 func Initialize()
 {
@@ -140,6 +141,12 @@ func ApproachRift()
 	
 	SetXDir(+Sin(actual_r, thrust), 100);
 	SetYDir(-Cos(actual_r, thrust), 100);
+	
+	if (!seq && dist < 5)
+	{
+		seq = true;
+		StartSequence("Rift_Warp", 0, FindContents(Clonk), this);
+	}
 }
 
 

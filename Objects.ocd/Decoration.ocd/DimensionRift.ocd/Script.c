@@ -40,6 +40,16 @@ func Initialize()
 	ScheduleCall(this, "Display", 1);
 }
 
+func ShrinkRift()
+{
+	for (var i = 0, effect = nil; effect = GetEffect("IntWarp", this, i); i++)
+	{
+		var growth = AddEffect("IntShrink", this, 5, 1, this);
+		growth.target = effect;
+		growth.speed = 15;
+	}
+}
+
 func Display()
 {
 	this.Visibility = VIS_All;
@@ -71,8 +81,21 @@ func FxIntGrowthTimer(object target, proplist effect, int timer)
 	}
 	else
 	{
-		effect.target.scale = effect.progress * effect.target.scale / 1000;
 		effect.progress = Min(1000, effect.progress + effect.speed);
+		effect.target.scale = effect.progress * effect.target.scale / 1000;
+	}
+}
+
+func FxIntShrinkTimer(object target, proplist effect, int timer)
+{
+	if (effect.progress == 1000)
+	{
+		return FX_Execute_Kill;
+	}
+	else
+	{
+		effect.progress = Min(1000, effect.progress + effect.speed);
+		effect.target.scale = (1000 - effect.progress) * effect.target.scale / 1000;
 	}
 }
 
