@@ -678,9 +678,8 @@ func RandomModulation(object plant)
 func CreateWaterfall()
 {
 	Seaweed->Place(15, Shape->Rectangle(2170, 420, 180, 50));
-//	CreateObjectMapZoom(_WAF,2920,515,0);
 	AddEffect("IntWaterfall", nil, 1, 1, nil);
-//	CreateObject(Dummy, 2333, 395, NO_OWNER)->Sound("Water", false, nil, nil, 1);
+
 	var dummy = CreateObject(Rock, 2333, 395, NO_OWNER);
 	dummy->Sound("waterfall", false, nil, nil, 1);
 	dummy->SetClrModulation(RGBa(255, 255, 255, 0));
