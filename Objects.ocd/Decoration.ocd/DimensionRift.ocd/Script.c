@@ -18,6 +18,11 @@ func Initialize()
 	var growth = AddEffect("IntGrowth", this, priority_growth, 1, this);
 	growth.target = effect;
 	growth.speed = 40;
+	
+	
+	var shrink = AddEffect("IntShrink", this, priority_growth, 1, this);
+	shrink.target = effect;
+	shrink.speed = 15;
 
     SetGraphics(nil, this, 1, 1);
 	effect = AddEffect("IntWarp", this, priority_warp, 1, this);
@@ -32,21 +37,23 @@ func Initialize()
 	pulse.range = 100;
 	pulse.offset = 300;
 
-	var growth = AddEffect("IntGrowth", this, priority_growth, 1, this);
+	growth = AddEffect("IntGrowth", this, priority_growth, 1, this);
 	growth.target = effect;
 	growth.speed = 40;
 	
+	shrink = AddEffect("IntShrink", this, priority_growth, 1, this);
+	shrink.target = effect;
+	shrink.speed = 15;
+
 	this.Visibility = VIS_None;
 	ScheduleCall(this, "Display", 1);
 }
 
 func ShrinkRift()
 {
-	for (var i = 0, effect = nil; effect = GetEffect("IntWarp", this, i); i++)
+	for (var i = 0, effect = nil; effect = GetEffect("IntShrink", this, i); i++)
 	{
-		var growth = AddEffect("IntShrink", this, 5, 1, this);
-		growth.target = effect;
-		growth.speed = 15;
+		effect.active = true;
 	}
 }
 
@@ -90,9 +97,10 @@ func FxIntShrinkTimer(object target, proplist effect, int timer)
 {
 	if (effect.progress == 1000)
 	{
+		this.Visibility = VIS_None;
 		return FX_Execute_Kill;
 	}
-	else
+	else if (effect.active)
 	{
 		effect.progress = Min(1000, effect.progress + effect.speed);
 		effect.target.scale = (1000 - effect.progress) * effect.target.scale / 1000;
