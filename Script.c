@@ -679,6 +679,13 @@ func CreateWaterfall()
 {
 	Seaweed->Place(15, Shape->Rectangle(2170, 420, 180, 50));
 //	CreateObjectMapZoom(_WAF,2920,515,0);
+	AddEffect("IntWaterfall", nil, 1, 1, nil);
+//	CreateObject(Dummy, 2333, 395, NO_OWNER)->Sound("Water", false, nil, nil, 1);
+	var dummy = CreateObject(Rock, 2333, 395, NO_OWNER);
+	dummy->Sound("waterfall", false, nil, nil, 1);
+	dummy->SetClrModulation(RGBa(255, 255, 255, 0));
+	dummy.Collectible = false;
+	dummy->SetCategory(C4D_StaticBack);
 }
 
 func CreateRealWorld()
@@ -713,4 +720,45 @@ global func FxIntDisplayMerchantTimer(object target, proplist effect, int timer)
 		target->SetGraphics(nil, nil, 1, GFXOV_MODE_Object, nil, nil, npc_merchant);
 	    target->SetObjDrawTransform(1000, 0, x, 0, 1000, 20 * precision, 1);
     }
+}
+
+global func FxIntWaterfallTimer(object target, proplist effect, int timer)
+{
+
+		var color = GetAverageTextureColor("water");
+		var particles =
+		{	
+			CollisionVertex = 500,
+			Size = 16,
+//			Phase = PV_Linear(0, 7),
+			ForceX = 0,
+			ForceY = PV_Gravity(1000),
+			Alpha = PV_Linear(90, 180),
+			Rotation = PV_Random(0, 360),
+			OnCollision = PC_Bounce(200),
+			R = (color >> 16) & 0xff,
+			G = (color >>  8) & 0xff,
+			B = (color >>  0) & 0xff,
+		};
+		
+		CreateParticle("Dust", 2342 + RandomX(-2, +2), 233, 0, 0, 10, particles);
+		CreateParticle("Dust", 2333 + RandomX(-2, +2), 245, 0, 0, 17, particles);
+		CreateParticle("Dust", 2333 + RandomX(-2, +2), 260, 0, 0, 13, particles);
+		CreateParticle("Dust", 2333 + RandomX(-2, +2), 280, 0, 0, 13, particles);
+		CreateParticle("Dust", 2333 + RandomX(-2, +2), 295, 0, 0, 13, particles);
+		//CreateParticle("Dust", 2320, 245, 0, 0, 50, particles);
+
+		var bottom = particles;
+		bottom.Size = 18;
+		bottom.R = 255;
+		bottom.G = 255;
+		bottom.B = 255;
+		bottom.ForceY = 0;
+		bottom.Alpha = PV_KeyFrames(0, 0, 0, 250, 60, 1000, 0);
+		
+		// 2342, 233
+		// 2333, 245
+		// 2333, 395
+
+		CreateParticle("Dust", 2333 + RandomX(-5, 5), 395, RandomX(-5,5), RandomX(-5, 0), 24, bottom);
 }
