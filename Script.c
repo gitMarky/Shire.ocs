@@ -266,6 +266,7 @@ func CreateCastle()
 	castle_low->SetGraphics("Inside");
 
 	var castle_low_top = CreateObject(DecoCastle, 1070, 1727, NO_OWNER);
+	castle_low_top->SetSolidMask(0, 0, 67, 50);
 	castle_low_top->SetGraphics("InsideTop");
 	castle_low_top.Plane = 10000;
 
@@ -318,6 +319,7 @@ func CreatePirateCastle()
 	castle_low->SetGraphics("Inside");
 
 	var castle_low_top = CreateObject(DecoCastle, 2245, 1727, NO_OWNER);
+	castle_low_top->SetSolidMask(0, 0, 67, 50);
 	castle_low_top->SetGraphics("InsideWaterTop");
 	castle_low_top.Plane = 10000;
 	
@@ -348,6 +350,7 @@ func CreateStoneHut()
 	CreateObject(DecoStoneHut, 730, 1007, NO_OWNER);
 	var stonehut_low = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
 	var stonehut_low_top = CreateObject(DecoStoneHut, 730, 1727, NO_OWNER);
+	stonehut_low_top->SetSolidMask(0, 0, 60, 50);
 	stonehut_low->SetGraphics("Inside");
 	stonehut_low_top->SetGraphics("Top");
 	stonehut_low_top.Plane = 10000;
@@ -400,6 +403,7 @@ func CreateScientistLab()
 	DigFreeRect(88 , 1744 , 70, 7);
 	var lab_low = CreateObject(DecoLab, 125, 1751, NO_OWNER);
 	var lab_low_top = CreateObject(DecoLab, 125, 1751, NO_OWNER);
+	lab_low_top->SetSolidMask(0, 0, 71, 90);
 	lab_low->SetGraphics("Inside");
 	lab_low_top->SetGraphics("Top");
 	lab_low_top.Plane = 10000;
@@ -416,6 +420,7 @@ func CreateShop()
     shop = CreateObject(DecoShop, 985, 1002, NO_OWNER);
     var shop_low = CreateObject(DecoShop, 985, 1722, NO_OWNER);
     shop_low_top = CreateObject(DecoShop, 985, 1722, NO_OWNER);
+	shop_low_top->SetSolidMask(0, 0, 60, 60);
 	shop_low->SetGraphics("Inside");
 	shop_low_top->SetGraphics("Jeans");
 	shop_low_top->SetGraphics("Top", DecoShop, 2, GFXOV_MODE_Base);
@@ -455,6 +460,7 @@ func CreateWoodHut()
 	CreateObject(DecoHut, 610, 1007, NO_OWNER);
 	var hut_low = CreateObject(DecoHut, 610, 1727, NO_OWNER);
 	var hut_low_top = CreateObject(DecoHut, 610, 1727, NO_OWNER);
+	hut_low_top->SetSolidMask(0, 0, 60, 50);
 	hut_low->SetGraphics("Inside");
 	hut_low_top->SetGraphics("Top");
 	hut_low_top.Plane=10000;
