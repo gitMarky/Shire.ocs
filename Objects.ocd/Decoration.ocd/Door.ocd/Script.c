@@ -56,6 +56,7 @@ func Transfer(object target)
 	{
 		target->MovePosition(0, -7);
 	}
+	SetPlrView(target->GetOwner(), target, true);
 }
 
 func ConnectTo(object target)
