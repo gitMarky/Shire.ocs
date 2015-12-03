@@ -1,48 +1,68 @@
 
-global func FxIntCyclopsAITimer(object cyclops, proplist ai, int timer)
+global func AddCyclopsAI(object clonk) // somewhat hacky, but it works
 {
-	if (!ai.cyclops)
-	{
-		ai.cyclops = cyclops;
-	}
+	var effect_name = "IntCyclopsAI";
+	var fx = GetEffect(effect_name, clonk);
+	if (!fx) fx = AddEffect(effect_name, clonk, 1, 10);
+	if (!fx || !clonk) return nil;
+	
+//	fx.ai = AI;
+//	clonk.ExecuteAI = AI.Execute;
+	clonk.ai = fx;
+//	if (clonk->GetProcedure() == "PUSH") fx.vehicle = clonk->GetActionTarget();
+//	AI->BindInventory(clonk); // this works
+	var cnt = clonk->ContentsCount();
+	fx.bound_weapons = CreateArray(cnt);
+	for (var i=0; i<cnt; ++i) fx.bound_weapons[i] = clonk->Contents(i);
+
+//	AI->SetHome(clonk); // this did not
+	fx.home_x = clonk->GetX();
+	fx.home_y = clonk->GetY();
+	fx.home_dir = DIR_Left;
+
+//	AI->SetGuardRange(clonk, fx.home_x-AI_DefGuardRangeX, fx.home_y-AI_DefGuardRangeY, AI_DefGuardRangeX*2, AI_DefGuardRangeY*2);
+	fx.guard_range = {//x=x, y=y, wdt=wdt, hgt=hgt};
+                      x = fx.home_x-AI_DefGuardRangeX,
+                      y = fx.home_y-AI_DefGuardRangeY,
+                      wdt = AI_DefGuardRangeX*2,
+                      hgt =  AI_DefGuardRangeY*2};
+
+	AI->SetMaxAggroDistance(clonk, AI_DefMaxAggroDistance);
+	// AI editor commands
+	//if (!clonk.EditCursorCommands)
+	//	clonk.EditCursorCommands = [];
+	//else if (clonk.EditCursorCommands == clonk.Prototype.EditCursorCommands)
+	//	clonk.EditCursorCommands = clonk.EditCursorCommands[:];
+	//var idx;
+	//if ((idx=GetIndexOf(clonk.EditCursorCommands, "AI_Add()"))>=0) clonk.EditCursorCommands[idx] = nil;
+	//if (GetIndexOf(clonk.EditCursorCommands, AI.AI_SetHome)<0)
+	//{
+	//	var l = GetLength(clonk.EditCursorCommands);
+	//	clonk.EditCursorCommands[l++] = clonk.AI_SetHome = AI.AI_SetHome;
+	//	clonk.EditCursorCommands[l++] = clonk.AI_BindInventory = AI.AI_BindInventory;
+	//}
+	return fx;
 }
 
-// called in context of the Clonk that is being controlled
-private func Execute(proplist fx, int time)
+global func FxIntCyclopsAITimer(object cyclops, proplist fx, int time)
 {
+	if (!fx.cyclops)
+	{
+		fx.cyclops = cyclops;
+		fx.weapon = cyclops->FindContents(Club);
+	}
+
 	fx.time = time;
-	// Evasion, healing etc. if alert
-	if (fx.alert) if (ExecuteProtection(fx)) return true;
-	// Find something to fight with
-	if (!fx.weapon) { CancelAiming(fx); if (!ExecuteArm(fx)) return ExecuteIdle(fx); else if (!fx.weapon) return true; }
-	// Weapon out of ammo?
-	if (fx.ammo_check && !Call(fx.ammo_check, fx, fx.weapon)) { fx.weapon=nil; return false; }
+
 	// Find an enemy
 	if (fx.target) if (!fx.target->GetAlive() || (!fx.ranged && ObjectDistance(fx.target) >= fx.max_aggro_distance)) fx.target = nil;
 	if (!fx.target)
 	{
-		CancelAiming(fx);
-		if (!(fx.target = FindTarget(fx))) return ExecuteIdle(fx);
-		// first encounter callback. might display a message.
-		if (fx.encounter_cb) if (GameCall(fx.encounter_cb, this, fx.target)) fx.encounter_cb = nil;
-		// wake up nearby allies
-		if (fx.ally_alert_range)
-		{
-			var ally_fx;
-			for (var ally in FindObjects(Find_Distance(fx.ally_alert_range), Find_Exclude(this), Find_OCF(OCF_CrewMember), Find_Owner(GetOwner())))
-				if (ally_fx = AI->GetAI(ally))
-					if (!ally_fx.target)
-					{
-						ally_fx.target = fx.target;
-						ally_fx.alert = ally_fx.time;
-						if (ally_fx.encounter_cb) if (GameCall(ally_fx.encounter_cb, ally, fx.target)) ally_fx.encounter_cb = nil;
-					}
-			// waking up works only once. after that, AI might have moved and wake up Clonks it shouldn't
-			fx.ally_alert_range = nil;
-		}
+		if (!(fx.target = CyclopsFindTarget(fx))) return CyclopsExecuteIdle(fx);
 	}
+
 	// Attack it!
-	return Call(fx.strategy, fx);
+	return CyclopsExecuteMelee(fx);
 }
 
 
@@ -68,7 +88,8 @@ global func CyclopsFindTarget(fx)
 	var hostile_criteria = Find_Hostile(fx.cyclops->GetOwner());
 	if (fx.cyclops->GetOwner() == NO_OWNER)
 		hostile_criteria = Find_Not(Find_Owner(fx.cyclops->GetOwner()));
-	for (var target in FindObjects(Find_InRect(fx.guard_range.x-GetX(),fx.guard_range.y-GetY(),fx.guard_range.wdt,fx.guard_range.hgt), Find_OCF(OCF_CrewMember), hostile_criteria, Find_NoContainer(), Sort_Random()))
+//	for (var target in FindObjects(Find_InRect(fx.guard_range.x-fx.cyclops->GetX(),fx.guard_range.y-fx.cyclops->GetY(),fx.guard_range.wdt,fx.guard_range.hgt), Find_OCF(OCF_CrewMember), hostile_criteria, Find_NoContainer(), Sort_Random()))
+	for (var target in FindObjects(Find_InRect(fx.guard_range.x,fx.guard_range.y,fx.guard_range.wdt,fx.guard_range.hgt), Find_OCF(OCF_CrewMember), hostile_criteria, Find_NoContainer(), Sort_Random()))
 		if (PathFree(fx.cyclops->GetX(),fx.cyclops->GetY(),target->GetX(),target->GetY()))
 			return target;
 	// Nothing found.
@@ -102,8 +123,15 @@ global func CyclopsExecuteMelee(fx)
 	// the cyclops stands in its place and hits objects or breathes fire
 	if (PathFree(x,y,tx,ty))
 	{
-		if (Abs(dx) <= 10 && dy >= -15)
+		if (Abs(dx) <= 35 && dy >= -15)
 		{
+			// OK, slash!
+			if (fx.cyclops->IsAiming())
+			{
+				fx.weapon->ControlUseStop(fx.cyclops, tx, ty);
+				return;
+			}
+
 			// target is under us - sword slash downwards!
 			if (!CyclopsCheckHandsAction(fx)) return true;
 			// Stop here
@@ -114,13 +142,17 @@ global func CyclopsExecuteMelee(fx)
 			{
 				return true;
 			}
+
 			// OK, slash!
-			return fx.weapon->ControlUse(fx.cyclops, tx,ty);
+			if (!fx.cyclops->IsAiming())
+				fx.weapon->ControlUseStart(fx.cyclops, tx, ty);
+			
+			return;
 		}
 	}
 	
 	// Not in range. Walk there.
-	if (!GetCommand() || !Random(10)) SetCommand("MoveTo", fx.target);
+//	if (!fx.cyclops->GetCommand() || !Random(10)) fx.cyclops->SetCommand("MoveTo", nil, tx+20-40*fx.cyclops->GetDir(), y);
 	
 	return true;
 }
@@ -129,6 +161,7 @@ global func CyclopsExecuteMelee(fx)
 
 global func CyclopsCheckHandsAction(fx)
 {
+//	return true;
 	// can use hands?
 	if (fx.cyclops->~HasHandAction()) return true;
 	// Can't throw: Is it because e.g. we're scaling?
