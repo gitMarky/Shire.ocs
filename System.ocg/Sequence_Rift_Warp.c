@@ -37,6 +37,7 @@ func Rift_Warp_3()
 func Rift_Warp_4()
 {
 	SetViewTarget(this.hero);
+	SetPlrView(this.hero->GetOwner(), this.hero, true);
 	return ScheduleNext(30);
 }
 
