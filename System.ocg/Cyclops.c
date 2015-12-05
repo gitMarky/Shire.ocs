@@ -128,7 +128,16 @@ global func CyclopsExecuteMelee(fx)
 			// OK, slash!
 			if (fx.cyclops->IsAiming())
 			{
-				fx.weapon->ControlUseStop(fx.cyclops, tx, ty);
+//				if (!fx.did_aim)
+//				{
+					fx.weapon->ControlUseHolding(fx.cyclops, dx, dy);
+//					fx.did_aim = true;
+//				}
+//				else
+//				{
+					fx.weapon->ControlUseStop(fx.cyclops, dx, dy);
+//					fx.did_aim = false;
+//				}
 				return;
 			}
 
@@ -145,7 +154,7 @@ global func CyclopsExecuteMelee(fx)
 
 			// OK, slash!
 			if (!fx.cyclops->IsAiming())
-				fx.weapon->ControlUseStart(fx.cyclops, tx, ty);
+				fx.weapon->ControlUseStart(fx.cyclops, dx, dy);
 			
 			return;
 		}
