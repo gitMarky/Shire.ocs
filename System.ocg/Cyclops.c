@@ -99,6 +99,13 @@ global func CyclopsExecuteMelee(fx)
 		fx.weapon=nil;
 		return false;
 	}
+	
+	if (GetActiveSequence())
+	{
+		fx.spraying = 0;
+		fx.spraying_charge = 0;
+		return;
+	}
 
 	// Are we in range?
 	var x=fx.cyclops->GetX();
@@ -167,43 +174,64 @@ global func CyclopsCheckHandsAction(fx)
 global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 {
 	var reach = 110;
-	var spray_max = 20;
-	
+	var spray_max = 30;
+	var anim_length = 20;
+
 	var sx = x - 6;
 	var sy = y - 15;
 
 	// effects
-	if (ObjectDistance(fx.cyclops, fx.target) < reach)
+	if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < spray_max)
 	{
-		fx.spraying = Min(spray_max, fx.spraying + 1);
-		var angle = Angle(sx, sy, tx, ty);
-//		var sx = +Sin(angle, 15);
-//		var sy = -Cos(angle, 15);
-//		sy -= 3;
+		if (fx.spraying_charge <= 0)
+		{
+			var action = "IdleLookAround";
+			fx.cyclops->PlayAnimation(action, CLONK_ANIM_SLOT_Arms, Anim_Linear(0, 0, fx.cyclops->GetAnimationLength(action), anim_length, ANIM_Remove), Anim_Linear(0, 0, 1000, 5, ANIM_Remove));
+			fx.spraying_charge = 1;
+		}
+		else if (fx.spraying_charge < anim_length)
+		{
+			fx.spraying_charge++;
+		}
+		else
+		{
+			fx.spraying = Min(spray_max, fx.spraying + 1);
+			var angle = Angle(sx, sy, tx, ty);
 
-		var fuzzy = 10;
-		var velocity = reach; // should take 20 frames to reach the end
-		var vx = +Sin(angle, velocity);
-		var vy = -Cos(angle, velocity);
+			var fuzzy = 5;
+			var velocity = 50; // should take 20 frames to reach the end
+			var vx = +Sin(angle, velocity);
+			var vy = -Cos(angle, velocity);
+			var vxs = +Sin(angle, 8 * velocity / 10);
+			var vys = -Cos(angle, 8 * velocity / 10);
+			var vx0 = +Sin(angle, 5);
+			var vy0 = -Cos(angle, 5);
 
-		var smoke = Particles_Smoke();
-		
-		smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
-		smoke.Size = PV_Linear(1, PV_Random(20, 30));
-		
+			var smoke = Particles_Smoke();
+			
+			smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
+			smoke.Size = PV_Linear(5, PV_Random(20, 30));
 
-		CreateParticle("Fire", sx, sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(15, 20), smoke, 3);
-		CreateParticle("Fire", sx, sy, PV_Random(vx/2 - fuzzy, vx/2 + fuzzy), PV_Random(vy/2 - fuzzy, vy/2 + fuzzy), PV_Random(15, 20), smoke, 3);
+			CreateParticle("Fire", sx, sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(30, 40), smoke, RandomX(3, 5));
+			CreateParticle("Fire", sx, sy, PV_Random(vxs - fuzzy, vxs + fuzzy), PV_Random(vys - fuzzy, vys + fuzzy), PV_Random(50, 60), smoke, RandomX(3, 5));
+		}
 	}
 	else
 	{
-		fx.spraying = 0;
+		// cooldown and reset
+		fx.spraying = Min(2 * spray_max, fx.spraying + 1);
+		if (fx.spraying == 2 * spray_max)
+		{
+			fx.spraying = 0;
+			fx.spraying_charge = 0;
+		}
 	}
-	
+
 	// damage the clonk
-	if (ObjectDistance(fx.cyclops, fx.target) < (spray_max + fx.spraying)*(reach-fuzzy)/(2*spray_max) && this.hero->GetAction() != "Tumble")
+	if (ObjectDistance(fx.cyclops, fx.target) < (spray_max + fx.spraying)*(reach-fuzzy)/(2*spray_max))
 	{
-		var damage=1000;
-		fx.target->DoEnergy(-damage, true, FX_Call_EngGetPunched, NO_OWNER);
+		fx.target->Message("*!*");
+		//var damage=1000;
+		//fx.target->DoEnergy(-damage, true, FX_Call_EngGetPunched, NO_OWNER);
 	}
 }
