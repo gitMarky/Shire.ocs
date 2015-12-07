@@ -245,6 +245,21 @@ func CreateCyclops()
 	enemy_cyclops->AttachMesh(head, "skeleton_head", "main", Trans_Mul(Trans_Translate(-500, 0, 0), Trans_Rotate(90, 0, 0, 1)), AM_DrawBefore);
 	
 	CreateObject(Tarydium, 3125, 1080, NO_OWNER);
+	
+	// flames
+	
+	var flames = [{x = 3022, y = 1020}, {x = 3055, y = 1020}];
+	
+	for (var coordinates in flames)
+	{
+		// dummy objects did change their shape again after being incinerated
+		// using rocks is better in this case
+		var flame = CreateObject(Rock, coordinates.x, coordinates.y, NO_OWNER);
+		flame.NoBurnDecay = true;
+		flame.Visibility = VIS_None;
+		flame->SetObjectLayer(flame);
+		flame->Incinerate();
+	}
 }
 
 func CreateDoctor()
