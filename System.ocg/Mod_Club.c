@@ -3,7 +3,6 @@
 // giant club for the cyclops
 func DoStrike(clonk, angle)
 {
-	Log("DoStrike(%v, %d)", clonk, angle);
 	var reach = 15;
 	var range = 25;
 	// hit all objects in the direction of the Clonk - the angle is only important for the direction of the flinging
@@ -12,9 +11,7 @@ func DoStrike(clonk, angle)
 	var found = false;
 	for (var obj in FindObjects(Find_Distance(reach + range, 0, 0), Find_Or(Find_OCF(OCF_Alive), Find_Category(C4D_Object), Find_Category(C4D_Vehicle)), Find_Exclude(clonk), Find_NoContainer(), Find_Layer(0), Sort_Distance()))
 	{
-		Log(".. Checking target %v", obj);
 		if (obj->Stuck()) continue;
-		Log(".. Object not stuck");
 		
 		// don't hit objects behind the Clonk
 		if (x < 0)
@@ -23,7 +20,6 @@ func DoStrike(clonk, angle)
 		}
 		else if (obj->GetX() < GetX()) continue;
 		
-		Log(".. Object hittable by direction");
 		
 		// vehicles are only hit if they are pseudo vehicles. Bad system - has to be changed in the future
 		if (obj->GetCategory() & C4D_Vehicle)
@@ -32,14 +28,11 @@ func DoStrike(clonk, angle)
 		var en = Format("CannotBeHitTwiceBy%d", this->ObjectNumber());
 		if (GetEffect(en, obj)) continue;
 		
-		Log(".. Object hittable by effect");
-		
 		if (obj->GetOCF() & OCF_Alive)
 		{
-			var damage=5*1000;
+			var damage=15*1000;
 			ApplyWeaponBash(obj, 400, angle, clonk);
 			obj->DoEnergy(-damage, true, FX_Call_EngGetPunched, clonk->GetOwner());
-			Log(".. Object is alive and hit");
 		}
 		else
 		{
