@@ -211,7 +211,18 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 			var head_angle = Normalize(angle - source_angle, -180);
 
 			// turn his head towards the clonk
-			//fx.cyclops->TransformBone("skeleton_head", Trans_Rotate(head_angle, 0, 0, 1), 5, Anim_Const(1000));
+			// somehow the turning head makes the cyclops invisible, though
+			//var transform = Trans_Rotate(10, 0, 0, 1);
+			var transform = Trans_Rotate(head_angle, 0, 0, 1);
+
+			if (!fx.anim_nr)
+			{
+				fx.anim_nr = fx.cyclops->TransformBone("skeleton_head", transform, 5, Anim_Const(1000));
+			}
+			else
+			{
+				fx.cyclops->SetAnimationBoneTransform(fx.anim_nr, transform);
+			}
 
 			fx.spraying = Min(spray_max, fx.spraying + 1);
 
@@ -228,8 +239,6 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 			
 			smoke.ForceX = 0;
 			smoke.ForceY = PV_Gravity(-10);
-//			smoke.ForceY = PV_Gravity(-40);
-			//smoke.ForceX = PV_Wind(10);
 			
 			
 			smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
@@ -239,7 +248,6 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 			{
 				var vxd = vx + RandomX(-fuzzy, +fuzzy);
 				var vyd = vy + RandomX(-fuzzy, +fuzzy);
-//				CreateParticle("Fire", sx, sy, PV_KeyFrames(0, 0, vx0, 250, vxd, 500, vxd * 2, 1000, vxd * 4), PV_KeyFrames(0, 0, vy0, 250, vyd, 500, vyd * 2, 1000, vyd * 4), PV_Random(30, 40), smoke, 1);
 				CreateParticle("Fire", sx, sy, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(30, 40), smoke, 1);
 			}
 			for (var i = 0; i < RandomX(3, 5); i++)
@@ -253,7 +261,7 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 	else
 	{
 		// cooldown and reset
-		fx.spraying = Min(2 * spray_max, fx.spraying + 1);
+		fx.spraying = Min(2 * spray_max, Max(spray_max + 1, fx.spraying + 1));
 		if (fx.spraying == 2 * spray_max)
 		{
 			fx.spraying = 0;
@@ -262,7 +270,9 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 	}
 
 	// damage the clonk
-	if (ObjectDistance(fx.cyclops, fx.target) < (spray_max + fx.spraying)*(reach-fuzzy)/(2*spray_max))
+	if (fx.spraying > 0
+	 && fx.spraying <= spray_max
+	 && ObjectDistance(fx.cyclops, fx.target) < (spray_max + fx.spraying)*reach/(2*spray_max))
 	{
 		fx.target->Message("*!*");
 		//var damage=1000;
