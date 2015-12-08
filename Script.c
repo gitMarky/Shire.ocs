@@ -607,15 +607,15 @@ func CreateJungle()
 	Grass->Place(100, Shape->Rectangle(2400, 1020, 620, 20));
 	PlaceForestCustom(Cotton, 2455, 1040, 570, true);
 	
-	for (var plant in FindObjects(Find_ID(Cotton), Find_InRect(2950, 900, 100, 200)))
+	for (var plant in FindObjects(Find_ID(Cotton), Find_InRect(2900, 900, 200, 200)))
 	{
 		var original = plant->GetClrModulation();
-		var percent = plant->GetX() - 2950;
+		var percent = Min(100, plant->GetX() - 2900);
 		var hundred = 100;
 		var grey = 50;
-		var r = ((hundred - percent) * GetRGBaValue(original, RGBA_RED  ) + percent * grey) / hundred;
-		var g = ((hundred - percent) * GetRGBaValue(original, RGBA_GREEN) + percent * grey) / hundred;
-		var b = ((hundred - percent) * GetRGBaValue(original, RGBA_BLUE ) + percent * grey) / hundred;
+		var r = ((hundred - percent) * GetRGBaValue(original, RGBA_RED  ) + percent * 20) / hundred;
+		var g = ((hundred - percent) * GetRGBaValue(original, RGBA_GREEN) + percent * 15) / hundred;
+		var b = ((hundred - percent) * GetRGBaValue(original, RGBA_BLUE ) + percent *  5) / hundred;
 		
 		plant->SetClrModulation(RGB(r, g, b));
 	}
