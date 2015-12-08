@@ -30,9 +30,12 @@ func DoStrike(clonk, angle)
 		
 		if (obj->GetOCF() & OCF_Alive)
 		{
-			var damage=15*1000;
 			ApplyWeaponBash(obj, 400, angle, clonk);
-			obj->DoEnergy(-damage, true, FX_Call_EngGetPunched, clonk->GetOwner());
+			if (cyclops_dangerous)
+			{
+				var damage=15*1000;
+				obj->DoEnergy(-damage, true, FX_Call_EngGetPunched, clonk->GetOwner());
+			}
 		}
 		else
 		{

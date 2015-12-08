@@ -274,8 +274,10 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 	 && fx.spraying <= spray_max
 	 && ObjectDistance(fx.cyclops, fx.target) < (spray_max + fx.spraying)*reach/(2*spray_max))
 	{
-		fx.target->Message("*!*");
-		//var damage=1000;
-		//fx.target->DoEnergy(-damage, true, FX_Call_EngGetPunched, NO_OWNER);
+		if (cyclops_dangerous)
+		{
+			var damage=1000;
+			fx.target->DoEnergy(-damage, true, FX_Call_EngGetPunched, NO_OWNER);
+		}
 	}
 }
