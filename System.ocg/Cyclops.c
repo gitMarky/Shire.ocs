@@ -38,6 +38,10 @@ global func FxIntCyclopsAITimer(object cyclops, proplist fx, int time)
 	}
 
 	fx.time = time;
+	
+	// do not idle
+	var effect = GetEffect("IntWalk", fx.cyclops);
+	if (effect) effect.idle_time = 0;
 
 	// Find an enemy
 	if (fx.target) if (!fx.target->GetAlive() || (!fx.ranged && ObjectDistance(fx.target) >= fx.max_aggro_distance)) fx.target = nil;
@@ -173,13 +177,15 @@ global func CyclopsCheckHandsAction(fx)
 
 global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 {
-	var reach = 110;
+	var reach = 90;
 	var spray_max = 30;
 	var anim_length = 20;
 
-	var sx = x - 6;
-	var sy = y - 15;
-
+//	var sx = x - 6;
+//	var sy = y - 15;
+	var sx = x - 3;
+	var sy = y - 15;	
+	
 	// effects
 	if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < spray_max)
 	{
@@ -195,25 +201,53 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 		}
 		else
 		{
-			fx.spraying = Min(spray_max, fx.spraying + 1);
-			var angle = Angle(sx, sy, tx, ty);
+			var target_angle = Normalize(Angle(sx, sy, tx, ty), -180);
+			var source_angle = -90 + fx.cyclops->GetDir() * 180;
+			
+			var a = Min(spray_max, fx.spraying * 2);
+			var b = spray_max - a;
+			var angle = (b * source_angle + a * target_angle) / spray_max;
+			angle = Normalize(angle, -180);
+			var head_angle = Normalize(angle - source_angle, -180);
 
-			var fuzzy = 5;
-			var velocity = 50; // should take 20 frames to reach the end
+			// turn his head towards the clonk
+			//fx.cyclops->TransformBone("skeleton_head", Trans_Rotate(head_angle, 0, 0, 1), 5, Anim_Const(1000));
+
+			fx.spraying = Min(spray_max, fx.spraying + 1);
+
+			var fuzzy = 10;
+			var velocity = reach * 3; // should take 20 frames to reach the end
 			var vx = +Sin(angle, velocity);
 			var vy = -Cos(angle, velocity);
 			var vxs = +Sin(angle, 8 * velocity / 10);
 			var vys = -Cos(angle, 8 * velocity / 10);
-			var vx0 = +Sin(angle, 5);
-			var vy0 = -Cos(angle, 5);
+			var vx0 = +Sin(angle, velocity / 3);
+			var vy0 = -Cos(angle, velocity / 3);
 
 			var smoke = Particles_Smoke();
+			
+			smoke.ForceX = 0;
+			smoke.ForceY = PV_Gravity(-10);
+//			smoke.ForceY = PV_Gravity(-40);
+			//smoke.ForceX = PV_Wind(10);
+			
 			
 			smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
 			smoke.Size = PV_Linear(5, PV_Random(20, 30));
 
-			CreateParticle("Fire", sx, sy, PV_Random(vx - fuzzy, vx + fuzzy), PV_Random(vy - fuzzy, vy + fuzzy), PV_Random(30, 40), smoke, RandomX(3, 5));
-			CreateParticle("Fire", sx, sy, PV_Random(vxs - fuzzy, vxs + fuzzy), PV_Random(vys - fuzzy, vys + fuzzy), PV_Random(50, 60), smoke, RandomX(3, 5));
+			for (var i = 0; i < RandomX(3, 5); i++)
+			{
+				var vxd = vx + RandomX(-fuzzy, +fuzzy);
+				var vyd = vy + RandomX(-fuzzy, +fuzzy);
+//				CreateParticle("Fire", sx, sy, PV_KeyFrames(0, 0, vx0, 250, vxd, 500, vxd * 2, 1000, vxd * 4), PV_KeyFrames(0, 0, vy0, 250, vyd, 500, vyd * 2, 1000, vyd * 4), PV_Random(30, 40), smoke, 1);
+				CreateParticle("Fire", sx, sy, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(30, 40), smoke, 1);
+			}
+			for (var i = 0; i < RandomX(3, 5); i++)
+			{
+				var vxd = vxs + RandomX(-fuzzy, +fuzzy);
+				var vyd = vys + RandomX(-fuzzy, +fuzzy);
+				CreateParticle("Fire", sx, sy, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(50, 60), smoke, 1);
+			}
 		}
 	}
 	else
