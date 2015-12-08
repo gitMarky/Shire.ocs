@@ -249,7 +249,7 @@ func CreateCyclops()
 	
 	// flames
 	
-	var flames = [{x = 3022, y = 1020}, {x = 3055, y = 1020}];
+	var flames = [{x = 3022, y = 1020}, {x = 3055, y = 1020}, {x = 2965, y = 1020}];
 	
 	for (var coordinates in flames)
 	{
@@ -612,7 +612,6 @@ func CreateJungle()
 		var original = plant->GetClrModulation();
 		var percent = Min(100, plant->GetX() - 2900);
 		var hundred = 100;
-		var grey = 50;
 		var r = ((hundred - percent) * GetRGBaValue(original, RGBA_RED  ) + percent * 20) / hundred;
 		var g = ((hundred - percent) * GetRGBaValue(original, RGBA_GREEN) + percent * 15) / hundred;
 		var b = ((hundred - percent) * GetRGBaValue(original, RGBA_BLUE ) + percent *  5) / hundred;
