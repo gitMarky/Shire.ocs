@@ -60,8 +60,8 @@ func Initialize()
 	{
 		StartBackgroundSequence("Trigger_Bird_Elevator");
 		StartBackgroundSequence("Trigger_Clonkarabas");
-	}
 		StartBackgroundSequence("Trigger_Bird_Cyclops");
+	}
 }
 
 func InitializePlayer(int player)
@@ -263,6 +263,9 @@ func CreateCyclops()
 		flame->SetObjectLayer(flame);
 		flame->Incinerate();
 	}
+	
+	// make him hurtable
+	CreateObject(CyclopsEye, 3081, 977);
 }
 
 func CreateDoctor()
@@ -657,7 +660,6 @@ func PlaceForestCustom(id plant_type, int x, int y, int width, bool oversize)
 		RandomGrowth(plant, growth, oversize);
 		RandomModulation(plant);
 
-		if (!Random(3)) plant.Plane = 510;
 		// Every ~7th plant: double plant!
 		if (x_variance != 0 && !Random(7))
 		{
@@ -669,7 +671,6 @@ func PlaceForestCustom(id plant_type, int x, int y, int width, bool oversize)
 			plant->SetObjectLayer(plant);
 			RandomGrowth(plant, growth, oversize);
 			RandomModulation(plant);
-			if (!Random(3)) plant.Plane = 510;
 		}
 	}
 }
@@ -681,6 +682,11 @@ func SetPlantToDeco(object plant)
 		plant->RemoveTimer("Reproduction");
 		plant->RemoveTimer("Seed");
 		plant->RemoveTimer("WaterCheck");
+		
+		var x = plant->GetX();
+		if (x > 2500 && x < 2555) return;
+		
+		if (!Random(3)) plant.Plane = 510;
 }
 
 func RandomGrowth(object plant, int growth, bool oversize)

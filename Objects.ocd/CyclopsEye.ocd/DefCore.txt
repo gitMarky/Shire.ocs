@@ -1,0 +1,10 @@
+[DefCore]
+id=CyclopsEye
+Version=6,0
+Category=C4D_StaticBack
+Width=7
+Height=7
+Offset=-4,-4
+Value=1
+Mass=1
+
