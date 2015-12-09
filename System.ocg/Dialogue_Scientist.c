@@ -18,6 +18,10 @@ public func Dlg_Scientist(object player)
 		DlgText("Um ehrlich zu sein:|Sie ist noch nicht fertig.");
 		DlgText("Ich brauche etwas Tarydium.|Das einzige Vorkommen wird aber von einem Zyklopen bewacht.");
 		DlgText("Geh in meine Werkstatt, dort findest Du Waffen.");
+		if (DlgEvent())
+		{
+			cyclops_dangerous = true;
+		}
 	}
 	else if (true)
 	{

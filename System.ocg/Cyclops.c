@@ -279,5 +279,9 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 			var damage=1000;
 			fx.target->DoEnergy(-damage, true, FX_Call_EngGetPunched, NO_OWNER);
 		}
+		else
+		{
+			fx.target.hurt_by_cyclops = true;
+		}
 	}
 }

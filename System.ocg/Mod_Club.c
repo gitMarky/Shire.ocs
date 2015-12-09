@@ -36,6 +36,10 @@ func DoStrike(clonk, angle)
 				var damage=15*1000;
 				obj->DoEnergy(-damage, true, FX_Call_EngGetPunched, clonk->GetOwner());
 			}
+			else
+			{
+				obj.hurt_by_cyclops = true;
+			}
 		}
 		else
 		{
