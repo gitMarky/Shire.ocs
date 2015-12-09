@@ -4,10 +4,11 @@ static npc_merchant, npc_iolo, npc_iolos_father, npc_mhoram;
 static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
 static enemy_cyclops, shop, shop_low_top, dimension_rift, npc_doctor;
-static cyclops_dangerous = false;
+static cyclops_dangerous;
 
 func Initialize()
 {
+    cyclops_dangerous = false;
 	var debug = true;
 	// buildings
 
@@ -58,9 +59,9 @@ func Initialize()
 	if (!debug)
 	{
 		StartBackgroundSequence("Trigger_Bird_Elevator");
-		StartBackgroundSequence("Trigger_Bird_Cyclops");
 		StartBackgroundSequence("Trigger_Clonkarabas");
 	}
+		StartBackgroundSequence("Trigger_Bird_Cyclops");
 }
 
 func InitializePlayer(int player)
