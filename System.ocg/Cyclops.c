@@ -272,12 +272,14 @@ global func FireBreathEffect(proplist fx, int angle, int distance, int x, int y,
 			fx.spray_old.time = fx.spray_cur.time;
 			fx.spray_old.v0 = fx.spray_cur.v0;
 			fx.spray_old.v1 = fx.spray_cur.v1;
+			fx.spray_old.rmax = fx.spray_cur.rmax;
 
 			// start a new beam at the beginning
 			fx.spray_cur.reach = 0;
 			fx.spray_cur.time = 0;
 			fx.spray_cur.v0 = velocity / 3;
 			fx.spray_cur.v1 = velocity;
+			fx.spray_cur.rmax = distance * CYCLOPS_FireBreath_Precision;
 		}
 
 		// calculate position of the flame
@@ -321,7 +323,7 @@ global func FireBreathEffect(proplist fx, int angle, int distance, int x, int y,
 
 global func FireBreathDamage(proplist fx, int angle, int max_reach, int x, int y)
 {
-	var precision = 13;
+	var precision = CYCLOPS_FireBreath_Precision; //13;
 	Log("Choosing max of: %d %d %d", fx.spray_reach, fx.spray_cur.reach, fx.spray_old.reach);
 //	fx.spray_reach = Max(Max(fx.spray_reach, fx.spray_cur.reach), fx.spray_old.reach);
 //	fx.spray_reach = Max(fx.spray_cur.reach, fx.spray_old.reach);
@@ -361,8 +363,7 @@ global func FireBreathReach(proplist info)
 	if (info.time <= CYCLOPS_FireBreath_Duration)
 	{
 		var v = ((CYCLOPS_FireBreath_Duration - info.time) * info.v0 + info.time * info.v1) / CYCLOPS_FireBreath_Duration;
-		info.reach += v;
+		info.reach = BoundBy(info.reach + v, 0, info.rmax);
 		Log("Calculating distance: t = %d, v = %d, r = %d", info.time, v, info.reach);
 	}
-	
 }
