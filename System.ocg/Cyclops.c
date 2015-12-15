@@ -1,5 +1,6 @@
 
 static const CYCLOPS_FireBreath_Duration = 30;
+static const CYCLOPS_FireBreath_Precision = 10;
 
 global func AddCyclopsAI(object clonk) // somewhat hacky, but it works
 {
@@ -26,6 +27,10 @@ global func AddCyclopsAI(object clonk) // somewhat hacky, but it works
                       y = fx.home_y-AI_DefGuardRangeY,
                       wdt = AI_DefGuardRangeX*2,
                       hgt =  AI_DefGuardRangeY*2};
+                      
+
+	fx.spray_old = {time = 0, v0 = 0, v1 = 0, reach = 0};
+	fx.spray_cur = {time = 0, v0 = 0, v1 = 0, reach = 0};
 
 	AI->SetMaxAggroDistance(clonk, AI_DefMaxAggroDistance);
 	return fx;
@@ -53,7 +58,7 @@ global func FxIntCyclopsAITimer(object cyclops, proplist fx, int time)
 	}
 
 	// Attack it!
-	return CyclopsExecuteMelee(fx);
+	return CyclopsExecuteMelee(fx, time);
 }
 
 
@@ -97,7 +102,7 @@ global func CyclopsExecuteStand(fx)
 	return true;
 }
 
-global func CyclopsExecuteMelee(fx)
+global func CyclopsExecuteMelee(fx, int timer)
 {
 	// Still carrying the melee weapon?
 	if (fx.weapon->Contained() != fx.cyclops)
@@ -152,7 +157,7 @@ global func CyclopsExecuteMelee(fx)
 			return;
 		}
 		
-			DoFireBreath(fx, x ,y , tx, ty);
+			DoFireBreath(fx, x ,y , tx, ty, timer);
 	}
 	
 	return true;
@@ -170,7 +175,7 @@ global func CyclopsCheckHandsAction(fx)
 	return false;
 }
 
-global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
+global func DoFireBreath(proplist fx, int x, int y, int tx, int ty, int timer)
 {
 	var reach_min = 90; // easiest difficulty
 	var reach_max = 150; // hardest difficulty
@@ -223,9 +228,10 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 		}
 
 		fx.spraying = Min(CYCLOPS_FireBreath_Duration, fx.spraying + 1);
+		var distance = Min(reach, ObjectDistance(fx.cyclops, fx.target));
 
-		FireBreathEffect(fx, angle, reach, sx, sy);
-		FireBreathDamage(fx, angle, reach, sx, sy);
+		FireBreathEffect(fx, angle, distance, sx, sy, timer);
+		FireBreathDamage(fx, angle, distance, sx, sy);
 	}
 	else
 	{
@@ -237,13 +243,16 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 			Log("Spray Reset");
 			fx.spraying = 0;
 			fx.spraying_charge = 0;
+			fx.spray_old = {time = 0, v0 = 0, v1 = 0, reach = 0};
+			fx.spray_cur = {time = 0, v0 = 0, v1 = 0, reach = 0};
+			fx.spray_reach = 0;
 		}
 	}
 }
 
-global func FireBreathEffect(proplist fx, int angle, int reach, int x, int y)
+global func FireBreathEffect(proplist fx, int angle, int distance, int x, int y, int timer)
 {
-		var distance = Min(reach, ObjectDistance(fx.cyclops, fx.target));
+		// calculate velocity and coordinates for the effects
 		
 		var fuzzy = distance / 9;
 		var velocity = distance * 3; // should take 20 frames to reach the end
@@ -253,6 +262,30 @@ global func FireBreathEffect(proplist fx, int angle, int reach, int x, int y)
 		var vys = -Cos(angle, 8 * velocity / 10);
 		var vx0 = +Sin(angle, velocity / 3);
 		var vy0 = -Cos(angle, velocity / 3);
+
+		// replace with faster flame
+//		if (fx.spray_cur.v1 == 0 || velocity > fx.spray_cur.v1 && fx.spray_cur.reach >= fx.spray_old.reach)//&& fx.spray_old.time >= CYCLOPS_FireBreath_Duration / 2)
+		if (velocity > fx.spray_old.v1 && fx.spray_cur.reach >= fx.spray_old.reach)
+		{
+			// transfer new values to old values
+			fx.spray_old.reach = fx.spray_cur.reach;
+			fx.spray_old.time = fx.spray_cur.time;
+			fx.spray_old.v0 = fx.spray_cur.v0;
+			fx.spray_old.v1 = fx.spray_cur.v1;
+
+			// start a new beam at the beginning
+			fx.spray_cur.reach = 0;
+			fx.spray_cur.time = 0;
+			fx.spray_cur.v0 = velocity / 3;
+			fx.spray_cur.v1 = velocity;
+		}
+
+		// calculate position of the flame
+		
+		FireBreathReach(fx.spray_old);
+		FireBreathReach(fx.spray_cur);
+
+		// particle definitions
 
 		var smoke = Particles_Smoke();
 		
@@ -286,10 +319,28 @@ global func FireBreathEffect(proplist fx, int angle, int reach, int x, int y)
 		}
 }
 
-global func FireBreathDamage(proplist fx, int angle, int reach, int x, int y)
+global func FireBreathDamage(proplist fx, int angle, int max_reach, int x, int y)
 {
+	var precision = 13;
+	Log("Choosing max of: %d %d %d", fx.spray_reach, fx.spray_cur.reach, fx.spray_old.reach);
+//	fx.spray_reach = Max(Max(fx.spray_reach, fx.spray_cur.reach), fx.spray_old.reach);
+//	fx.spray_reach = Max(fx.spray_cur.reach, fx.spray_old.reach);
+	var reach = Min(fx.spray_cur.reach, max_reach * precision);
+	Log("Max is %d", fx.spray_reach);
+	var dx = +Sin(angle, reach) / precision;
+	var dy = -Cos(angle, reach) / precision;
+
+	if (!fx.rock) fx.rock = CreateObject(Rock);
+
+	fx.rock->SetPosition(x + dx, y + dy);
+	fx.rock->SetXDir();
+	fx.rock->SetYDir();
+
 	// damage the clonk
-	if (ObjectDistance(fx.cyclops, fx.target) < (CYCLOPS_FireBreath_Duration + fx.spraying)*reach/(2*CYCLOPS_FireBreath_Duration))
+	reach /= precision;
+	reach += 5; // the fuzzy part of the flames
+	Log("Damage range %d", reach);
+	if (ObjectDistance(fx.cyclops, fx.target) < reach)
 	{
 		if (cyclops_dangerous)
 		{
@@ -302,4 +353,16 @@ global func FireBreathDamage(proplist fx, int angle, int reach, int x, int y)
 			fx.target.hurt_by_cyclops = true;
 		}
 	}
+}
+
+global func FireBreathReach(proplist info)
+{
+	info.time += 1;
+	if (info.time <= CYCLOPS_FireBreath_Duration)
+	{
+		var v = ((CYCLOPS_FireBreath_Duration - info.time) * info.v0 + info.time * info.v1) / CYCLOPS_FireBreath_Duration;
+		info.reach += v;
+		Log("Calculating distance: t = %d, v = %d, r = %d", info.time, v, info.reach);
+	}
+	
 }
