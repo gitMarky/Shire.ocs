@@ -21,6 +21,7 @@ public func MaxStackCount() { return 1; }
 public func Fuse(bool unknown)
 {
 	ScheduleCall(this, "AddHitCheck", 5);
+	AddEffect("IntDetonation", this, 1, 1, this);
 }
 
 public func AddHitCheck()
@@ -31,3 +32,11 @@ public func AddHitCheck()
 
 local Name = "$Name$";
 local Description = "$Description$";
+
+func FxIntDetonationTimer(object target, proplist effect, int time)
+{
+	if (time > 8)
+	{
+		target->Hit();
+	}
+}
