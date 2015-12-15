@@ -150,10 +150,10 @@ global func CyclopsExecuteMelee(fx)
 			return;
 		}
 		
-		if (Inside(ObjectDistance(fx.cyclops, fx.target), 40, 120))
-		{
+		//if (Inside(ObjectDistance(fx.cyclops, fx.target), 40, 120))
+		//{
 			DoFireBreath(fx, x ,y , tx, ty);
-		}
+		//}
 	}
 	
 	// Not in range. Walk there.
@@ -177,93 +177,106 @@ global func CyclopsCheckHandsAction(fx)
 
 global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 {
-	var reach = 90;
+	var reach_min = 90; // easiest difficulty
+	var reach_max = 150; // hardest difficulty
+	var reach = 150;
 	var spray_max = 30;
-	var anim_length = 20;
+	var anim_length = 12;
 
-//	var sx = x - 6;
-//	var sy = y - 15;
 	var sx = x - 3;
 	var sy = y - 15;	
 	
 	// effects
-	if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < spray_max)
+	if (fx.spraying_charge <= 0)
 	{
-		if (fx.spraying_charge <= 0)
+		if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < spray_max)
 		{
+			Log("Cyclops trigger spray");
 			var action = "IdleLookAround";
 			fx.cyclops->PlayAnimation(action, CLONK_ANIM_SLOT_Arms, Anim_Linear(0, 0, fx.cyclops->GetAnimationLength(action), anim_length, ANIM_Remove), Anim_Linear(0, 0, 1000, 5, ANIM_Remove));
 			fx.spraying_charge = 1;
 		}
-		else if (fx.spraying_charge < anim_length)
+	}
+	else if (fx.spraying_charge < anim_length)
+	{
+		Log("Charging %d", fx.spraying_charge);
+		fx.spraying_charge++;
+	}
+	else if (fx.spraying < spray_max)
+	{
+		Log("Spraying %d", fx.spraying);
+		var target_angle = Normalize(Angle(sx, sy, tx, ty), -180);
+		var source_angle = -90 + fx.cyclops->GetDir() * 180;
+		
+		var a = Min(spray_max, fx.spraying * 2);
+		var b = spray_max - a;
+		var angle = (b * source_angle + a * target_angle) / spray_max;
+		angle = Normalize(angle, -180);
+		var head_angle = Normalize(angle - source_angle, -180);
+
+		// turn his head towards the clonk
+		// somehow the turning head makes the cyclops invisible, though
+		var transform = Trans_Rotate(10, 0, 0, 1);
+		//var transform = Trans_Rotate(head_angle, 0, 0, 1);
+
+		if (!fx.anim_nr)
 		{
-			fx.spraying_charge++;
+			fx.anim_nr = fx.cyclops->TransformBone("skeleton_head", transform, 5, Anim_Const(1000));
 		}
 		else
 		{
-			var target_angle = Normalize(Angle(sx, sy, tx, ty), -180);
-			var source_angle = -90 + fx.cyclops->GetDir() * 180;
-			
-			var a = Min(spray_max, fx.spraying * 2);
-			var b = spray_max - a;
-			var angle = (b * source_angle + a * target_angle) / spray_max;
-			angle = Normalize(angle, -180);
-			var head_angle = Normalize(angle - source_angle, -180);
+			fx.cyclops->SetAnimationBoneTransform(fx.anim_nr, transform);
+		}
 
-			// turn his head towards the clonk
-			// somehow the turning head makes the cyclops invisible, though
-			//var transform = Trans_Rotate(10, 0, 0, 1);
-			var transform = Trans_Rotate(head_angle, 0, 0, 1);
+		fx.spraying = Min(spray_max, fx.spraying + 1);
 
-			if (!fx.anim_nr)
-			{
-				fx.anim_nr = fx.cyclops->TransformBone("skeleton_head", transform, 5, Anim_Const(1000));
-			}
-			else
-			{
-				fx.cyclops->SetAnimationBoneTransform(fx.anim_nr, transform);
-			}
+		var distance = Min(reach, ObjectDistance(fx.cyclops, fx.target));
+		
+		var fuzzy = distance / 9; //10;
+		var velocity = distance * 3; // should take 20 frames to reach the end
+		var vx = +Sin(angle, velocity);
+		var vy = -Cos(angle, velocity);
+		var vxs = +Sin(angle, 8 * velocity / 10);
+		var vys = -Cos(angle, 8 * velocity / 10);
+		var vx0 = +Sin(angle, velocity / 3);
+		var vy0 = -Cos(angle, velocity / 3);
 
-			fx.spraying = Min(spray_max, fx.spraying + 1);
+		var smoke = Particles_Smoke();
+		
+		smoke.ForceX = 0;
+		smoke.ForceY = PV_Gravity(-10);
+		
+		
+		smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
+		smoke.Size = PV_Linear(5, PV_Random(20, 30));
 
-			var fuzzy = 10;
-			var velocity = reach * 3; // should take 20 frames to reach the end
-			var vx = +Sin(angle, velocity);
-			var vy = -Cos(angle, velocity);
-			var vxs = +Sin(angle, 8 * velocity / 10);
-			var vys = -Cos(angle, 8 * velocity / 10);
-			var vx0 = +Sin(angle, velocity / 3);
-			var vy0 = -Cos(angle, velocity / 3);
-
-			var smoke = Particles_Smoke();
-			
-			smoke.ForceX = 0;
-			smoke.ForceY = PV_Gravity(-10);
-			
-			
-			smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
-			smoke.Size = PV_Linear(5, PV_Random(20, 30));
-
-			for (var i = 0; i < RandomX(3, 5); i++)
-			{
-				var vxd = vx + RandomX(-fuzzy, +fuzzy);
-				var vyd = vy + RandomX(-fuzzy, +fuzzy);
-				CreateParticle("Fire", sx, sy, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(30, 40), smoke, 1);
-			}
-			for (var i = 0; i < RandomX(3, 5); i++)
-			{
-				var vxd = vxs + RandomX(-fuzzy, +fuzzy);
-				var vyd = vys + RandomX(-fuzzy, +fuzzy);
-				CreateParticle("Fire", sx, sy, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(50, 60), smoke, 1);
-			}
+		for (var i = 0; i < RandomX(3, 5); i++)
+		{
+			var scale = 15;
+			var factor = (scale - i);
+			var vxd = vx * factor / scale + RandomX(-fuzzy, +fuzzy);
+			var vyd = vy * factor / scale + RandomX(-fuzzy, +fuzzy);
+			CreateParticle("Fire", sx + i * vx0 / 20, sy + i * vy0 / 20, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(30, 40), smoke, 1);
+		}
+		for (var i = 0; i < RandomX(3, 5); i++)
+		{
+			var scale = 15;
+			var factor = (scale - i);
+			var vxm = vx0 + RandomX(-fuzzy, + fuzzy);
+			var vym = vy0 + RandomX(-fuzzy, + fuzzy);
+			var vxd = vxs * factor / scale + RandomX(-fuzzy, +fuzzy);
+			var vyd = vys * factor / scale + RandomX(-fuzzy, +fuzzy);
+			CreateParticle("Fire", sx + i * vx0 / 20, sy + i * vy0 / 20, PV_Linear(vxm, vxd), PV_Linear(vym, vyd), PV_Random(50, 60), smoke, 1);
 		}
 	}
 	else
 	{
+		Log("Cooldown %d", fx.spraying);
 		// cooldown and reset
 		fx.spraying = Min(2 * spray_max, Max(spray_max + 1, fx.spraying + 1));
 		if (fx.spraying == 2 * spray_max)
 		{
+			Log("Spray Reset");
 			fx.spraying = 0;
 			fx.spraying_charge = 0;
 		}
@@ -281,6 +294,7 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 		}
 		else
 		{
+			fx.target->Message("!");
 			fx.target.hurt_by_cyclops = true;
 		}
 	}
