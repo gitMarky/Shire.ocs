@@ -154,6 +154,9 @@ global func CyclopsExecuteMelee(fx, int timer)
 			if (!fx.cyclops->IsAiming())
 				fx.weapon->ControlUseStart(fx.cyclops, dx, dy);
 			
+			// fire breath cooldown
+			fx.spraying = CYCLOPS_FireBreath_Duration;
+			
 			return;
 		}
 		
