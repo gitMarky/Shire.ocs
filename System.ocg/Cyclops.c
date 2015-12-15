@@ -1,4 +1,6 @@
 
+static const CYCLOPS_FireBreath_Duration = 30;
+
 global func AddCyclopsAI(object clonk) // somewhat hacky, but it works
 {
 	var effect_name = "IntCyclopsAI";
@@ -150,14 +152,8 @@ global func CyclopsExecuteMelee(fx)
 			return;
 		}
 		
-		//if (Inside(ObjectDistance(fx.cyclops, fx.target), 40, 120))
-		//{
 			DoFireBreath(fx, x ,y , tx, ty);
-		//}
 	}
-	
-	// Not in range. Walk there.
-//	if (!fx.cyclops->GetCommand() || !Random(10)) fx.cyclops->SetCommand("MoveTo", nil, tx+20-40*fx.cyclops->GetDir(), y);
 	
 	return true;
 }
@@ -166,7 +162,6 @@ global func CyclopsExecuteMelee(fx)
 
 global func CyclopsCheckHandsAction(fx)
 {
-//	return true;
 	// can use hands?
 	if (fx.cyclops->~HasHandAction()) return true;
 	// Can't throw: Is it because e.g. we're scaling?
@@ -180,7 +175,6 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 	var reach_min = 90; // easiest difficulty
 	var reach_max = 150; // hardest difficulty
 	var reach = 150;
-	var spray_max = 30;
 	var anim_length = 12;
 
 	var sx = x - 3;
@@ -189,7 +183,7 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 	// effects
 	if (fx.spraying_charge <= 0)
 	{
-		if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < spray_max)
+		if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < CYCLOPS_FireBreath_Duration)
 		{
 			Log("Cyclops trigger spray");
 			var action = "IdleLookAround";
@@ -202,15 +196,15 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 		Log("Charging %d", fx.spraying_charge);
 		fx.spraying_charge++;
 	}
-	else if (fx.spraying < spray_max)
+	else if (fx.spraying < CYCLOPS_FireBreath_Duration)
 	{
 		Log("Spraying %d", fx.spraying);
 		var target_angle = Normalize(Angle(sx, sy, tx, ty), -180);
 		var source_angle = -90 + fx.cyclops->GetDir() * 180;
-		
-		var a = Min(spray_max, fx.spraying * 2);
-		var b = spray_max - a;
-		var angle = (b * source_angle + a * target_angle) / spray_max;
+
+		var a = Min(CYCLOPS_FireBreath_Duration, fx.spraying * 2);
+		var b = CYCLOPS_FireBreath_Duration - a;
+		var angle = (b * source_angle + a * target_angle) / CYCLOPS_FireBreath_Duration;
 		angle = Normalize(angle, -180);
 		var head_angle = Normalize(angle - source_angle, -180);
 
@@ -228,11 +222,30 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 			fx.cyclops->SetAnimationBoneTransform(fx.anim_nr, transform);
 		}
 
-		fx.spraying = Min(spray_max, fx.spraying + 1);
+		fx.spraying = Min(CYCLOPS_FireBreath_Duration, fx.spraying + 1);
 
+		FireBreathEffect(fx, angle, reach, sx, sy);
+		FireBreathDamage(fx, angle, reach, sx, sy);
+	}
+	else
+	{
+		Log("Cooldown %d", fx.spraying);
+		// cooldown and reset
+		fx.spraying = Min(2 * CYCLOPS_FireBreath_Duration, Max(CYCLOPS_FireBreath_Duration + 1, fx.spraying + 1));
+		if (fx.spraying == 2 * CYCLOPS_FireBreath_Duration)
+		{
+			Log("Spray Reset");
+			fx.spraying = 0;
+			fx.spraying_charge = 0;
+		}
+	}
+}
+
+global func FireBreathEffect(proplist fx, int angle, int reach, int x, int y)
+{
 		var distance = Min(reach, ObjectDistance(fx.cyclops, fx.target));
 		
-		var fuzzy = distance / 9; //10;
+		var fuzzy = distance / 9;
 		var velocity = distance * 3; // should take 20 frames to reach the end
 		var vx = +Sin(angle, velocity);
 		var vy = -Cos(angle, velocity);
@@ -246,7 +259,6 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 		smoke.ForceX = 0;
 		smoke.ForceY = PV_Gravity(-10);
 		
-		
 		smoke.R = smoke.G = smoke.B = PV_Linear(255, 100);
 		smoke.Size = PV_Linear(5, PV_Random(20, 30));
 
@@ -254,38 +266,30 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty)
 		{
 			var scale = 15;
 			var factor = (scale - i);
-			var vxd = vx * factor / scale + RandomX(-fuzzy, +fuzzy);
-			var vyd = vy * factor / scale + RandomX(-fuzzy, +fuzzy);
-			CreateParticle("Fire", sx + i * vx0 / 20, sy + i * vy0 / 20, PV_Linear(vx0, vxd), PV_Linear(vy0, vyd), PV_Random(30, 40), smoke, 1);
+			var x0 = x + i * vx0 / 20;
+			var y0 = y + i * vy0 / 20;
+			var vx1 = vx * factor / scale + RandomX(-fuzzy, +fuzzy);
+			var vy1 = vy * factor / scale + RandomX(-fuzzy, +fuzzy);
+			CreateParticle("Fire", x0, y0, PV_Linear(vx0, vx1), PV_Linear(vy0, vy1), PV_Random(30, 40), smoke, 1);
 		}
 		for (var i = 0; i < RandomX(3, 5); i++)
 		{
 			var scale = 15;
 			var factor = (scale - i);
+			var x0 = x + i * vx0 / 20;
+			var y0 = y + i * vy0 / 20;
 			var vxm = vx0 + RandomX(-fuzzy, + fuzzy);
 			var vym = vy0 + RandomX(-fuzzy, + fuzzy);
-			var vxd = vxs * factor / scale + RandomX(-fuzzy, +fuzzy);
-			var vyd = vys * factor / scale + RandomX(-fuzzy, +fuzzy);
-			CreateParticle("Fire", sx + i * vx0 / 20, sy + i * vy0 / 20, PV_Linear(vxm, vxd), PV_Linear(vym, vyd), PV_Random(50, 60), smoke, 1);
+			var vx1 = vxs * factor / scale + RandomX(-fuzzy, +fuzzy);
+			var vy1 = vys * factor / scale + RandomX(-fuzzy, +fuzzy);
+			CreateParticle("Fire", x0, y0, PV_Linear(vxm, vx1), PV_Linear(vym, vy1), PV_Random(50, 60), smoke, 1);
 		}
-	}
-	else
-	{
-		Log("Cooldown %d", fx.spraying);
-		// cooldown and reset
-		fx.spraying = Min(2 * spray_max, Max(spray_max + 1, fx.spraying + 1));
-		if (fx.spraying == 2 * spray_max)
-		{
-			Log("Spray Reset");
-			fx.spraying = 0;
-			fx.spraying_charge = 0;
-		}
-	}
+}
 
+global func FireBreathDamage(proplist fx, int angle, int reach, int x, int y)
+{
 	// damage the clonk
-	if (fx.spraying > 0
-	 && fx.spraying <= spray_max
-	 && ObjectDistance(fx.cyclops, fx.target) < (spray_max + fx.spraying)*reach/(2*spray_max))
+	if (ObjectDistance(fx.cyclops, fx.target) < (CYCLOPS_FireBreath_Duration + fx.spraying)*reach/(2*CYCLOPS_FireBreath_Duration))
 	{
 		if (cyclops_dangerous)
 		{
