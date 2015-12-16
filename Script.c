@@ -76,14 +76,6 @@ func InitializePlayer(int player)
 }
 
 
-func CreateObjectMapZoom(id def, int x, int y, int owner)
-{
-	var x_scaled = 8 * x / 10;
-	var y_scaled = 8 * y / 10;
-	Log("CreateObjectMapZoom(%i, %d, %d, %d) -> CreateObject(%i, %d, %d, %d)", def, x, y, owner, def, x_scaled, y_scaled, owner);
-	return CreateObject(def, 8 * x / 10, 8 * y / 10, owner);
-}
-
 // ----- *** NPC Creation *** -----------------------------------------
 
 func CreateTuti()
