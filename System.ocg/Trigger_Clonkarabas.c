@@ -56,6 +56,11 @@ func Trigger_Clonkarabas_Wait()
 		this.clonkarabas->SetObjectLayer(this.clonkarabas);
 		AddEffect("CanBeEnchanted", this.clonkarabas, 1);
 		
+		this.clonkarabas->SetGraphics("Alchemist");
+		this.clonkarabas->SetMeshMaterial("Clonk_Clonkarabas");
+		this.clonkarabas->SetMeshMaterial("Clonk_Clonkarabas", 1);
+		
+		
 		// staff
 		this.staff = this.clonkarabas->CreateContents(WizardStaff);
 		this.staff->SetMeshMaterial("Wizard_Staff_Clonkarabas");
