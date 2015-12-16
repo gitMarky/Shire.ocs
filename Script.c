@@ -521,6 +521,15 @@ func CreateCorpses()
 		corpse->SetMeshMaterial("Clonk_NDo");
 		corpse->Kill(corpse, true);
 	}
+	
+	var dead_clonkarabas = CreateObject(Clonk, 2925, 230, NO_OWNER);
+	dead_clonkarabas->RemoveBackpack();
+	dead_clonkarabas->SetGraphics("Alchemist");
+	dead_clonkarabas->SetMeshMaterial("Clonk_Clonkarabas");
+	dead_clonkarabas->SetMeshMaterial("Clonk_Clonkarabas", 1);
+	dead_clonkarabas->SetDir(DIR_Right);
+	dead_clonkarabas->Kill(dead_clonkarabas, true);
+	
 }
 
 func CreateFields()
