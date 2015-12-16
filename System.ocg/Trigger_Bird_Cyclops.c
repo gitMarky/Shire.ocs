@@ -75,6 +75,12 @@ func Trigger_Bird_Cyclops_BoundaryReturn()
 		{
 			this.hero->SetCommand("MoveTo", nil, 2545, this.hero->GetY());
 		}
+		
+		if (this.hero->GetAction() == "Jump") // prevent bunny-hopping to the cyclops
+		{
+			this.hero->SetXDir(-3);
+		}
+		
 		Dialogue->MessageBoxAll("Der Magier hat recht,|der Zyklop wird mich umbringen!", this.hero, true);
 		return ScheduleSame(1);
 	}
