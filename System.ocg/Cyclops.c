@@ -199,6 +199,11 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty, int timer)
 	else if (fx.spraying_charge < anim_length)
 	{
 		fx.spraying_charge++;
+		
+		if (fx.spraying_charge >= anim_length)
+		{
+			fx.cyclops->Sound("BalloonInflate");
+		}
 	}
 	else if (fx.spraying < CYCLOPS_FireBreath_Duration)
 	{

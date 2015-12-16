@@ -33,7 +33,12 @@ public func Damage(int change, int cause)
 			}
 		}
 
+		enemy_cyclops->Sound("MonsterDie");
 		RemoveObject();
+	}
+	else
+	{
+		enemy_cyclops->Sound("MonsterGrowl?");
 	}
 }
 
