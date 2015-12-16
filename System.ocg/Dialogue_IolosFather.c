@@ -27,9 +27,7 @@ public func Dlg_IolosFather(object player)
 			DlgText("Diese Jugend von heute...|tz,tz,tz!");
 			if (DlgEvent())
 			{
-				// TODO: sequence where iolo comes near
-				//npc_iolo->SetPosition(npc_iolos_father->GetX() - 20, npc_iolos_father->GetY());
-				StartSequence("Iolo_Comes", 0, this, player);
+				StartSequence("Iolo_Comes", 0, this, player, false);
 			}
 		}
 		else
