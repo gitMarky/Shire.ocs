@@ -182,7 +182,7 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty, int timer)
 {
 	var reach_min = 90; // easiest difficulty
 	var reach_max = 150; // hardest difficulty
-	var reach = 150;
+	var reach = BoundBy(reach_min + 30 * SCENPAR_Difficulty, reach_min, reach_max);
 	var anim_length = 12;
 
 	var sx = x - 3;

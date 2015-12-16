@@ -13,3 +13,12 @@ NPC_Quimby=Quimby
 NPC_Guardsman=Wächter
 NPC_Scientist=Wissenschaftler
 NPC_Doctor=Arzt
+
+Difficulty=Schwierigkeit
+Easy=Leicht
+Medium=Mittel
+Hard=Schwer
+DescDifficulty=Ändert die Gefährlichkeit von Gegnern
+DescEasy=Geringe Reichweite
+DescMedium=Mittlere Reichweite
+DescHard=Große Reichweite
