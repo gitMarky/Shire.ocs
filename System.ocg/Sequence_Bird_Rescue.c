@@ -14,8 +14,21 @@ func Bird_Rescue_1()
 	this.bird->SetDir(DIR_Left);
 	this.bird->FadeIn(20);
 	this.bird->Sound("Magic");
+	this.bird->RemoveBackpack();
+	this.bird->SetMeshMaterial("Clonk_Mage");
 	this.staff = this.bird->CreateContents(WizardStaff);
 	this.staff->SetMeshMaterial("Wizard_Staff_Mage");	
+	
+	// hat
+	var hat = this.bird->CreateContents(ClonkarabasHat);
+	hat->SetMeshMaterial("mage_hat");
+	this.bird->AttachMesh(hat, "skeleton_head", "Base", Trans_Mul(Trans_Translate(4600, 100, 0),
+	                                                              Trans_Rotate(90, 0, 0, 1),
+	                                                              Trans_Rotate(90, 0, 1, 0),
+	                                                              Trans_Rotate(-30, 1, 0, 0),
+	                                                              Trans_Scale(1500, 1500, 1500)));
+	
+	
 	BirdSparks();
 	return ScheduleNext(30);
 }
@@ -73,6 +86,7 @@ func Bird_Rescue_7()
 
 func Bird_Rescue_8()
 {
+	this.bird->FindContents(ClonkarabasHat)->FadeOut(19, true); // fade the hat faster, so that it does not drop
 	this.staff->FadeOut(19, true); // fade the staff faster, so that it does not drop
 	this.bird->FadeOut(20, true);
 	BirdSparks();
