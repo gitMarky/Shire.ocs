@@ -1,6 +1,7 @@
 
 static const CYCLOPS_FireBreath_Duration = 30;
 static const CYCLOPS_FireBreath_Precision = 10;
+static const CYCLOPS_FireBreath_Reach = 120;
 
 global func AddCyclopsAI(object clonk) // somewhat hacky, but it works
 {
@@ -180,18 +181,15 @@ global func CyclopsCheckHandsAction(fx)
 
 global func DoFireBreath(proplist fx, int x, int y, int tx, int ty, int timer)
 {
-	var reach_min = 90; // easiest difficulty
-	var reach_max = 150; // hardest difficulty
-	var reach = BoundBy(reach_min + 30 * SCENPAR_Difficulty, reach_min, reach_max);
 	var anim_length = 12;
 
 	var sx = x - 3;
 	var sy = y - 15;	
-	
+
 	// effects
 	if (fx.spraying_charge <= 0)
 	{
-		if (ObjectDistance(fx.cyclops, fx.target) < reach && fx.spraying < CYCLOPS_FireBreath_Duration)
+		if (ObjectDistance(fx.cyclops, fx.target) < CYCLOPS_FireBreath_Reach && fx.spraying < CYCLOPS_FireBreath_Duration)
 		{
 			var action = "IdleLookAround";
 			fx.cyclops->PlayAnimation(action, CLONK_ANIM_SLOT_Arms, Anim_Linear(0, 0, fx.cyclops->GetAnimationLength(action), anim_length, ANIM_Remove), Anim_Linear(0, 0, 1000, 5, ANIM_Remove));
@@ -228,7 +226,7 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty, int timer)
 		}
 
 		fx.spraying = Min(CYCLOPS_FireBreath_Duration, fx.spraying + 1);
-		var distance = Min(reach, ObjectDistance(fx.cyclops, fx.target));
+		var distance = Min(CYCLOPS_FireBreath_Reach, ObjectDistance(fx.cyclops, fx.target));
 
 		FireBreathEffect(fx, angle, distance, sx, sy, timer);
 		FireBreathDamage(fx, angle, distance, sx, sy);
