@@ -23,6 +23,7 @@ public func Damage(int change, int cause)
 
 		var tarydium = FindObject(Find_ID(Tarydium));
 		CreateObject(Dummy, tarydium->GetX(), tarydium->GetY())->Explode(8);
+		CreateObject(Dummy, tarydium->GetX() + 10, tarydium->GetY())->Explode(8);
 		
 		if (this.inventory)
 		{
