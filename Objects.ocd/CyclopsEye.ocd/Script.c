@@ -33,6 +33,15 @@ public func Damage(int change, int cause)
 					ScheduleCall(item, item.Enter, 1, nil, enemy_cyclops);
 			}
 		}
+		
+		var weapon = FindObject(Find_ID(GrenadeLauncher));
+		
+		if (weapon->Contained())
+		{
+			weapon.Collectible = false;
+			if (weapon->Contained()->GetID() == Clonk) weapon->Exit();
+		}
+		
 
 		enemy_cyclops->Sound("MonsterDie");
 		RemoveObject();

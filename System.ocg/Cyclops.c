@@ -44,12 +44,15 @@ global func FxIntCyclopsAITimer(object cyclops, proplist fx, int time)
 		fx.cyclops = cyclops;
 		fx.weapon = cyclops->FindContents(Club);
 	}
+	if (!fx.eye) fx.eye = FindObject(Find_ID(CyclopsEye));
 
 	fx.time = time;
 	
 	// do not idle
 	var effect = GetEffect("IntWalk", fx.cyclops);
 	if (effect) effect.idle_time = 0;
+	
+	fx.eye->SetPosition(fx.cyclops->GetX() -4 + fx.cyclops->GetDir() * 8, fx.cyclops->GetY() - 19);
 
 	// Find an enemy
 	if (fx.target) if (!fx.target->GetAlive() || (!fx.ranged && ObjectDistance(fx.target) >= fx.max_aggro_distance)) fx.target = nil;
@@ -125,10 +128,20 @@ global func CyclopsExecuteMelee(fx, int timer)
 	var tx=fx.target->GetX();
 	var ty=fx.target->GetY();
 	var dx = tx-x, dy = ty-y;
-	
+
+	if (tx > x)
+	{
+		fx.cyclops->SetDir(DIR_Right);
+	}
+	else
+	{
+		fx.cyclops->SetDir(DIR_Left);
+	}
+
 	// the cyclops stands in its place and hits objects or breathes fire
 	if (PathFree(x,y,tx,ty))
 	{
+
 		// hit objects
 		if (Abs(dx) <= 35 && dy >= -15)
 		{
@@ -183,7 +196,7 @@ global func DoFireBreath(proplist fx, int x, int y, int tx, int ty, int timer)
 {
 	var anim_length = 12;
 
-	var sx = x - 3;
+	var sx = x - 3 + 6 * fx.cyclops->GetDir();
 	var sy = y - 15;	
 
 	// effects

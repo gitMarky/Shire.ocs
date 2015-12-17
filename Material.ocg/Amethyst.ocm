@@ -1,0 +1,12 @@
+[Material]
+Name=Amethyst
+Shape=Rough
+Density=70
+Friction=15
+MaxAirSpeed=100
+MaxSlide=1
+Placement=21
+TextureOverlay=amethyst
+LightEmit=128,90,164
+LightSpot=160,96,128
+LightAngle=204
