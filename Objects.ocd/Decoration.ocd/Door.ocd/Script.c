@@ -4,6 +4,7 @@ local Description = "$Description$";
 
 local transfer_target;
 local is_enabled = true;
+local entrance, exit;
 
 func Initialize()
 {
@@ -38,6 +39,7 @@ func FxIntTransferTimer(object target, proplist effect, int timer)
 	
 	if (GetAction() == "DoorOpen")
 	{
+		HandleDisplay();
 		Transfer(target);
 		return FX_Execute_Kill;
 	}
@@ -66,6 +68,29 @@ func ConnectTo(object target)
 	if (target.transfer_target != this)
 	{
 		target->ConnectTo(this);
+	}
+}
+
+func BecomeEntrance(object target)
+{
+	entrance = target;
+}
+
+func BecomeExit(object target)
+{
+	exit = target;
+	HandleDisplay();
+}
+
+func HandleDisplay()
+{
+	if (exit)
+	{
+		exit->SetGraphics("Black", exit->GetID(), 5, 1);
+	}
+	if (entrance)
+	{
+		entrance->SetGraphics(nil, nil, 5, 1);
 	}
 }
 

@@ -290,6 +290,8 @@ func CreateCastle()
 	door_castle_low->SetGraphics("Castle");
 	door_castle_top->SetEnabled(false);
 	door_castle_top->SetDialogueEx("DoorCastle");
+	door_castle_top->BecomeEntrance(castle_low_top);
+	door_castle_low->BecomeExit(castle_low_top);
 
 	var bed = CreateObject(Bed, 1050, 1738, NO_OWNER);
 	bed->Turn(75);
@@ -341,8 +343,11 @@ func CreatePirateCastle()
 	door_pcastle_top->ConnectTo(door_pcastle_low);
 	door_pcastle_top->SetGraphics("WaterCastle");
 	door_pcastle_low->SetGraphics("Castle");
+	door_pcastle_top->BecomeEntrance(castle_low_top);
+	door_pcastle_low->BecomeExit(castle_low_top);
 
-	var cupboard5 = CreateObject(Cupboard, 2815, 2157, NO_OWNER);
+
+	var cupboard5 = CreateObject(Cupboard, 2255, 1730, NO_OWNER);
 	cupboard5->CreateContents(sMett);
 	cupboard5->CreateContents(GoldCoin);
 	cupboard5->CreateContents(GoldCoin);
@@ -351,9 +356,6 @@ func CreatePirateCastle()
 	skull->SetCategory(C4D_StaticBack);
 	skull->SetObjectLayer(skull);
 	
-// 	Door, 2207, 519, NO_OWNER);
-// 	Door, 2225, 1744, NO_OWNER)
-
 	CreateObject(Sailboat, 2205, 374, NO_OWNER);
 	CreateObject(Bed, 2263, 1738, NO_OWNER)->Turn(70);
 }
@@ -373,6 +375,10 @@ func CreateStoneHut()
 	door_stonehut_top->ConnectTo(door_stonehut_low);
 	door_stonehut_top->SetGraphics("Stone");
 	door_stonehut_low->SetGraphics("Stone");
+	door_stonehut_top->BecomeEntrance(stonehut_low_top);
+	door_stonehut_low->BecomeExit(stonehut_low_top);
+
+
 	var kitchen = CreateObject(Kitchen, 740, 1726);
 	kitchen.MeshTransformation = Trans_Mul(Trans_Rotate(30, 0, 1, 0), Trans_Scale(1200, 1200, 1200));
     kitchen->SetShape(-25,-23,20,50);
@@ -424,6 +430,8 @@ func CreateScientistLab()
 	var door_lab_top = CreateObject(DecoSteelDoor, 135, 519, NO_OWNER);
 	var door_lab_low = CreateObject(DecoSteelDoor, 135, 1743, NO_OWNER);
 	door_lab_top->ConnectTo(door_lab_low);
+	door_lab_top->BecomeEntrance(lab_low_top);
+	door_lab_low->BecomeExit(lab_low_top);
 
 	CreateObject(DimensionVector, 55, 525, NO_OWNER);
 }
@@ -446,6 +454,9 @@ func CreateShop()
 	door_shop_low->SetGraphics("Shop");
 	door_shop_top->SetEnabled(false);
 	door_shop_top->SetDialogueEx("DoorShop");
+	door_shop_top->BecomeEntrance(shop_low_top);
+	door_shop_low->BecomeExit(shop_low_top);
+
 
 	// cool effects
 	shop->SetGraphics("Inside");
@@ -480,6 +491,8 @@ func CreateWoodHut()
 	door_hut_iolo_top = CreateObject(DecoDoor, 600, 1024, NO_OWNER);
 	door_hut_iolo_low = CreateObject(DecoDoor, 600, 1744, NO_OWNER);
 	door_hut_iolo_top->ConnectTo(door_hut_iolo_low);
+	door_hut_iolo_top->BecomeEntrance(hut_low_top);
+	door_hut_iolo_low->BecomeExit(hut_low_top);
 
 	var cupboard1 = CreateObject(Cupboard, 630, 1742, NO_OWNER);
 	cupboard1->CreateContents(GoldCoin);
