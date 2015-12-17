@@ -3,7 +3,11 @@
 
 public func Dlg_Scientist(object player)
 {
-	if (true)
+	var has_initial_dialogue = !player.scientist_intro;
+	var cyclops_alive = enemy_cyclops->GetAlive();
+	var has_dimension_dialogue = !player.scientist_dimension;
+
+	if (has_initial_dialogue)
 	{
 		DlgText("Hallo!|Bist Du auch aus der richtigen Welt?", player);
 		DlgText("Du meinst bestimmt Deine Welt.");
@@ -20,14 +24,20 @@ public func Dlg_Scientist(object player)
 		DlgText("Geh in meine Werkstatt, dort findest Du Waffen.");
 		if (DlgEvent())
 		{
+			player.scientist_intro = true;
 			cyclops_dangerous = true;
+
+			// this is a little more comfortable than walking back and forth
+			var chest = CreateObject(Chest);
+			AddEffect("IntRespawnGrenades", chest, 1, 300);
+			chest->SetPosition(npc_ndo->GetX() + 20, npc_ndo->GetY());
 		}
 	}
-	else if (true)
+	else if (cyclops_alive)
 	{
 		DlgText("Bedenke aber, dass der Zyklop nur eine |verwundbare Stelle hat.");
 	}
-	else if (true)
+	else if (has_dimension_dialogue)
 	{
 		DlgText("Ich habe den Zyklop besiegt und es gibt wirklich Tarydium.", player);
 		DlgText("Sehr gut.|Du musst das Tarydium in das Dimensionsfahrzeug tun.");
@@ -35,13 +45,13 @@ public func Dlg_Scientist(object player)
 		DlgText("Und wo kriege ich einen Dimensionsspalt her?", player);
 		DlgText("Es gibt ein Zauberbuch, in dem ein Spruch|steht, der einen Spalt erzeugt.");
 		DlgText("Dieses Buch liegt bei mir im Turm.");
-		DlgText("Du musst aber erst die magische Barriere ausschalten.");
-		DlgText("Sie verschwindet erst, wenn alle weissen Schalter aus sind.");
-		DlgText("Die Schalter werden durch das Kontrollpult unten gesteuert.");
-		DlgText("Du musst also den Hebel unten betaetigen,|bis alle Schalter aus sind.");
+		if (DlgEvent())
+		{
+			player.scientist_dimension = true;
+		}
 	}
 	else
 	{
-		DlgText("Also nochmal in Kurzform:|Hebel ziehen,|Schalter aus,|Buch lesen,|Tarydium einwerfen,|in den Spalt fliegen.");
+		DlgText("Also nochmal in Kurzform:|Buch lesen,|Tarydium einwerfen,|in den Spalt fliegen.");
 	}
 }

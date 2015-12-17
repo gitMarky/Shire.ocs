@@ -21,8 +21,12 @@ public func Dlg_NDo(object player)
 			player.dialogue_ndo_completed = true;
 		}
 	}
-	else
+	else if (!player.scientist_intro)
 	{
 		DlgText("Fremder nicht gehen weiter sollte.|Er in Not geraten wird.");
+	}
+	else
+	{
+		DlgText("Kiste hier wurde gebracht. Hilfe gegen grosses Clonk!");
 	}
 }
