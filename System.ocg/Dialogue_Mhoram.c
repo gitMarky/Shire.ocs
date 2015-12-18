@@ -5,20 +5,20 @@ public func Dlg_Mhoram(object player)
 {
 	if (!player.dialogue_mhoram_completed)
 	{
-		DlgText("Hallo!|Wissen Sie, wie ich wieder in meine Welt komme?", player);
-		DlgText("Ich weiss viel, mein Junge.");
-		DlgText("Aber etwas von 'Deiner Welt' habe ich noch nicht gehoert,|mein Junge.");
-		DlgText("Ich meine die Welt, von wo ich komme.", player);
-		DlgText("Ich wurde von einem Auto ueberfahren,|und merkwuerdigerweise war ich dann hier.", player);
-		DlgText("Mmmmm...|Merkwuerdig, sagst Du, mein Junge?");
-		DlgText("UEber merkwuerdige Sachen weiss vielleicht |der Magier bescheid, mein Junge.");
-		DlgText("Was fuer ein Magier?|Rede, Alter!", player);
-		DlgText("Viele behaupten, es gibt ihn garnicht.|Aber ich weiss, dass es ihn gibt.");
-		DlgText("Er ist unsichtbar und erscheint nur, wenn jemand in Not ist, mein Junge.");
-		DlgText("Aber ich bin in Not, wo ist er?", player);
-		DlgText("Wirkliche Not tut Not, mein Junge.");
-		DlgText("Im Dorf sagte man mir,| ich sollte vielleicht nach Osten gehen.", player);
-		DlgText("So gehe.");
+		DlgText("$DlgMhoram01$", player);
+		DlgText("$DlgMhoram02$");
+		DlgText("$DlgMhoram03$");
+		DlgText("$DlgMhoram04$", player);
+		DlgText("$DlgMhoram05$", player);
+		DlgText("$DlgMhoram06$");
+		DlgText("$DlgMhoram07$");
+		DlgText("$DlgMhoram08$", player);
+		DlgText("$DlgMhoram09$");
+		DlgText("$DlgMhoram10$");
+		DlgText("$DlgMhoram11$", player);
+		DlgText("$DlgMhoram12$");
+		DlgText("$DlgMhoram13$", player);
+		DlgText("$DlgMhoram14$");
 		if (DlgEvent())
 		{
 			player.dialogue_mhoram_completed = true;
@@ -32,7 +32,7 @@ public func Dlg_Mhoram(object player)
 	}
 	else
 	{
-		DlgText("Du solltest ueber den Berg gehen, wenn Du zurueck willst.");
+		DlgText("$DlgMhoram15$");
 	}
 }
 

@@ -3,8 +3,8 @@
 
 public func Dlg_Drin(object player)
 {
-	DlgText("Hi, wie geht es dir?", player);
-	DlgText("Schlecht...Hick....Bssssss. ");
-	DlgText("Kannst Du mir vielleicht helfen?", player);
-	DlgText("Geh wech...Hick...Hick...");
+	DlgText("$DlgDrin01$", player);
+	DlgText("$DlgDrin02$");
+	DlgText("$DlgDrin03$", player);
+	DlgText("$DlgDrin04$");
 }

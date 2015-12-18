@@ -16,18 +16,18 @@ public func Dlg_Guardsman(object player)
 
 	if (has_dialogue_elevator)
 	{
-		DlgText("Hallo.", player);
-		DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
-		DlgText("Ich suche hier aber etwas.", player);
-		DlgText("Und zwar suche ich eine Moeglichkeit,|nach Osten zu gelangen.", player);
-		DlgText("Mir wurde gesagt, im Osten |vielleicht weiter zu kommen.", player);
-		DlgText("Dir wurde bestimmt auch gesagt,|dass man schon lange nicht mehr auf der |andere Seite des Berges war?");
-		DlgText("Frueher waren wir oft im Osten,|aber dann wurde der Fahrstuhl verschuettet,|und nun klemmt er und wir koennen nicht mehr hoch.");
-		DlgText("Er klemmt fest, sagst Du?", player);
-		DlgText("Jawohl!");
-		DlgText("Dann muss man ihn freisprengen.", player);
-		DlgText("Mmmm... Das ist natuerlich richtig.|Mit einem Sprengpfeil, zum Beispiel.");
-		DlgText("Es gibt im Dorf nur einen einzigen Bogenschuetzen,|Iolo ist sein Name.");
+		DlgText("$DlgGuardsmanA01$", player);
+		DlgText("$DlgGuardsmanA02$");
+		DlgText("$DlgGuardsmanA03$", player);
+		DlgText("$DlgGuardsmanA04$", player);
+		DlgText("$DlgGuardsmanA05$", player);
+		DlgText("$DlgGuardsmanA06$");
+		DlgText("$DlgGuardsmanA07$");
+		DlgText("$DlgGuardsmanA08$", player);
+		DlgText("$DlgGuardsmanA09$");
+		DlgText("$DlgGuardsmanA10$", player);
+		DlgText("$DlgGuardsmanA11$");
+		DlgText("$DlgGuardsmanA12$");
 		if (DlgEvent())
 		{
 			player.dialogue_guardsman_elevator = true; // gives new dialogue in iolo's father
@@ -35,12 +35,12 @@ public func Dlg_Guardsman(object player)
 	}
 	else if (has_dialogue_need_arrow)
 	{
-		DlgText("Hallo, nochmal.|Ich wuerde gerne einen Sprengpfeil|aus der Burg holen.", player);
-		DlgText("Aber sie ist abgeschlossen.", player);
-		DlgText("Das wird sie auch bleiben, ich habe naemlich keine Waffen,|mit denen ich eine offene Burg verteidigen koennte.");
-		DlgText("Was waere denn, wenn wir angegriffen werden?");
-		DlgText("Wir waeren schutzlos ausgeliefert| und die Gegner koennten einfach in die Burg hineinspazieren.");
-		DlgText("Du solltest mir also erstmal einen T-Flint bringen.");
+		DlgText("$DlgGuardsmanB01$", player);
+		DlgText("$DlgGuardsmanB02$", player);
+		DlgText("$DlgGuardsmanB03$");
+		DlgText("$DlgGuardsmanB04$");
+		DlgText("$DlgGuardsmanB05$");
+		DlgText("$DlgGuardsmanB06$");
 		if (DlgEvent())
 		{
 			player.dialogue_guardsman_asked_tflint = true;
@@ -51,9 +51,9 @@ public func Dlg_Guardsman(object player)
 		var tflint = player->FindContents(TFlint);
 		if (tflint)
 		{
-			DlgText("Hi, Waechter!|Hier ist Dein T-Flint.", player);
-			DlgText("Sehr gut! Jetzt kannst Du in die Burg.");
-			DlgText("Und wenn wir angegriffen werden,|werden unsere Gegner T-Flints zu spueren bekommen.");
+			DlgText("$DlgGuardsmanC01$", player);
+			DlgText("$DlgGuardsmanC02$");
+			DlgText("$DlgGuardsmanC03$");
 			if (DlgEvent())
 			{
 				tflint->RemoveObject();
@@ -62,21 +62,21 @@ public func Dlg_Guardsman(object player)
 		}
 		else
 		{
-			DlgText("Hi, leider habe ich noch keinen T-Flint für Dich.", player);
-			DlgText("Du weißt ja...|Kein T-Flint, kein Zugang zur Burg.");
+			DlgText("$DlgGuardsmanC04$", player);
+			DlgText("$DlgGuardsmanC05$");
 		}
 	}
 	else if (has_dialogue_crowbar)
 	{
-		DlgText("Haben Sie zufaellig ein Brecheisen,|mit dem ich in den Laden komme?", player);
-		DlgText("Nein, ich besitze kein Brecheisen.");
+		DlgText("$DlgGuardsmanD01$", player);
+		DlgText("$DlgGuardsmanD02$");
 	}
 	else // default dialogue
 	{
-		DlgText("Hallo.", player);
-		if (has_dialogue_go_east) DlgText("Hallo. Was willst Du?|Ich dachte, du willst nach Osten.");
-		                     else DlgText("Hallo. Was willst Du?|Zivilisten haben hier nichts zu suchen.");
-		DlgText("Tja, ich weiss nicht genau, was ich suche, aber ich...", player);
-		DlgText("Wenn Du nicht weisst, was Du suchst solltest|Du wiederkommen, wenn Du es weisst. ");
+		DlgText("$DlgGuardsmanE01$", player);
+		if (has_dialogue_go_east) DlgText("$DlgGuardsmanE02$");
+		                     else DlgText("$DlgGuardsmanE03$");
+		DlgText("$DlgGuardsmanE04$", player);
+		DlgText("$DlgGuardsmanE05$");
 	}
 }

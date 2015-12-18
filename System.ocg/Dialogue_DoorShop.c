@@ -14,7 +14,7 @@ public func Dlg_DoorShop(object player)
 	}
 	else if (has_eyepatch)
 	{
-		DlgText("Der Haendler ist gluecklich, |und ich habe meine Augenklappe|Da brauch ich nicht mehr rein.", player);
+		DlgText("$DlgDoorShop01$", player);
 	}
 	else if (needs_eyepatch)
 	{
@@ -22,12 +22,12 @@ public func Dlg_DoorShop(object player)
 
 		if (!crowbar)
 		{
-			DlgText("Ein Laden in dem man Kleidung kaufen kann.|Aber er hat geschlossen.", player);
-			DlgText("Vielleicht bekomme ich die Tür mit einem Werkzeug auf?", player);
+			DlgText("$DlgDoorShop02$", player);
+			DlgText("$DlgDoorShop03$", player);
 		}
 		else
 		{
-			DlgText("Jetzt habe ich die Tuer aufgebrochen.|Na, der Zweck heiligt die Mittel.", player);
+			DlgText("$DlgDoorShop04$", player);
 			if (DlgEvent())
 			{
 				crowbar->RemoveObject();
@@ -37,6 +37,6 @@ public func Dlg_DoorShop(object player)
 	}
 	else
 	{
-		DlgText("Ich brauche jetzt keine neue Kleidung.|Ist doch nur ein Traum!", player);
+		DlgText("$DlgDoorShop05$", player);
 	}
 }

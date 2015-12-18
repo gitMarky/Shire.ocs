@@ -3,13 +3,13 @@
 
 public func Dlg_Clonkarabas(object player)
 {
-	DlgText("CLONKARABAS??? Ich dachte, ich haette Dich getoetet???", player);
-	DlgText("Du selbst waerst doch auch fast von einem Auto ueberfahren worden.");
-	DlgText("Ich bin also auch kurz vor dem sicheren Tod in dieses Land versetzt worden.");
-	DlgText("Dann bist Du derjenige, von dem der Magier sprach?", player);
-	DlgText("Nein, es gibt da noch jemanden.|Er koennte Dich vielleicht wieder nach Hause bringen.");
-	DlgText("Aber ich bin natuerlich nicht wenig nachtragend.|Du wirst diesen Mann also nicht erreichen.");
-	DlgText("Als Strafe, dafuer, dass Du mich fast getoetet haettest,|wirst Du ewig hier bleiben.");
+	DlgText("$DlgClonkarabas01$", player);
+	DlgText("$DlgClonkarabas02$");
+	DlgText("$DlgClonkarabas03$");
+	DlgText("$DlgClonkarabas04$", player);
+	DlgText("$DlgClonkarabas05$");
+	DlgText("$DlgClonkarabas06$");
+	DlgText("$DlgClonkarabas07$");
 	if (DlgEvent())
 	{
 		GetActiveSequence()->Stop();

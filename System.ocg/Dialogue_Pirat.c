@@ -9,24 +9,24 @@ public func Dlg_Pirat(object player)
 {
 	if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_NoQuest || !player.dlg_pirat_get_quest)
 	{
-	    DlgText("Hallo.|Koennen Sie mir helfen nach Hause zu kommen?", player);
-	    DlgText("Har, ich bin schon viel rumgekommen, Du Landratte.");
-	    DlgText("Aber einfachso geholfen, habe ich niemandem, har, har.");
-	    DlgText("Ein Suesswassermatrose wie Du erkennt es|vielleicht nicht aber ich bin ein Pirat.");
-	    DlgText("Und Piraten helfen niemandem, har, har!");
-	    DlgText("Har, har, har,|HAR,HAR!");
-	    DlgText("Wenn Du mir nicht helfen willst, ...", player);
-	    DlgText("Gibt es einen Weg weiter nach Osten zu gelangen?", player);
-	    DlgText("Har, das will ich meinen.|Und zwar gibt es in meiner Burg einen Geheimgang nach Osten.");
-	    DlgText("Seit wann haben Piraten denn eine Burg?", player);
-	    DlgText("Mach Dich nicht ueber mich lustig.");
-	    DlgText("Ich bin der Herrscher aller Meere.");
-	    DlgText("Und da das, das einzige Meer hier ist,|gehoert es mir.");
-	    DlgText("Und mit ihm die Burg.");
-	    DlgText("Ist ja schon gut.|Darf ich denn den Geheimgang benutzen?", player);
-	    DlgText("Wie gesagt, ich helfe niemandem.");
-	    DlgText("Wenn Du mir jedoch eine Augenklappe bringen wuerdest,|wuerde ich eine Ausnahme machen.");
-	    DlgText("Denn man ist doch nur ein halber Pirat ohne Augenklappe.");
+	    DlgText("$DlgPirateA01$", player);
+	    DlgText("$DlgPirateA02$");
+	    DlgText("$DlgPirateA03$");
+	    DlgText("$DlgPirateA04$");
+	    DlgText("$DlgPirateA05$");
+	    DlgText("$DlgPirateA06$");
+	    DlgText("$DlgPirateA07$", player);
+	    DlgText("$DlgPirateA08$", player);
+	    DlgText("$DlgPirateA09$");
+	    DlgText("$DlgPirateA10$", player);
+	    DlgText("$DlgPirateA11$");
+	    DlgText("$DlgPirateA12$");
+	    DlgText("$DlgPirateA13$");
+	    DlgText("$DlgPirateA14$");
+	    DlgText("$DlgPirateA15$", player);
+	    DlgText("$DlgPirateA16$");
+	    DlgText("$DlgPirateA17$");
+	    DlgText("$DlgPirateA18$");
 	    if (DlgEvent())
 	    {
 	    	player.dlg_pirat_get_quest = DIALOGUE_Pirat_QuestWaiting;
@@ -35,15 +35,15 @@ public func Dlg_Pirat(object player)
 	else if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting)
 	{
 		var eyepatch = player->FindContents(Eyepatch);
-		DlgText("Hast Du die Augenklappe?");
+		DlgText("$DlgPirateB01$");
 		if (!eyepatch)
 		{
-			DlgText("Noch nicht.", player);
+			DlgText("$DlgPirateB02$", player);
 		}
 		else
 		{
-			DlgText("Hier ist die Augenklappe.", player);
-  			DlgText("Heiliges Kanonenrohr.|Geh in meine Burg, erste Tuer links.");
+			DlgText("$DlgPirateB03$", player);
+  			DlgText("$DlgPirateB04$");
   			if (DlgEvent())
   			{
   				eyepatch->RemoveObject();

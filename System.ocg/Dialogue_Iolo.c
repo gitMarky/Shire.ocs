@@ -17,11 +17,11 @@ public func Dlg_Iolo(object player)
 	if (has_dialogue_arrow)
 	{
 		var arrows = player->FindContents(BombArrow);
-		DlgText("Hast Du schon einen Sprengpfeil?");
+		DlgText("$DlgIoloA01$");
 		if (arrows)
 		{
-			DlgText("Ja, hier.", player);
-			DlgText("Ok, dann komm mit!");
+			DlgText("$DlgIoloA02$", player);
+			DlgText("$DlgIoloA03$");
 			if (DlgEvent())
 			{
 				arrows->RemoveObject();
@@ -31,13 +31,13 @@ public func Dlg_Iolo(object player)
 		}
 		else
 		{
-			DlgText("Nein, leider noch nicht.", player);
+			DlgText("$DlgIoloA04$", player);
 		}
 	}
 	else if (has_dialogue_elevator)
 	{
-		DlgText("So, jetzt kannst Du den Aufzug benutzen.");
-		DlgText("Danke, Iolo!", player);
+		DlgText("$DlgIoloB01$");
+		DlgText("$DlgIoloB02$", player);
 		if (DlgEvent())
 		{
 			StopSequence();
@@ -49,14 +49,14 @@ public func Dlg_Iolo(object player)
 		               && GetActiveSequence().seq_name == "Iolo_Comes";
 		if (!in_sequence)
 		{
-			DlgText("Hey, was machst Du hier?");
+			DlgText("$DlgIoloC01$");
 			// from father dialoge
-			DlgText("Ich wollte nur fragen, ob Du vielleicht so|nett waerest, und mit einem Sprengpfeil...", player);
-			DlgText("...den alten Fahrstuhl freisprengst.", player);
-			DlgText("Damit ich nach Osten kann.|Ich will ja eigentlich nur so schnell wie moeglich|aus diesem Traum raus.", player);
-			DlgText("Klar bin ich dabei!|Endlich passiert mal was in diesem Kaff.|Endlich Abenteuer.|Nur Pfeile hab ich nicht.", npc_iolo);
+			DlgText("$DlgIoloFatherA10$", player);
+			DlgText("$DlgIoloFatherA11$", player);
+			DlgText("$DlgIoloFatherA12$", player);
+			DlgText("$DlgIoloFatherA13$");
 			// end of father dialoge
-			DlgText("Komm mit!");
+			DlgText("$DlgIoloC02$");
 			if (DlgEvent())
 			{
 				StartSequence("Iolo_Comes", 0, this, player, true);
@@ -64,7 +64,7 @@ public func Dlg_Iolo(object player)
 		}
 		else
 		{
-			DlgText("Also, wenn du mir noch ein paar Pfeile besorgst, dann kann es losgehen!");
+			DlgText("$DlgIoloC03$");
 			if (DlgEvent())
 			{
 				player.dialogue_iolo_arrow = true;
@@ -74,8 +74,8 @@ public func Dlg_Iolo(object player)
 	}
 	else
 	{
-		DlgText("Hey, was machst Du hier?");
-		DlgText("Ich sehe mich nur um.", player);
-		DlgText("Geh raus aus meinem Zimmer!");
+		DlgText("$DlgIoloD01$");
+		DlgText("$DlgIoloD02$", player);
+		DlgText("$DlgIoloD03$");
 	}
 }

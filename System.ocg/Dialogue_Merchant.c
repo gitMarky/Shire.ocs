@@ -9,21 +9,21 @@ public func Dlg_Merchant(object player)
 
 	if (has_dialogue_eyepatch)
 	{
-		DlgText("Hallo. Wie siehts aus?", player);
-		DlgText("Schlecht.|Ich glaube ich werde den Laden schliessen muessen.");
-		DlgText("Aber warum denn?", player);
-		DlgText("Ganz einfach.|Du siehst doch mein Schild draussen,oder?");
-		DlgText("Ja, und?", player);
-		DlgText("Und Du siehst auch mein Schaufenster?");
-		DlgText("Ja.", player);
-		DlgText("Und wie Du auch siehst, werbe ich|mit einem schoenen roten Pulli,|aber alle roten Pullis sind ausverkauft.");
-		DlgText("Der rote Pulli war immer mein Aushaengeschild,|mein Markenzeichen.");
-		DlgText("Und gerade als mein Laden gut lief,|wurde das Land von einer roten Pulli-Krise heimgesucht.");
-		DlgText("Daran war nur der Krieg gegen die Buschvoelker schuld.|Und ich kann die Erwartungen der Kaeufer nicht mehr erfuellen...");
-		DlgText("Das ist mein Ruin.|Buuuuuhhhhuuuuu!");
-		DlgText("Wenn Du moechtest, kannst Du meinen Pulli haben.", player);
-		DlgText("WIRKLICH??? Das ist aber nett von Dir.|Wie kann ich Dir jemals danken?");
-		DlgText("Gib mir nur eine Augenklappe.", player);
+		DlgText("$DlgMerchantA01$", player);
+		DlgText("$DlgMerchantA02$");
+		DlgText("$DlgMerchantA03$", player);
+		DlgText("$DlgMerchantA04$");
+		DlgText("$DlgMerchantA05$", player);
+		DlgText("$DlgMerchantA06$");
+		DlgText("$DlgMerchantA07$", player);
+		DlgText("$DlgMerchantA08$");
+		DlgText("$DlgMerchantA09$");
+		DlgText("$DlgMerchantA10$");
+		DlgText("$DlgMerchantA11$");
+		DlgText("$DlgMerchantA12$");
+		DlgText("$DlgMerchantA13$", player);
+		DlgText("$DlgMerchantA14$");
+		DlgText("$DlgMerchantA15$", player);
 		if (DlgEvent())
 		{
 			player.dialogue_merchant_eyepatch = true;
@@ -36,9 +36,9 @@ public func Dlg_Merchant(object player)
 		var has_pullover = player->FindContents(Pullover);
 		if (has_pullover)
 		{
-			DlgText("Hier, da hast du meinen Pullover.", player);
-			DlgText("Danke, dann bekommst Du auch eine Augenklappe.");
-			DlgText("Danke für die Augenklappe.", player);
+			DlgText("$DlgMechantB01$", player);
+			DlgText("$DlgMechantB02$");
+			DlgText("$DlgMechantB03$", player);
 			if (DlgEvent())
 			{
 				if (has_pullover) has_pullover->RemoveObject();
@@ -50,12 +50,12 @@ public func Dlg_Merchant(object player)
 		}
 		else
 		{
-			DlgText("Hast du schon einen Pullover für mich?");
-		    DlgText("Leider nein, ich behalte ihn noch ein bisschen...", player);
+			DlgText("$DlgMechantB04$");
+		    DlgText("$DlgMechantB05$", player);
 		}
 	}
 	else
 	{
-		DlgText("Danke nochmal für den Pulli.");
+		DlgText("$DlgMechantB06$");
 	}
 }

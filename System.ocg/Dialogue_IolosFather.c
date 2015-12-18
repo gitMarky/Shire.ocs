@@ -18,13 +18,13 @@ public func Dlg_IolosFather(object player)
 		               && GetActiveSequence().seq_name == "Iolo_Comes";
 		if (!in_sequence)
 		{
-			DlgText("Wissen Sie wo Iolo ist?", player);
-			DlgText("Zu Iolo willst Du, hae?");
-			DlgText("Der sitzt nur zu Hause 'rum,|anstatt zu arbeiten.");
-			DlgText("Der ist genauso faul, wie Du aussiehst.");
-			DlgText("IOLO!!!|Komm her, Du Nichtsnutz!");
-			DlgText("Mach schnell, verfluchte Hacke!");
-			DlgText("Diese Jugend von heute...|tz,tz,tz!");
+			DlgText("$DlgIoloFatherA01$", player);
+			DlgText("$DlgIoloFatherA02$");
+			DlgText("$DlgIoloFatherA03$");
+			DlgText("$DlgIoloFatherA04$");
+			DlgText("$DlgIoloFatherA05$");
+			DlgText("$DlgIoloFatherA06$");
+			DlgText("$DlgIoloFatherA07$");
 			if (DlgEvent())
 			{
 				StartSequence("Iolo_Comes", 0, this, player, false);
@@ -32,12 +32,12 @@ public func Dlg_IolosFather(object player)
 		}
 		else
 		{
-			DlgText("Was ist denn los, Vater?", npc_iolo);
-			DlgText("Hier diese Type will was von Dir!");
-			DlgText("Ich wollte nur fragen, ob Du vielleicht so|nett waerest, und mit einem Sprengpfeil...", player);
-			DlgText("...den alten Fahrstuhl freisprengst.", player);
-			DlgText("Damit ich nach Osten kann.|Ich will ja eigentlich nur so schnell wie moeglich|aus diesem Traum raus.", player);
-			DlgText("Klar bin ich dabei!|Endlich passiert mal was in diesem Kaff.|Endlich Abenteuer.|Nur Pfeile hab ich nicht.", npc_iolo);		
+			DlgText("$DlgIoloFatherA08$", npc_iolo);
+			DlgText("$DlgIoloFatherA09$");
+			DlgText("$DlgIoloFatherA10$", player);
+			DlgText("$DlgIoloFatherA11$", player);
+			DlgText("$DlgIoloFatherA12$", player);
+			DlgText("$DlgIoloFatherA13$", npc_iolo);		
 			if (DlgEvent())
 			{
 				player.dialogue_iolo_arrow = true;
@@ -47,8 +47,8 @@ public func Dlg_IolosFather(object player)
 	}
 	else if (has_dialogue_crowbar)
 	{
-		DlgText("Hallo.|Sie haben nicht zufaellig ein Brecheisen oder so,|mit dem ich in den Laden kann?", player);
-		DlgText("Nein, ich habe keins.");
+		DlgText("$DlgIoloFatherB01$", player);
+		DlgText("$DlgIoloFatherB02$");
 		if (DlgEvent())
 		{
 			player.dialogue_iolos_father_angry = true;
@@ -56,11 +56,11 @@ public func Dlg_IolosFather(object player)
 	}
 	else if (has_final_dialogue)
 	{
-		DlgText("Du faengst an mich zu nerven, Kleiner.");
+		DlgText("$DlgIoloFatherB03$");
 	}
 	else // default dialogue
 	{
-		DlgText("Hallo!", player);
-		DlgText("Geh weg!|Siehst Du Gruenschnabel nicht,|dass ich beschaeftigt bin?");
+		DlgText("$DlgIoloFatherB04$", player);
+		DlgText("$DlgIoloFatherB05$");
 	}
 }

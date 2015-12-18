@@ -3,14 +3,14 @@
 
 public func Dlg_Doctor(object player)
 {
-	DlgText("Hallo? Sind Sie wieder bei Bewusstsein?");
-	DlgText("Wo bin ich?", player);
-	DlgText("Sie leben.");
-	DlgText("Sie haben Glueck gehabt.|Es grenzt fast an ein Wunder,|dass Sie den Unfall unbeschadet ueberstanden haben.");
-	DlgText("Sie waren etwa 10 Minuten bewusstlos.");
-	DlgText("Was? Nur 10 Minuten?", player);
-	DlgText("Ich... hatte...einen merkwuerdigen...Traum.", player);
-	DlgText("Wo ist denn mein roter Pullover?", player);
+	DlgText("$DlgDoctor01$");
+	DlgText("$DlgDoctor02$", player);
+	DlgText("$DlgDoctor03$");
+	DlgText("$DlgDoctor04$");
+	DlgText("$DlgDoctor05$");
+	DlgText("$DlgDoctor06$", player);
+	DlgText("$DlgDoctor07$", player);
+	DlgText("$DlgDoctor08$", player);
 	if (DlgEvent())
 	{
 		GameOver();		

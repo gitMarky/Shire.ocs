@@ -4,20 +4,20 @@
 public func Dlg_Beggar(object player)
 {
 	var coin = player->FindContents(GoldCoin);
-	DlgText("Hallo.", player);
-	DlgText("Hallo, Du.");
-	DlgText("Hast Du nicht eine Goldmuenze fuer einen armen Kriegsveteranen?");
+	DlgText("$DlgBeggar01$", player);
+	DlgText("$DlgBeggar02$");
+	DlgText("$DlgBeggar03$");
 	if (!coin)
 	{
-		DlgText("Nein, leider nicht.", player);
+		DlgText("$DlgBeggar04$", player);
 	}
 	else
 	{
-		DlgText("Hier eine Goldmuenze.", player);
+		DlgText("$DlgBeggar05$", player);
 		if (DlgEvent())
 		{
 			coin->RemoveObject();
 		}
-		DlgText("Gott segne Dich.");
+		DlgText("$DlgBeggar06$");
 	}
 }

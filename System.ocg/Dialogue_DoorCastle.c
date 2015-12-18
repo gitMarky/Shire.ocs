@@ -13,6 +13,6 @@ public func Dlg_DoorCastle(object player)
 	}
 	else
 	{
-		DlgText("Hmm, hier ist abgesperrt...", player);
+		DlgText("$DlgDoorCastle$", player);
 	}
 }

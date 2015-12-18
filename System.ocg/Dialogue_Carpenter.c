@@ -9,23 +9,23 @@ public func Dlg_Carpenter(object player)
 
 	if (has_dialogue_crowbar)
 	{
-		DlgText("Hast Du zufaellig ein Brecheisen da?", player);
-		DlgText("Na, denk doch mal nach,|ein Bauarbeiter hat immer sein Handwerkszeug dabei.");
-		DlgText("Kannst Du es mir mal leihen?", player);
-		DlgText("Hier ist es.");
+		DlgText("$DlgCarpenter01$", player);
+		DlgText("$DlgCarpenter02$");
+		DlgText("$DlgCarpenter03$", player);
+		DlgText("$DlgCarpenter04$");
 		if (DlgEvent())
 		{
 			player->CreateContents(Crowbar);
 			player.dialogue_carpenter_crowbar = true;
 		}
-		DlgText("Danke.", player);
+		DlgText("$DlgCarpenter05$", player);
 	}
 	else
 	{
-		DlgText("Hi, wie geht es dir?", player);
-		DlgText("Lass mich in Ruhe ich muss arbeiten.");
-		DlgText("Woran arbeitest Du gerade?", player);
-		DlgText("An diesem Haus hier. Im Auftrag von Iolos Vater.");
-		DlgText("Wir sehen uns.", player);
+		DlgText("$DlgCarpenter06$", player);
+		DlgText("$DlgCarpenter07$");
+		DlgText("$DlgCarpenter08$", player);
+		DlgText("$DlgCarpenter09$");
+		DlgText("$DlgCarpenter10$", player);
 	}
 }
