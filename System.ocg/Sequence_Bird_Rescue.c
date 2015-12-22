@@ -17,7 +17,8 @@ func Bird_Rescue_1()
 	this.bird->RemoveBackpack();
 	this.bird->SetMeshMaterial("Clonk_Mage");
 	this.staff = this.bird->CreateContents(WizardStaff);
-	this.staff->SetMeshMaterial("Wizard_Staff_Mage");	
+	this.staff->SetMeshMaterial("Wizard_Staff_Mage");
+	this.bird->SetShirePortrait("Mage");
 	
 	// hat
 	var hat = this.bird->CreateContents(ClonkarabasHat);

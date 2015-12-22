@@ -59,6 +59,7 @@ func Trigger_Clonkarabas_Wait()
 		this.clonkarabas->SetGraphics("Alchemist");
 		this.clonkarabas->SetMeshMaterial("Clonk_Clonkarabas");
 		this.clonkarabas->SetMeshMaterial("Clonk_Clonkarabas", 1);
+		this.clonkarabas->SetShirePortrait("Clonkarabas");
 		
 		
 		// staff

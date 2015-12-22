@@ -86,6 +86,7 @@ func CreateTuti()
 	npc_tuti->SetMeshMaterial("Clonk_Tuti");
 	npc_tuti->SetDir(DIR_Left);
 	npc_tuti->RemoveBackpack();
+	npc_tuti->SetShirePortrait("Tuti");
 }
 
 func CreatePirate()
@@ -98,6 +99,7 @@ func CreatePirate()
 	npc_pirate->SetMeshMaterial("Clonk_Pirate");
 	npc_pirate->SetMeshMaterial("Clonk_PirateTunic", 1);
 	npc_pirate->SetDir(DIR_Left);
+	npc_pirate->SetShirePortrait("Pirate");
 	
 	// hat
 	var hat = npc_pirate->CreateContents(PirateHat);
@@ -116,6 +118,7 @@ func CreateCarpenter()
 	npc_carpenter->SetDialogueEx("Carpenter");
 	npc_carpenter->RemoveBackpack();
 	npc_carpenter->SetMeshMaterial("Clonk_Carpenter");
+	npc_carpenter->SetShirePortrait("Carpenter");
 }
 
 func CreateBeggar()
@@ -125,6 +128,7 @@ func CreateBeggar()
 	npc_beggar->SetDialogueEx("Beggar");
 	npc_beggar->RemoveBackpack();
 	npc_beggar->SetMeshMaterial("Clonk_Beggar");
+	npc_beggar->SetShirePortrait("Beggar");
 }
 
 func CreateDrin()
@@ -134,6 +138,7 @@ func CreateDrin()
 	npc_drin->SetDialogueEx("Drin");
 	npc_drin->RemoveBackpack();
 	npc_drin->SetMeshMaterial("Clonk_Drin");
+	npc_drin->SetShirePortrait("Drin");
 }
 
 func CreateMerchant()
@@ -157,6 +162,7 @@ func CreateIolosFather()
 	npc_iolos_father->SetDialogueEx("IolosFather");
 	npc_iolos_father->RemoveBackpack();
 	npc_iolos_father->SetMeshMaterial("Clonk_IolosFather");
+	npc_iolos_father->SetShirePortrait("IolosFather");
 }
 
 func CreateIolo()
@@ -166,6 +172,7 @@ func CreateIolo()
 	npc_iolo->RemoveBackpack();
 	npc_iolo->SetMeshMaterial("Clonk_Iolo");
 	npc_iolo->SetDialogueEx("Iolo");
+	npc_iolo->SetShirePortrait("Iolo");
 }
 
 func CreateMhoram()
@@ -175,6 +182,7 @@ func CreateMhoram()
 	npc_mhoram->SetDialogueEx("Mhoram");
 	npc_mhoram->RemoveBackpack();
 	npc_mhoram->SetMeshMaterial("Clonk_Mhoram");
+	npc_mhoram->SetShirePortrait("Mhoram");
 }
 
 func CreateNDo()
@@ -184,6 +192,7 @@ func CreateNDo()
 	npc_ndo->SetDialogueEx("NDo");
 	npc_ndo->RemoveBackpack();
 	npc_ndo->SetMeshMaterial("Clonk_NDo");
+	npc_ndo->SetShirePortrait("Ndo");
 }
 
 func CreatePea()
@@ -193,6 +202,7 @@ func CreatePea()
 	npc_pea->SetDialogueEx("Pea");
 	// pea may keep his backpack!
 	npc_pea->SetMeshMaterial("Clonk_Pea");
+	npc_pea->SetShirePortrait("Pea");
 }
 
 func CreateQuimby()
@@ -202,6 +212,7 @@ func CreateQuimby()
 	npc_quimby->SetDialogueEx("Quimby");
 	npc_quimby->RemoveBackpack();
 	npc_quimby->SetMeshMaterial("Clonk_Quimby");
+	npc_quimby->SetShirePortrait("Quimby");
 }
 
 func CreateGuardsman()
@@ -211,6 +222,7 @@ func CreateGuardsman()
 	npc_guardsman->SetDialogueEx("Guardsman");
 	npc_guardsman->RemoveBackpack();
 	npc_guardsman->SetMeshMaterial("Clonk_Guardsman");
+	npc_guardsman->SetShirePortrait("Guardsman");
 }
 
 func CreateScientist()
@@ -222,6 +234,7 @@ func CreateScientist()
 	npc_scientist->SetGraphics("Alchemist");
 	npc_scientist->SetMeshMaterial("Clonk_Scientist");
 	npc_scientist->SetMeshMaterial("Clonk_Scientist", 1);
+	npc_scientist->SetShirePortrait("Scientist");
 }
 
 func CreateCyclops()
@@ -269,6 +282,7 @@ func CreateDoctor()
 	npc_doctor->SetMeshMaterial("Clonk_Doctor");
 	npc_doctor->SetMeshMaterial("Clonk_Doctor", 1);
 	npc_doctor->SetDir(DIR_Left);
+	npc_doctor->SetShirePortrait("Doctor");
 }
 
 // ----- *** Buildings Creation *** -----------------------------------------
