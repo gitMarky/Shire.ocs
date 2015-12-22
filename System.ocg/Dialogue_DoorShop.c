@@ -3,7 +3,7 @@
 
 public func Dlg_DoorShop(object player)
 {
-	var needs_eyepatch = player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting;
+	var needs_eyepatch = player.dialogue_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting;
 	var has_eyepatch = player.dialogue_merchant_pullover;
 	var can_enter = player.dialogue_shop_open && !has_eyepatch;
 

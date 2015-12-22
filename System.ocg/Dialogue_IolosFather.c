@@ -6,7 +6,7 @@ public func Dlg_IolosFather(object player)
 	var has_dialogue_iolo = player.dialogue_guardsman_elevator
 	                    && !player.dialogue_iolo_arrow;  // talked to guardsman about the elevator
 
-	var has_dialogue_crowbar = player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
+	var has_dialogue_crowbar = player.dialogue_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
 	                       && !player.dialogue_carpenter_crowbar
 	                       && !player.dialogue_iolos_father_angry;
 

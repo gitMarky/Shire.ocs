@@ -7,7 +7,7 @@ static const DIALOGUE_Pirat_QuestFinished = 2;
 
 public func Dlg_Pirat(object player)
 {
-	if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_NoQuest || !player.dlg_pirat_get_quest)
+	if (player.dialogue_pirat_get_quest == DIALOGUE_Pirat_NoQuest || !player.dialogue_pirat_get_quest)
 	{
 	    DlgText("$DlgPirateA01$", player);
 	    DlgText("$DlgPirateA02$");
@@ -29,10 +29,10 @@ public func Dlg_Pirat(object player)
 	    DlgText("$DlgPirateA18$");
 	    if (DlgEvent())
 	    {
-	    	player.dlg_pirat_get_quest = DIALOGUE_Pirat_QuestWaiting;
+	    	player.dialogue_pirat_get_quest = DIALOGUE_Pirat_QuestWaiting;
 	    }
 	}
-	else if (player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting)
+	else if (player.dialogue_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting)
 	{
 		var eyepatch = player->FindContents(Eyepatch);
 		DlgText("$DlgPirateB01$");
@@ -47,7 +47,7 @@ public func Dlg_Pirat(object player)
   			if (DlgEvent())
   			{
   				eyepatch->RemoveObject();
-		    	player.dlg_pirat_get_quest = DIALOGUE_Pirat_QuestFinished;
+		    	player.dialogue_pirat_get_quest = DIALOGUE_Pirat_QuestFinished;
 		    	
 		    	var secret_door = CreateObject(DecoDoor, AbsX(2220), AbsY(1744), NO_OWNER);
 		    	secret_door->SetClrModulation(RGB(180, 180, 180));

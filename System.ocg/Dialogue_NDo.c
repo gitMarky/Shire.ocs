@@ -21,7 +21,7 @@ public func Dlg_NDo(object player)
 			player.dialogue_ndo_completed = true;
 		}
 	}
-	else if (!player.scientist_intro)
+	else if (!player.dialogue_scientist_intro)
 	{
 		DlgText("$DlgNdo09$");
 	}

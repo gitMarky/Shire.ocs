@@ -10,7 +10,7 @@ public func Dlg_Guardsman(object player)
 	var has_dialogue_give_flint = player.dialogue_guardsman_asked_tflint // guardsman asked to give him the flint
 	                          && !player.dialogue_guardsman_gave_tflint; // did not give the t-flint to the guardsman yet.
 	var has_dialogue_go_east = player.dialogue_guardsman_gave_tflint;
-	var has_dialogue_crowbar = player.dlg_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
+	var has_dialogue_crowbar = player.dialogue_pirat_get_quest == DIALOGUE_Pirat_QuestWaiting
 	                       && !player.dialogue_carpenter_crowbar;
 
 

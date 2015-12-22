@@ -3,7 +3,7 @@
 
 public func Dlg_Scientist(object player)
 {
-	var has_initial_dialogue = !player.scientist_intro;
+	var has_initial_dialogue = !player.dialogue_scientist_intro;
 	var cyclops_alive = enemy_cyclops->GetAlive();
 	var has_dimension_dialogue = !player.scientist_dimension;
 
@@ -24,7 +24,7 @@ public func Dlg_Scientist(object player)
 		DlgText("$DlgScientist13$");
 		if (DlgEvent())
 		{
-			player.scientist_intro = true;
+			player.dialogue_scientist_intro = true;
 			cyclops_dangerous = true;
 
 			// this is a little more comfortable than walking back and forth
