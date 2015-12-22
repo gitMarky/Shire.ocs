@@ -1,0 +1,13 @@
+[DefCore]
+id=DecoSkyline
+Category=C4D_StaticBack
+Width=544
+Height=176
+Offset=-380,-170
+Value=20
+Mass=50
+Components=Rock=30
+Vertices=1
+VertexX=1
+VertexY=1
+VertexFriction=100
