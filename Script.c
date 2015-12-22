@@ -759,8 +759,26 @@ func CreateWaterfall()
 
 func CreateRealWorld()
 {
-	CreateObject(Porsche, 2955, 240, NO_OWNER);
+	var light_red = RGB(255, 0, 0);
+	var light_yellow = RGB(255, 255, 190);
+
+
+	CreateObject(DecoSkyline, 3007, 234, NO_OWNER).Plane = -1;
+
+	// porsche
+	CreateObject(Porsche, 2955, 240, NO_OWNER);	
+	CreateLight(2972, 232, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_red);
+	CreateLight(2928, 232, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_yellow);
+
+	// ambulance
 	CreateObject(Ambulance, 3035, 240, NO_OWNER);
+	CreateLight(3028, 208, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_red);
+	CreateLight(3050, 208, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_red);
+	CreateLight(3007, 208, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_red);
+	
+	CreateLight(3042, 227, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_yellow);
+	CreateLight(3060, 227, 30, Fx_Light.LGT_Constant, nil, 10)->SetLightColor(light_yellow);
+	
 }
 
 global func RevealTunnel()
