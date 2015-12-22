@@ -5,6 +5,7 @@ static npc_ndo, npc_pea, npc_quimby, npc_guardsman, npc_scientist;
 static door_hut_iolo_top, door_hut_iolo_low, door_castle_top, door_shop_top;
 static enemy_cyclops, shop, shop_low_top, dimension_rift, npc_doctor;
 static cyclops_dangerous;
+static started;
 
 func Initialize()
 {
@@ -68,11 +69,20 @@ func InitializePlayer(int player)
 {
 	var crew = GetHiRank(player);
 	crew->SetPosition(80, 1048);
-	crew->Fling(100, 1335);
 	crew->RemoveBackpack();
 	crew->SetMeshMaterial("Clonk_PlayerPullover");
-	
+
 	SetPlrKnowledge(player, Bread);
+	
+	if (!started)
+	{
+		started = true;
+		crew->SetLightRange(0, 0);
+		SetAmbientBrightness(0);
+	
+		var dialogue = crew->SetDialogueEx("Intro");
+		dialogue->Interact(crew);
+	}
 }
 
 

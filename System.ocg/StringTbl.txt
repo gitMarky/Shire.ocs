@@ -309,3 +309,7 @@ DlgTuti11=Ich glaube nicht, dass Du tot bist.|Du siehst nämlich sehr lebendig au
 DlgTuti12=Gibt es denn sonst eine logischere Erklärung dafür,|dass ich nicht mehr auf Mutter Erde bin, als meinen Tod?|Oder träum ich?
 DlgTuti13=Ich weiss nicht viel, vielleicht solltest Du mal jemand anderes fragen...
 DlgTuti14=Ich glaube das ist wohl besser.|Ich will nämlich so schnell wie möglich nach Hause.
+
+DlgIntro01=Ahh...|Mein Kopf!
+DlgIntro02=Warum ist mir dieser Idiot Clonkarabas vor die Motorhaube gelaufen?
+DlgIntro03=So ein Mist...
