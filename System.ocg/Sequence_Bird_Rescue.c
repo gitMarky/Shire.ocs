@@ -36,7 +36,7 @@ func Bird_Rescue_1()
 
 func Bird_Rescue_2()
 {
-	MessageBoxAll("Der Zyklop wird auch Dich toeten,|ich hatte Dich doch gewarnt.", this.bird, true);
+	MessageBoxAll("$SeqBirdRescue$", this.bird, true);
 	return ScheduleNext(this.delay);
 }
 

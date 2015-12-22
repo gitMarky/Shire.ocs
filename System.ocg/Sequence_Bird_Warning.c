@@ -19,13 +19,13 @@ func Bird_Warning_1()
 
 func Bird_Warning_2()
 {
-	MessageBoxAll("Schon wieder dieser Vogel.", this.hero, true);
+	MessageBoxAll("$SeqBirdWarning01$", this.hero, true);
 	return ScheduleNext(this.delay);
 }
 
 func Bird_Warning_3()
 {
-	MessageBoxAll("Sieht aus als wuerde er versuchen, mich zu warnen.", this.hero, true);
+	MessageBoxAll("$SeqBirdWarning02$", this.hero, true);
 	return ScheduleNext(this.delay);
 }
 

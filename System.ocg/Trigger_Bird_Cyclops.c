@@ -81,7 +81,7 @@ func Trigger_Bird_Cyclops_BoundaryReturn()
 			this.hero->SetXDir(-3);
 		}
 		
-		Dialogue->MessageBoxAll("Der Magier hat recht,|der Zyklop wird mich umbringen!", this.hero, true);
+		Dialogue->MessageBoxAll("$SeqCyclopsAbort$", this.hero, true);
 		return ScheduleSame(1);
 	}
 

@@ -313,3 +313,15 @@ DlgTuti14=Ich glaube das ist wohl besser.|Ich will nämlich so schnell wie möglic
 DlgIntro01=Ahh...|Mein Kopf!
 DlgIntro02=Warum ist mir dieser Idiot Clonkarabas vor die Motorhaube gelaufen?
 DlgIntro03=So ein Mist...
+
+SeqBirdElevator01=Kraeh, kraeh,|Du solltest nicht nach Osten gehn'.
+SeqBirdElevator02=Du wirst in Not geraten, kraeh, kraeh...
+SeqBirdElevator03=Hat da gerade ein Vogel gesprochen?
+SeqBirdElevator04=Das muss ich mir eingebildet haben.
+
+SeqBirdWarning01=Schon wieder dieser Vogel.
+SeqBirdWarning02=Sieht aus als wuerde er versuchen, mich zu warnen.
+
+SeqBirdRescue=Der Zyklop wird auch Dich toeten,|ich hatte Dich doch gewarnt.
+
+SeqCyclopsAbort=Der Magier hat recht,|der Zyklop wird mich umbringen!

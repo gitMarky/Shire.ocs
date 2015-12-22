@@ -17,14 +17,14 @@ func Bird_Elevator_1()
 	this.bird->SetDir(1);
 	this.bird->FadeIn(20);
 	BirdSparks();
-	MessageBoxAll("Kraeh, kraeh,|Du solltest nicht nach Osten gehn'.", this.bird, true);
+	MessageBoxAll("$SeqBirdElevator01$", this.bird, true);
 	return ScheduleNext(this.delay);
 }
 
 func Bird_Elevator_2()
 {
 	this.bird->Sound("Raven?");
-	MessageBoxAll("Du wirst in Not geraten, kraeh, kraeh...", this.bird, true);
+	MessageBoxAll("$SeqBirdElevator02$", this.bird, true);
 	return ScheduleNext(this.delay);
 }
  
@@ -32,13 +32,13 @@ func Bird_Elevator_3()
 {
 	BirdSparks();
 	this.bird->FadeOut(20, true);
-	MessageBoxAll("Hat da gerade ein Vogel gesprochen?", this.hero, true);
+	MessageBoxAll("$SeqBirdElevator03$", this.hero, true);
 	return ScheduleNext(this.delay);
 }
 
 func Bird_Elevator_4()
 {
-	MessageBoxAll("Das muss ich mir eingebildet haben.", this.hero, true);
+	MessageBoxAll("$SeqBirdElevator04$", this.hero, true);
 	return ScheduleNext(this.delay * 2); // the message takes some time
 }
 
