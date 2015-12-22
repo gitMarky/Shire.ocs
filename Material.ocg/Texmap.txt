@@ -10,6 +10,7 @@ OverloadTextures
 12=Tunnel-brickback
 
 13=BrickSoft-brick1
+14=Brick-pavement
 
 19=DuroLava-lava_red
 20=Water-water
