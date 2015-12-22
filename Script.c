@@ -69,8 +69,10 @@ func InitializePlayer(int player)
 {
 	var crew = GetHiRank(player);
 	crew->SetPosition(80, 1048);
+	crew.StartDead = crew.DoNothing;
 	crew->RemoveBackpack();
 	crew->SetMeshMaterial("Clonk_PlayerPullover");
+
 
 	SetPlrKnowledge(player, Bread);
 	
@@ -859,3 +861,28 @@ global func FxIntWaterfallTimer(object target, proplist effect, int timer)
 
 		CreateParticle("Dust", 2333 + RandomX(-5, 5), 395, RandomX(-5,5), RandomX(-5, 0), 24, bottom);
 }
+
+func OnClonkDeath(object clonk, killed_by)
+{
+//	Log("Clonk died: %v, %v", clonk, clonk->GetAlive());
+//	Log("Healing? %v %v", clonk->GetAlive(), clonk->GetEnergy());
+
+	var plr = clonk->GetOwner();
+	if (plr == NO_OWNER) return;
+	
+	clonk->SetAlive(true);
+	clonk->DoEnergy(100);
+	clonk->MakeCrewMember(plr);
+	clonk->SetAction("Walk", nil, nil, true);
+	clonk->RemoveBackpack();
+
+	SetCursor(plr, clonk);
+	
+/*	var crew = CreateObject(Clonk, 50, 50, plr);
+	crew->MakeCrewMember(plr);
+	SetCursor(plr, crew);
+	// Transfer inventory if turned on.
+	Rule_BaseRespawn->TransferInventory(clonk, crew);
+*/
+}
+
