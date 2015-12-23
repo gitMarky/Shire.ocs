@@ -114,7 +114,7 @@ DlgGuardsmanE05=If you don't know it, then|you should return, when you know it.
 
 DlgIoloA01=Do you have a bomb arrow?
 DlgIoloA02=Yes, here.
-DlgIoloA03=Ok, follow me than!
+DlgIoloA03=Ok, follow me then!
 DlgIoloA04=Sorry, not yet.
 
 DlgIoloB01=That's it, you can use the elevator now.
