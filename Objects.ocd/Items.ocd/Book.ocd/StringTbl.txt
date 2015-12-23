@@ -1,5 +1,5 @@
-Name=Buch
-Description=Was da wohl drin steht?
-CtrlRead=Lesen
-MsgCantRead=Das kann ich nicht lesen.
-Next=Weiter
+Name=Book
+Description=What might be written in there?
+CtrlRead=Read
+MsgCantRead=I can't read it.
+Next=Next

@@ -1,2 +1,2 @@
-Name=Granate
-Description=Munition mit Sprengkraft.
+Name=Grenade
+Description=Explosive ammunition.

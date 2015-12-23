@@ -1,2 +1,2 @@
-Description=Ein monströser Kopf.
-Name=Zyklopenkopf
+Description=A monstrous head.
+Name=Cyclops head

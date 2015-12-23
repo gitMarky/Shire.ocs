@@ -1,2 +1,2 @@
-Name=Hut
-Description=Mein Hut der hat drei Ecken
+Name=Hat
+Description=My hat has three vertices!

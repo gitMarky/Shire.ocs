@@ -1,2 +1,2 @@
 Name=Tarydium
-Description=Ewiges Objekt der Begierde eines jeden Wissenschaftlers.
+Description=A material that is desired by many scientists!

@@ -1,0 +1,3 @@
+Name=Zauberstab
+Description=Verzaubert irgendwas.
+UsageHelp=Zielen mit [Benutzen].

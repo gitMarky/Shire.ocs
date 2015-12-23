@@ -1,2 +1,2 @@
-Name=Goldmünze
-Description=Ein Überbleibsel aus vergangenen Tagen von hohem Wert und geringem Nutzen.
+Name=Gold coin
+Description=Remaining from earlier days. Has got a high value and no use.

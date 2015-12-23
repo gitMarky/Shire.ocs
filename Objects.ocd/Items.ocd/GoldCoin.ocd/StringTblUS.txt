@@ -1,2 +1,0 @@
-Name=Gold coin
-Description=Remaining from earlier days. Has got a high value and no use.

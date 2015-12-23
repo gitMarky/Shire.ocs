@@ -1,3 +1,0 @@
-Name=Sawmill
-Description=Cuts trees to wood.
-

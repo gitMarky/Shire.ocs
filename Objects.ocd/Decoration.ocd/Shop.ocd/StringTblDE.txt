@@ -1,0 +1,3 @@
+Name=Geschäft
+Description=Hier werden Dinge verkauft!
+

@@ -1,0 +1,3 @@
+Name=Augenklappe
+Description=Eine Augenklappe, auf die jeder Pirat stolz wäre.
+

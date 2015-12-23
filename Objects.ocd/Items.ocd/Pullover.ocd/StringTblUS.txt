@@ -1,3 +1,0 @@
-Name=Pullover
-Description=A red pullover. Two grandmothers had been working on this for three years.
-

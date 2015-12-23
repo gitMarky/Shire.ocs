@@ -1,2 +1,0 @@
-Name=T-Flint
-Description=Delayed reaction. Useful in mining.

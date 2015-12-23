@@ -1,2 +1,0 @@
-Name=Tarydium
-Description=A material that is desired by many scientists!

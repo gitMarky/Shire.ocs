@@ -1,3 +1,0 @@
-Name=Construction site
-Description=Work in progress.
-

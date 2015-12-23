@@ -1,2 +1,2 @@
-Name=Segelboot
-Description=Zum Überqueren kleinerer Gewässer.
+Name=Sailboat
+Description=To get across small lakes.

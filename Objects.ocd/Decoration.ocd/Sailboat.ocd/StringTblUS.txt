@@ -1,2 +1,0 @@
-Name=Sailboat
-Description=To get across small lakes.

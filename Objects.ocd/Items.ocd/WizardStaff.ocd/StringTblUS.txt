@@ -1,3 +1,0 @@
-Name=Magic staff
-Description=Enchants something.
-UsageHelp=Press [Use] to aim.
