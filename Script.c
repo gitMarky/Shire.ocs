@@ -10,7 +10,7 @@ static started;
 func Initialize()
 {
     cyclops_dangerous = false;
-	var debug = true;
+	var debug = false;
 	// buildings
 
 	CreateCity();

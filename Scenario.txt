@@ -2,9 +2,7 @@
 Title=Shire
 Version=6,0
 Icon=15
-
-[Game]
-Goals=MELE=1
+MaxPlayer=1
 
 [Definitions]
 Definition1=Objects.ocd
