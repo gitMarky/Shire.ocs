@@ -117,11 +117,15 @@ func Iolo_Elevator_7()
 
 func Iolo_Elevator_8()
 {
-	// dig again in case something got stuck
-	Iolo_Elevator_DigShaft();
-	this.elevator_case->ControlDown(this.hero);
-	// so that the elevator lands on a flat surface
-	DigFreeRect(1225, 1000, 60, 37, true);
+	if (this.elevator_case->GetY() < 785)
+	{
+		// dig again in case something got stuck
+		Iolo_Elevator_DigShaft();
+		this.elevator_case->ControlDown(this.hero);
+		// so that the elevator lands on a flat surface
+		DigFreeRect(1225, 1000, 60, 37, true);
+		return ScheduleSame(10);
+	}
 	return ScheduleNext(30);
 }
 
