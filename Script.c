@@ -864,14 +864,19 @@ func OnClonkDeath(object clonk, killed_by)
 {
 	var plr = clonk->GetOwner();
 	if (plr == NO_OWNER) return;
-	
-	var crew = CreateObject(Clonk, 50, 50, plr);
+
+	var crew = CreateObject(Clonk, 80, 1048, plr);
 	crew->GrabObjectInfo(clonk);
 	crew->GrabShireInfo(clonk);
 	crew->MakeCrewMember(plr);
 	SetCursor(plr, crew);
 	Rule_BaseRespawn->TransferInventory(clonk, crew);
 	InitializeCrew(crew);
+
+	if (clonk->GetX() > 2415 && clonk->GetY() > 800 && clonk->GetY() < 1200)
+	{
+		crew->SetPosition(2385, 1015);
+	}
 }
 
 func InitializeCrew(object crew)
