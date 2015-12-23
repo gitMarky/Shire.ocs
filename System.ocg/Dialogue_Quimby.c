@@ -29,15 +29,12 @@ public func Dlg_Quimby(object player)
 	else if (!player.dialogue_quimby_gave_smett)
 	{
 		DlgText("$DlgQuimby12$", player);
-		if (DlgEvent())
-		{
-			bottle_of_smett->RemoveObject();
-		}
 		DlgText("$DlgQuimby13$");
 		DlgText("$DlgQuimby14$");
 		DlgText("$DlgQuimby15$");
 		if (DlgEvent())
 		{
+			bottle_of_smett->RemoveObject();
 			player->CreateContents(WizardStaff);
 			player.dialogue_quimby_gave_smett = true;
 		}
