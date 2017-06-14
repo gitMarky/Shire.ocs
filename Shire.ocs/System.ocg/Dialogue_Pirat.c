@@ -1,4 +1,3 @@
-#include Library_Dialogue
 #appendto Library_Dialogue
 
 static const DIALOGUE_Pirat_NoQuest = 0;

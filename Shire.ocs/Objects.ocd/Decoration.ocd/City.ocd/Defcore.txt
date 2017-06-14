@@ -6,7 +6,6 @@ Height=136
 Offset=-282,-134
 Value=20
 Mass=50
-Components=Rock=30;
 SolidMask=0,0,590,136
 Picture=0,0,590,136
 Vertices=1

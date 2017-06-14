@@ -6,7 +6,6 @@ Height=7
 Offset=-4,-4
 Value=5
 Mass=15
-Components=Gold=1
 Vertices=2
 VertexX=-1,1
 VertexY=2,-2

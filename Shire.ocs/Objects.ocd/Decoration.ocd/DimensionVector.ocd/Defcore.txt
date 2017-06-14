@@ -6,7 +6,6 @@ Height=67
 Offset=-36,-67
 Value=150
 Mass=500
-Components=Wood=7;Metal=3;Ruby=1;
 Picture=0,0,280,280
 Vertices=6
 VertexX=-30,+30,-30,+30,-19,+19
@@ -15,5 +14,4 @@ VertexCNAT=5,6,9,10
 VertexFriction=80,80,10,10,10,10
 Entrance=0,-19,20,20
 Float=75
-BorderBound=1
 Rotate=1

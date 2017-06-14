@@ -6,6 +6,5 @@ Height=55
 Offset=-36,-28
 Value=35
 Mass=1000
-Components=Wood=4;Rock=1;
 Vertices=1
 VertexY=1

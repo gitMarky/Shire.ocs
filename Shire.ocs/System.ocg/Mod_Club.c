@@ -9,7 +9,7 @@ func DoStrike(clonk, angle)
 	var x = Sin(angle, range);
 	var y = -Cos(angle, range);
 	var found = false;
-	for (var obj in FindObjects(Find_Distance(reach + range, 0, 0), Find_Or(Find_OCF(OCF_Alive), Find_Category(C4D_Object), Find_Category(C4D_Vehicle)), Find_Exclude(clonk), Find_NoContainer(), Find_Layer(0), Sort_Distance()))
+	for (var obj in FindObjects(Find_Distance(reach + range, 0, 0), Find_Or(Find_OCF(OCF_Alive), Find_Category(C4D_Object), Find_Category(C4D_Vehicle)), Find_Exclude(clonk), Find_NoContainer(), Find_Layer(nil), Sort_Distance()))
 	{
 		if (obj->Stuck()) continue;
 		

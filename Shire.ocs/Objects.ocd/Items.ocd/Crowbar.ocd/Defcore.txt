@@ -6,7 +6,6 @@ Height=9
 Offset=-5,-5
 Value=5
 Mass=15
-Components=Metal=1;
 Vertices=3
 VertexX=0,2,-3
 VertexY=0,-3,3

@@ -32,6 +32,7 @@ public func AddHitCheck()
 
 local Name = "$Name$";
 local Description = "$Description$";
+local ContactCalls = 1;
 
 func FxIntDetonationTimer(object target, proplist effect, int time)
 {

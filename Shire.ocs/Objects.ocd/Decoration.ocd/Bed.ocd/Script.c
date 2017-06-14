@@ -78,7 +78,7 @@ func Zzz()
   
 private func CheckChallenge(object clonk)
 {
-	// Ein feindlicher Clonk von auﬂen fordert den Insassen
+	// Ein feindlicher Clonk von au√üen fordert den Insassen
 	var enemy = FindObject(Find_OCF(OCF_Alive), Find_Container(this));
 	if (enemy)
 	{

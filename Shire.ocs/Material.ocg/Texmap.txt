@@ -9,7 +9,7 @@ OverloadTextures
 10=Tunnel-tunnel
 12=Tunnel-brickback
 
-13=BrickSoft-brick1
+13=BrickSoft-brick
 14=Brick-pavement
 
 19=DuroLava-lava_red
@@ -52,5 +52,5 @@ OverloadTextures
 
 70=Snow-snow1
 
-73=Brick-brick1
+73=Brick-brick
 74=Brick-barrier

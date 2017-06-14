@@ -1,4 +1,4 @@
-material Clonk_Carpenter
+material Clonk_CarpenterShire
 {
 	receive_shadows on
 	technique

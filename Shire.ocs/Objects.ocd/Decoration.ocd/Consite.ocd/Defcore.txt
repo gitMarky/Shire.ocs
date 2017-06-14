@@ -6,7 +6,6 @@ Height=50
 Offset=-30,-25
 Value=35
 Mass=1000
-Components=Wood=4;Rock=1;
 Picture=0,0,60,50
 Vertices=4
 VertexY=1

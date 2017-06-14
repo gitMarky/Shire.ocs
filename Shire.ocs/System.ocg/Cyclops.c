@@ -24,16 +24,16 @@ global func AddCyclopsAI(object clonk) // somewhat hacky, but it works
 
 	// set guard range
 	fx.guard_range = {
-                      x = fx.home_x-AI_DefGuardRangeX,
-                      y = fx.home_y-AI_DefGuardRangeY,
-                      wdt = AI_DefGuardRangeX*2,
-                      hgt =  AI_DefGuardRangeY*2};
+                      x = fx.home_x - AI.GuardRangeX,
+                      y = fx.home_y - AI.GuardRangeY,
+                      wdt = AI.GuardRangeX*2,
+                      hgt =  AI.GuardRangeY*2};
                       
 
 	fx.spray_old = {time = 0, v0 = 0, v1 = 0, reach = 0};
 	fx.spray_cur = {time = 0, v0 = 0, v1 = 0, reach = 0};
 
-	AI->SetMaxAggroDistance(clonk, AI_DefMaxAggroDistance);
+	AI->SetMaxAggroDistance(clonk, AI.MaxAggroDistance);
 	return fx;
 }
 

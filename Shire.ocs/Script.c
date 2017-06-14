@@ -417,7 +417,7 @@ func CreateStoneHut()
 	var book = chest->CreateContents(Book);
 	book->SetDialogue("Book_Mhoram");
 	var barrel = CreateObject(Barrel, 756, 1026, NO_OWNER);
-	barrel->SetFilled("Water", 300);	
+	barrel->PutLiquid("Water", 300);	
 }
 
 func CreateSawmill()

@@ -297,10 +297,10 @@ DlgScientist21=In short:|Read book,|use Tarydium,|fly into the rift.
 
 DlgTuti01=Hello, sir! Can you tell me where I am?
 DlgTuti02=Drop the 'sir'.
-DlgTuti03=You are in ShÓre, after all.
+DlgTuti03=You are in Sh√Ære, after all.
 DlgTuti04=Whaaaat??? Where???
-DlgTuti05=In ShÓre.|That is the name of the land|that we live in, and where you are at the moment. 
-DlgTuti06=This is the entrance to our town,|it is called Armag‚nth.
+DlgTuti05=In Sh√Ære.|That is the name of the land|that we live in, and where you are at the moment. 
+DlgTuti06=This is the entrance to our town,|it is called Armag√¢nth.
 DlgTuti07=That means 'The town'.|Funny, right? 
 DlgTuti08=I so do not care about this.|I want to go back home, where I come from.
 DlgTuti09=How did you get here then,|if you do not know how to go back?
@@ -325,3 +325,5 @@ SeqBirdWarning02=Looks as if it were trying to warn me.
 SeqBirdRescue=The cyclops is going to kill you.|I warned you, didn't I.
 
 SeqCyclopsAbort=The sorcerer is right,|that cyclops will kill me!
+
+HelpGrenadeLauncherNoTarget=Here is nothing for me to fight.

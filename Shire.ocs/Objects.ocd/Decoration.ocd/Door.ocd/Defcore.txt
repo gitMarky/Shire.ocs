@@ -6,6 +6,5 @@ Height=17
 Offset=-7,-9
 Value=1
 Mass=100
-Components=Wood=1;
 Vertices=1
 VertexY=1

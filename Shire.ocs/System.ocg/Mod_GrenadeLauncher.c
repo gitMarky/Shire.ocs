@@ -7,7 +7,7 @@ public func FinishedAiming(object clonk, int angle)
 
 	if (ObjectDistance(enemy_cyclops, clonk) > 180)
 	{
-		Dialogue->MessageBox("Hier ist nichts, was ich bekämpfen muss.", clonk, clonk, clonk->GetOwner(), true);
+		Dialogue->MessageBox("$HelpGrenadeLauncherNoTarget$", clonk, clonk, clonk->GetOwner(), true);
 		return;
 	}
 

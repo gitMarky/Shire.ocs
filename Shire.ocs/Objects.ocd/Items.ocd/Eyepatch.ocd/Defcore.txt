@@ -6,7 +6,6 @@ Height=6
 Offset=-3,-3
 Value=5
 Mass=15
-Components=Gold=1;
 Vertices=1
 VertexY=1
 VertexFriction=20

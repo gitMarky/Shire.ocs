@@ -6,7 +6,6 @@ Height=200
 Offset=-100,-100
 Value=20
 Mass=50
-Components=Crystal=1;
 Vertices=1
 VertexX=2
 VertexY=2

@@ -1,4 +1,3 @@
-#include Library_Dialogue
 #appendto Library_Dialogue
 
 public func Dlg_Pea(object player)

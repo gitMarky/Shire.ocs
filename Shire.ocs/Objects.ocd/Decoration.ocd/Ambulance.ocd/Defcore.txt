@@ -6,6 +6,5 @@ Height=36
 Offset=-28,-36
 Value=35
 Mass=1000
-Components=Metal=1;
 Vertices=1
 VertexY=1

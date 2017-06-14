@@ -1,4 +1,4 @@
-material Clonk_Beggar
+material Clonk_BeggarShire
 {
 	receive_shadows on
 	technique

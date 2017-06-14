@@ -6,7 +6,6 @@ Height=176
 Offset=-380,-170
 Value=20
 Mass=50
-Components=Rock=30
 Vertices=1
 VertexX=1
 VertexY=1

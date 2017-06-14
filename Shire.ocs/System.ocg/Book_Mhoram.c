@@ -1,4 +1,3 @@
-#include Library_Dialogue
 #appendto Library_Dialogue
 
 func Dlg_Book_Mhoram(object player)
